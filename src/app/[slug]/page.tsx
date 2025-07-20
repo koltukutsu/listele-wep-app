@@ -5,8 +5,8 @@ import Demo from "~/components/demo";
 import Powered from "~/components/powered";
 import { Confetti } from "~/components/magicui/confetti";
 import { notFound } from "next/navigation";
-import { collection, query, where, getDocs, limit } from "firebase/firestore";
-import { db } from "~/lib/firebase";
+import { getProjectBySlug, trackVisit } from "~/lib/firestore";
+import { headers } from "next/headers";
 
 
 type Props = {
@@ -15,27 +15,35 @@ type Props = {
   };
 };
 
-const getFakeProjectBySlug = (slug: string) => {
-  const projects: Record<string, { id: string; name: string }> = {
-    "ai-assistant": { id: "1", name: "Yapay Zeka Asistanım" },
-    "ecommerce-platform": { id: "2", name: "E-ticaret Platformu" },
-    "mobile-app-idea": { id: "3", name: "Mobil Uygulama Fikrim" },
-  };
-  return projects[slug];
-};
 
-export default function ProjectPage({ params }: Props) {
-  // FAKE DATA MODE
-  const project = getFakeProjectBySlug(params.slug);
+
+export default async function ProjectPage({ params }: Props) {
+  // Fetch project from Firestore
+  const project = await getProjectBySlug(params.slug);
   
-  // Real logic would be:
-  // const q = query(collection(db, "projects"), where("slug", "==", params.slug), limit(1));
-  // const querySnapshot = await getDocs(q);
-  // const projectDoc = querySnapshot.docs[0];
-  // const project = projectDoc ? { id: projectDoc.id, ...projectDoc.data() } : null;
-
   if (!project) {
     notFound();
+  }
+
+  // Track visit for analytics
+  try {
+    const headersList = await headers();
+    const userAgent = headersList.get('user-agent') || '';
+    const forwardedFor = headersList.get('x-forwarded-for');
+    const realIp = headersList.get('x-real-ip');
+    const ipAddress = forwardedFor?.split(',')[0] || realIp || '127.0.0.1';
+    const referrer = headersList.get('referer') || undefined;
+
+    // Note: This should ideally be done client-side to avoid blocking the page render
+    // For now, we'll track it here but in production, consider moving to client-side
+    await trackVisit(project.id, {
+      ipAddress,
+      userAgent,
+      referrer
+    });
+  } catch (error) {
+    console.error('Error tracking visit:', error);
+    // Don't block page render if analytics fails
   }
 
   return (
@@ -45,9 +53,14 @@ export default function ProjectPage({ params }: Props) {
         manualstart={true}
       />
       <section className="mx-auto flex max-w-lg flex-col items-center justify-center gap-4 py-20 text-center md:py-32">
-        <h1 className="text-4xl font-bold md:text-5xl">{project.name}</h1>
-        <p className="text-muted-foreground">
-          Dakikalar içinde bekleme listesi sayfası oluştur, talebi ölç.
+        <h1 className="text-4xl font-bold md:text-5xl" style={{ color: project.template.textColor }}>
+          {project.template.title}
+        </h1>
+        <h2 className="text-xl font-semibold mb-2" style={{ color: project.template.textColor }}>
+          {project.template.subtitle}
+        </h2>
+        <p className="text-muted-foreground mb-8">
+          {project.template.description}
         </p>
         <Form projectId={project.id} />
       </section>

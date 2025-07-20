@@ -36,7 +36,7 @@ export default function HowTo() {
           transition={{ duration: 0.5 }}
           className="text-3xl sm:text-4xl font-bold mb-6"
         >
-          Sadece 3 Basit Adım
+          Fikirden Lansmana: 3 Adımda Yol Haritan
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -45,8 +45,7 @@ export default function HowTo() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="max-w-3xl mx-auto text-lg text-muted-foreground mb-12 sm:mb-16"
         >
-          Teknik detaylarla veya karmaşık arayüzlerle uğraşmana gerek yok.
-          Fikrini hayata geçirmek hiç bu kadar hızlı olmamıştı.
+          Karmaşık süreçleri unut. Senin görevin hayal etmek, bizimki ise onu gerçeğe dönüştürmek. İşte bu kadar basit.
         </motion.p>
         <motion.div
           variants={containerVariants}
@@ -66,10 +65,10 @@ export default function HowTo() {
               <div className="w-12 h-12 flex items-center justify-center bg-primary text-primary-foreground rounded-full font-bold text-2xl mr-4">
                 1
               </div>
-              <h3 className="text-xl font-bold">Fikrini Özetle</h3>
+              <h3 className="text-xl font-bold">Vizyonunu Tanımla</h3>
             </div>
             <p className="text-muted-foreground">
-              Projen için akılda kalıcı bir isim ve basit bir açıklama gir.
+              Her büyük hikaye bir isimle başlar. Girişimine kimliğini kazandır, misyonunu tek cümlede anlat.
             </p>
           </motion.div>
           <motion.div
@@ -80,11 +79,10 @@ export default function HowTo() {
               <div className="w-12 h-12 flex items-center justify-center bg-primary text-primary-foreground rounded-full font-bold text-2xl mr-4">
                 2
               </div>
-              <h3 className="text-xl font-bold">Sayfanı Oluştur</h3>
+              <h3 className="text-xl font-bold">İlk Vitrinini Oluştur</h3>
             </div>
             <p className="text-muted-foreground">
-              Hazır şablonumuzu kullanarak bekleme listesi sayfanı anında
-              oluştur.
+              Founder Mode AI ile fikrini anlat veya dakikalar içinde kendin tasarla. Potansiyel kullanıcılarınla ilk temas noktan hazır.
             </p>
           </motion.div>
           <motion.div
@@ -95,11 +93,10 @@ export default function HowTo() {
               <div className="w-12 h-12 flex items-center justify-center bg-primary text-primary-foreground rounded-full font-bold text-2xl mr-4">
                 3
               </div>
-              <h3 className="text-xl font-bold">Paylaş ve İzle</h3>
+              <h3 className="text-xl font-bold">Topluluğunu Ateşle</h3>
             </div>
             <p className="text-muted-foreground">
-              Oluşturduğun linki sosyal medyada paylaş ve panodan kayıtları
-              takip et.
+              İlk destekçilerini toplamaya başla. Lansman gününde seni bekleyen bir kitle olsun. Büyümeyi gerçek zamanlı izle.
             </p>
           </motion.div>
         </motion.div>
@@ -111,7 +108,7 @@ export default function HowTo() {
           className="mt-12"
         >
           <Link href="/dashboard">
-            <Button size="lg">Vakit Kaybetme, Şimdi Başla</Button>
+            <Button size="lg">🚀 Kendi Yolculuğunu Başlat</Button>
           </Link>
         </motion.div>
       </div>

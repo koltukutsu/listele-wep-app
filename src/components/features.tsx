@@ -14,39 +14,39 @@ export default function Features() {
   const features = [
     {
       icon: <Code size={32} className="text-gray-800"/>,
-      title: "No-Code Editör",
+      title: "Founder Mode AI & Kodsuz Editör",
       description:
-        "Türkçe arayüz ve basit form alanları ile sayfanı anında kişiselleştir. Teknik bilgiye ihtiyacın yok.",
+        "İster fikrini sesli anlat, yapay zeka senin için tasarlasın, ister sürükle-bırak kolaylığıyla kendi vizyonunu yarat. Teknik bilgi, geçmişte kaldı.",
     },
     {
       icon: <Zap size={32} className="text-gray-800"/>,
-      title: "Tek Tıkla Yayınla",
+      title: "Anında Lansman",
       description:
-        "Projeni oluşturduğun an `senin-fikrin.listele.io` adresin hazır. Karmaşık hosting süreçlerini unut.",
+        "Fikrin hazır olduğunda, dünya da hazır olmalı. Tek tıkla projen yayında ve ilk ziyaretçilerini karşılamaya hazır. Beklemek yok, sadece aksiyon.",
     },
     {
       icon: <Gauge size={32} className="text-gray-800"/>,
-      title: "Yönetim Paneli",
+      title: "Büyüme Panelin",
       description:
-        "Kaç kişi kaydoldu? Hangi kanaldan daha çok ilgi geldi? Basit ve anlaşılır panelden takip et.",
+        "Sadece rakamları değil, büyümeyi gör. İlk destekçilerinin nereden geldiğini anla, stratejini verilerle şekillendir ve bir sonraki adımını güvenle at.",
     },
     {
       icon: <Database size={32} className="text-gray-800"/>,
-      title: "Güvenli Veritabanı",
+      title: "İlk Destekçilerin Güvende",
       description:
-        "Tüm verilerin Supabase üzerinde güvenle saklanır. E-posta listeni dilediğin zaman dışa aktarabilirsin.",
+        "Topluluğun en değerli varlığın. Tüm veriler güvenle saklanır ve kontrol tamamen sendedir. Listeni dilediğin zaman al, kendi yolunda ilerle.",
     },
     {
       icon: <Globe size={32} className="text-gray-800"/>,
-      title: "Özelleştirilebilir Alan Adı",
+      title: "Markanı İnşa Et",
       description:
-        "İlerleyen zamanlarda kendi alan adını bağlayarak markanı daha da güçlendirebilirsin. (Çok yakında)",
+        "Girişimin büyüdükçe, markan da büyür. Kendi alan adını kolayca bağlayarak kurumsal kimliğini bir üst seviyeye taşı.",
     },
     {
       icon: <Wallet size={32} className="text-gray-800"/>,
-      title: "Tamamen Ücretsiz",
+      title: "Maliyetsiz Başlangıç",
       description:
-        "Fikrini test etmenin bir maliyeti olmamalı. İlk 1000 kullanıcıya kadar tüm özellikler ücretsiz.",
+        "Büyük fikirlerin önündeki en büyük engelin bütçe olmaması gerektiğine inanıyoruz. İlk adımlarını atarken cüzdanını düşünme. Sadece fikrine odaklan.",
     },
   ];
 
@@ -81,11 +81,9 @@ export default function Features() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold">Öne Çıkan Özellikler</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">Kurucunun Cephaneliği</h2>
           <p className="max-w-2xl mx-auto text-lg text-muted-foreground mt-4">
-            Listele.io, sadece bir bekleme listesi aracı değil, aynı zamanda
-            girişimcilik yolculuğundaki ilk adımlarını kolaylaştıran bir
-            yardımcıdır.
+            Fikrini hayata geçirmek için ihtiyacın olan her şey burada. Hız, veri ve topluluk... Hepsi senin kontrolünde.
           </p>
         </motion.div>
         <motion.div

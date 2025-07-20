@@ -21,7 +21,7 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
           className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent"
         >
-          Fikrini Listele, Yatırıma Değil, Pazara Sun.
+          Fikrini Saniyeler İçinde Hayata Geçir.
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -29,10 +29,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-lg text-muted-foreground"
         >
-          Girişim yolculuğunun en kritik adımı fikir doğrulamadır. Listele.io ile
-          kod yazmadan, teknik bilgiye ihtiyaç duymadan dakikalar içinde bir
-          bekleme listesi sayfası oluştur ve fikrinin ne kadar talep gördüğünü
-          gerçek kullanıcılarla test et.
+          Bir fikrin var. Parlak, cesur, ezber bozan. Ama kodlama, tasarım ve saatler süren geliştirmeler... İşte bu, fikrinle arandaki en büyük engel. Listele.io, bu engeli ortadan kaldırıyor. Sadece fikrini anlat, gerisini biz halledelim. İlk adımını bugün at, geleceği şimdi başlat.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -41,7 +38,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 mt-4"
         >
           <Link href="/dashboard">
-            <Button size="lg" className="w-full sm:w-auto">Hemen Başla</Button>
+            <Button size="lg" className="w-full sm:w-auto">🚀 İlk Adımını At, Ücretsiz Başla</Button>
           </Link>
           <Link href="#nasil-calisir">
             <Button size="lg" variant="outline" className="w-full sm:w-auto">
