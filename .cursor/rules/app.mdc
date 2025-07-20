@@ -1,0 +1,198 @@
+---
+alwaysApply: false
+---
+
+# 🚀 Proje Dokümantasyonu
+
+## 1. Branding
+
+-- use the same color of the app
+
+| Alan | İçerik |
+|------|--------|
+| **Ürün Adı** | **Listele.io** |
+| **Tagline** | “Fikrini Listele, İşini Test Et.” |
+| **One‑Liner** | Türkiye’deki girişimciler için dakikalar içinde bekleme listesi sayfası kurup fikrini gerçek kullanıcılarla test etmeyi sağlayan no‑code platform. |
+
+---
+
+## 2. StoryBrand SB7 Script (Listele.io)
+
+1. **Karakter (Girişimci)**  
+   Yeni bir fikir/hizmet başlatmak isteyen ama talebi doğrulamaya ihtiyaç duyan girişimci.
+
+2. **Problemi**  
+   - **Dış Problem:** Kullanıcı bulmak ve geri bildirim toplamak zor.  
+   - **İç Problem:** “Ya kimse ilgilenmezse?” korkusu.  
+   - **Felsefi Problem:** İyi fikirler, doğru araçlar olmadığında çoğu zaman hayata geçemiyor.
+
+3. **Rehber (Listele.io)**  
+   Güven veren, yerel dilde, teknik detaylarla boğmayan bir platform.
+
+4. **Plan**  
+   1. Fikrini özetle.  
+   2. Hazır şablonu kişiselleştir.  
+   3. Tek tıkla URL’ni al ve paylaş.  
+   4. Dashboard’da kayıtları izle.
+
+5. **Eyleme Çağrı**  
+   - **Birincil:** “Hemen Bekleme Listeni Oluştur”  
+   - **İkincil:** Demo videosunu izle.
+
+6. **Başarı**  
+   Hedef kitlenizi ölç, yatırımcıya metri̇k sun, boşa harcanan zaman/maliyet düşer.
+
+7. **Başarısızlık**  
+   Bekleme listesi kurmayan girişimler, pazar geri bildirimi alamaz ve kaynak israf eder.
+
+---
+
+## 3. Landing Page Yapısı
+
+### 3.1 Hero
+- **Başlık:** “Fikrini Listele, İlk Kullanıcılarını Topla”
+- **Alt Başlık:** “Dakikalar içinde bekleme listesi sayfası oluştur, talebi ölç.”
+- **Ana CTA:** `Bekleme Listemi Kur` (anchor → kayıt formu)
+
+### 3.2 Neden Bekleme Listesi?
+- Kısa istatistikler (%40 daha hızlı pivot eden girişimler vb.)
+- Infografik veya 3 madde:
+  1. Pazar talebini ölç
+  2. Erken geri bildirim topla
+  3. Yatırımcıya kanıt sun
+
+### 3.3 Özellikler
+| Özellik | Açıklama |
+|---------|----------|
+| No‑Code Editör | Sürükle‑bırak, Türkçe arayüz |
+| Tek Tık Yayınla | Otomatik alt alanadı: `idea.listele.app` |
+| E‑posta / WhatsApp Lead Toplama | Supabase veritabanına düşer |
+| Yönetim Paneli | Lead listesi, grafikli görünüm |
+| Free Tier | İlk 1000 ziyaret ücretsiz |
+
+### 3.4 Sosyal Kanıt
+- Yerli girişimcilerin video/quote’ları
+
+### 3.5 Kayıt Formu (Minimum Alan)
+`[E‑posta adresi]`  
+`[Bekleme Listemi Kur →]`
+
+> Form sonrası “Firma adı / telefon (opsiyonel)” ikinci adım (micro‑conversion).
+
+### 3.6 Footer
+- SSS, KVKK, İletişim
+
+---
+
+## 4. Uygulama Akışı
+
+```mermaid
+flowchart LR
+A[Landing Page] -->|CTA| B(Register Modal)
+B --> C{Kayıt}
+C -->|Success| D[Dashboard İlk Giriş]
+D --> E[Şablon Seç & Düzenle]
+E --> F[Yayınla -> Static Build]
+F --> G[Özel URL Oluştu]
+G --> H[Ziyaretçiler]
+H --> I[Lead'ler Supabase'de]
+I --> J[Admin Paneli]
+4.1 Şablon Editörü
+Varsayılan “Haket” bekleme listesi şablonu yüklenir.
+
+
+Markdown/React bileşenleri canlı önizleme.
+
+
+4.2 Yayınlama & Maliyet
+Seçenek 1 (Önerilen):
+
+
+Next.js getServerSideProps → HTML’i Supabase Storage’a statik dosya olarak kaydet.
+
+
+Cloudflare R2/Pages veya Vercel Edge’den public serve.
+
+
+✅ Maliyet yok denecek kadar az; her yayın sadece Storage yazma işlemi.
+
+
+Seçenek 2: Dynamic routing (/[slug]) + ISR; küçük projelerde daima ücretsiz Vercel Hobby yeter.
+
+
+4.3 Admin Dashboard
+Supabase Auth → row‑level security
+
+
+Grafikler: Recharts
+
+
+Lead export (CSV)
+
+
+Basit dönüşüm oranı metrikleri
+
+
+
+5. Teknik Mimarî (Next.js 15 + Supabase)
+Katman
+Teknoloji
+Görev
+UI
+Next.js / App Router, shadcn/ui, Tailwind
+SSR + RSC
+State
+Zustand veya React Context
+Şablon edit durumu
+Auth
+Supabase Auth (email link)
+
+
+DB
+Supabase Postgres: projects, leads, users tabloları
+
+
+Storage
+Supabase Buckets (/pages/{user}/{slug}.html)
+Statik sayfa
+Edge
+Vercel Edge Functions (optional)
+SEO redirect
+Analytics
+Supabase Row + Vercel Web Analytics
+
+
+CI/CD
+GitHub → Vercel
+Otomatik deploy
+
+Dosya Ağacı (özet)
+/app
+  /(public)  // landing
+  /dashboard
+    /editor/[slug]
+    /leads/[slug]
+/lib
+  supabase.ts
+/templates
+  haket.md
+
+6. Yol Haritası
+Hafta 1‑2: Pazar doğrulaması anketi, Figma wireframe
+
+
+Hafta 3‑4: Landing + temel kayıt akışı (MVP)
+
+
+Hafta 5: Şablon editörü & yayınlama
+
+
+Hafta 6: Admin paneli, metrikler
+
+
+Hafta 7: Açık beta (50 kullanıcı)
+
+
+Hafta 8: Ödeme & premium plan (opsiyonel)
+
+
