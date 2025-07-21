@@ -5,7 +5,8 @@ import {
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, 
   signInWithPopup,
-  sendEmailVerification 
+  sendEmailVerification,
+  getIdToken,
 } from "firebase/auth";
 import { auth, googleProvider } from "~/lib/firebase";
 import { createUserProfile } from "~/lib/firestore";
@@ -14,7 +15,11 @@ import { Input } from "./ui/input";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-export default function AuthForm() {
+interface AuthFormProps {
+  onSuccess?: () => void;
+}
+
+export default function AuthForm({ onSuccess }: AuthFormProps) {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,16 +43,23 @@ export default function AuthForm() {
         await sendEmailVerification(user);
         
         toast.success("Hesap oluşturuldu! Doğrulama e-postası gönderildi.");
-        router.push("/dashboard");
+        if (onSuccess) onSuccess();
+        else router.push("/dashboard");
       } else {
         // Sign in with email and password
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        
+        // Set cookie for server-side authentication
+        const token = await getIdToken(user);
+        document.cookie = `firebase-auth-token=${token}; path=/; max-age=86400`; // 1 day expiration
         
         // Update last login time
-        await createUserProfile(userCredential.user, 'email');
+        await createUserProfile(user, 'email');
         
         toast.success("Başarıyla giriş yapıldı!");
-        router.push("/dashboard");
+        if (onSuccess) onSuccess();
+        else router.push("/dashboard");
       }
     } catch (error: any) {
       console.error("Auth error:", error);
@@ -82,11 +94,16 @@ export default function AuthForm() {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
       
+      // Set cookie for server-side authentication
+      const token = await getIdToken(user);
+      document.cookie = `firebase-auth-token=${token}; path=/; max-age=86400`; // 1 day expiration
+      
       // Create or update user profile in Firestore
       await createUserProfile(user, 'google');
       
       toast.success("Google ile başarıyla giriş yapıldı!");
-      router.push("/dashboard");
+      if (onSuccess) onSuccess();
+      else router.push("/dashboard");
     } catch (error: any) {
       console.error("Google sign-in error:", error);
       

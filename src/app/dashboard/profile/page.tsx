@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { deleteUser as deleteFirebaseUser } from "firebase/auth";
 import { deleteUser as deleteFirestoreUser } from "~/lib/firestore";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "~/components/ui/alert-dialog";
+import Link from "next/link";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -34,6 +35,8 @@ export default function ProfilePage() {
   const handleSignOut = async () => {
     try {
       await firebaseSignOut(auth);
+      // Clear the cookie
+      document.cookie = 'firebase-auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
       router.push('/');
       toast.success('Başarıyla çıkış yapıldı');
     } catch (error) {
@@ -90,7 +93,7 @@ export default function ProfilePage() {
               <div>
                 <p className="text-sm font-medium text-gray-500">Üyelik Türü</p>
                 <p className="mt-1">Ücretsiz Plan</p>
-                <Button variant="link" className="p-0 h-auto font-normal" asChild>
+                <Button asChild className="mt-2">
                   <Link href="/pricing">Yükselt</Link>
                 </Button>
               </div>

@@ -1,18 +1,34 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import formidable from 'formidable';
+import fs from 'fs';
+import { Writable } from 'stream';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function POST(req: Request) {
-  try {
-    const { prompt } = await req.json();
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
-    if (!prompt) {
-      return NextResponse.json({ error: 'Prompt is required' }, { status: 400 });
-    }
+const formidableParse = async (req: Request): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
+    return new Promise((resolve, reject) => {
+        const form = formidable({ 
+            maxFileSize: 10 * 1024 * 1024, // 10MB
+            filter: (part: formidable.Part) => part.name === 'audio' && (part.mimetype?.startsWith('audio/') || false),
+        });
+        form.parse(req as any, (err: any, fields: formidable.Fields, files: formidable.Files) => {
+            if (err) reject(err);
+            resolve({ fields, files });
+        });
+    });
+};
 
+
+const generateProjectConfig = async (prompt: string) => {
     const completion = await openai.chat.completions.create({
       model: "gpt-4-turbo",
       messages: [
@@ -64,19 +80,41 @@ export async function POST(req: Request) {
 
     const generatedConfig = JSON.parse(completion.choices[0].message.content || '{}');
     
-    // You might want to add default values for colors here
-    const fullConfig = {
+    return {
       ...generatedConfig,
       backgroundColor: "#ffffff",
       textColor: "#1f2937",
       accentColor: "#3b82f6",
       formFields: { name: true, email: true, phone: false },
     };
+}
 
-    return NextResponse.json(fullConfig);
+
+export async function POST(req: Request) {
+  try {
+    const { files } = await formidableParse(req);
+    const audioFile = files.audio;
+
+    if (!audioFile) {
+        return NextResponse.json({ error: 'No audio file found.' }, { status: 400 });
+    }
+
+    const firstAudioFile = Array.isArray(audioFile) ? audioFile[0] : audioFile;
+
+    const transcription = await openai.audio.transcriptions.create({
+        file: fs.createReadStream(firstAudioFile.filepath),
+        model: 'whisper-1',
+    });
+
+    const projectConfig = await generateProjectConfig(transcription.text);
+
+    // Clean up the uploaded file
+    fs.unlinkSync(firstAudioFile.filepath);
+
+    return NextResponse.json(projectConfig);
 
   } catch (error) {
-    console.error('[GENERATE_PROJECT_ERROR]', error);
-    return NextResponse.json({ error: 'Failed to generate project configuration.' }, { status: 500 });
+    console.error('[VOICE_PROJECT_ERROR]', error);
+    return NextResponse.json({ error: 'Failed to generate project from voice.' }, { status: 500 });
   }
-}
+} 

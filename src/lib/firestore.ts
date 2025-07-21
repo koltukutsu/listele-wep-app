@@ -42,31 +42,29 @@ export interface Project {
   name: string;
   slug: string;
   status: 'draft' | 'published' | 'paused';
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
+  createdAt: Timestamp | number;
+  updatedAt: Timestamp | number;
   config: any; // Using 'any' for flexibility, matches editor state
   stats: {
     totalVisits: number;
     totalSignups: number;
     conversionRate: number;
-    lastVisitAt?: Timestamp;
-    lastSignupAt?: Timestamp;
+    lastVisitAt?: Timestamp | number;
+    lastSignupAt?: Timestamp | number;
   };
 }
 
-export interface WaitlistEntry {
+export interface Lead {
   id: string;
   projectId: string;
-  userId?: string;
-  name?: string;
-  email?: string;
-  phone?: string;
-  customFields: Record<string, any>;
+  name?: string | null;
+  email: string;
+  phone?: string | null;
   createdAt: Timestamp;
-  ipAddress: string;
-  userAgent: string;
+  ipAddress?: string;
+  userAgent?: string;
   referrer?: string;
-  status: 'active' | 'contacted' | 'converted';
+  status: 'new' | 'contacted' | 'converted';
   notes?: string;
 }
 
@@ -180,7 +178,7 @@ export async function getUserProjects(userId: string): Promise<Project[]> {
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
   const projectsRef = collection(db, "projects");
-  const q = query(projectsRef, where("slug", "==", slug), where("status", "==", "published"));
+  const q = query(projectsRef, where("slug", "==", slug));
   const querySnapshot = await getDocs(q);
   
   if (querySnapshot.empty) {
@@ -297,19 +295,28 @@ export async function deleteProject(projectId: string): Promise<void> {
   }
 }
 
-// Waitlist operations
-export async function addWaitlistEntry(entry: Omit<WaitlistEntry, 'id' | 'createdAt'>): Promise<string> {
-  const waitlistRef = collection(db, "waitlist");
+// Lead operations
+export async function addLead(projectId: string, leadData: {
+  name?: string | null;
+  email: string;
+  phone?: string | null;
+  ipAddress?: string;
+  userAgent?: string;
+  referrer?: string;
+}): Promise<string> {
+  const leadsRef = collection(db, "leads");
   
-  const newEntry = {
-    ...entry,
+  const newLead = {
+    projectId,
+    ...leadData,
+    status: 'new',
     createdAt: serverTimestamp()
   };
 
-  const docRef = await addDoc(waitlistRef, newEntry);
+  const docRef = await addDoc(leadsRef, newLead);
   
   // Update project stats
-  const projectRef = doc(db, "projects", entry.projectId);
+  const projectRef = doc(db, "projects", projectId);
   const projectSnap = await getDoc(projectRef);
   
   if (projectSnap.exists()) {
@@ -329,16 +336,17 @@ export async function addWaitlistEntry(entry: Omit<WaitlistEntry, 'id' | 'create
   return docRef.id;
 }
 
-export async function getProjectWaitlistEntries(projectId: string): Promise<WaitlistEntry[]> {
-  const waitlistRef = collection(db, "waitlist");
-  const q = query(waitlistRef, where("projectId", "==", projectId));
+export async function getProjectLeads(projectId: string): Promise<Lead[]> {
+  const leadsRef = collection(db, "leads");
+  const q = query(leadsRef, where("projectId", "==", projectId));
   const querySnapshot = await getDocs(q);
   
   return querySnapshot.docs.map(doc => ({
     id: doc.id,
     ...doc.data()
-  })) as WaitlistEntry[];
+  })) as Lead[];
 }
+
 
 // Analytics operations
 export async function deleteUser(uid: string): Promise<void> {

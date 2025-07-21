@@ -24,6 +24,8 @@ import {
   DialogTitle,
   DialogClose,
 } from '~/components/ui/dialog';
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { APP_URL } from "~/lib/config";
 
 interface Benefit {
   title: string;
@@ -178,6 +180,7 @@ export default function ProjectEditorPage() {
                     name: config.name,
                     slug,
                     config,
+                    status: 'published', // Set status to published
                 };
                 const newProjectId = await createProject(user.uid, newProjectData);
                 setCreatedProjectId(newProjectId);
@@ -222,7 +225,7 @@ export default function ProjectEditorPage() {
 
     const handleCopyLink = () => {
         if (!createdProjectSlug) return;
-        const url = `${window.location.origin}/${createdProjectSlug}`;
+        const url = `${APP_URL}/${createdProjectSlug}`;
         navigator.clipboard.writeText(url);
         setCopyButtonText('Kopyalandı!');
         setTimeout(() => setCopyButtonText('Kopyala'), 2000);
@@ -240,354 +243,442 @@ export default function ProjectEditorPage() {
       {createdProjectId ? (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-50 text-center p-4">
           <PartyPopper size={64} className="text-green-500 mb-4 animate-bounce" />
-          <h1 className="text-4xl font-bold mb-2 text-gray-800">Projen Yayında!</h1>
-          <p className="text-lg text-gray-600 mb-8 max-w-md">Harika bir başlangıç yaptın. Şimdi fikrini dünyayla paylaşma zamanı.</p>
+          <h1 className="text-4xl font-bold mb-2 text-gray-800">İlk Adımı Attın!</h1>
+          <p className="text-lg text-gray-600 mb-8 max-w-md">Harika bir başlangıç. Şimdi fikrini dünyayla paylaşarak geleceği inşa etmeye başla.</p>
           <div className="flex items-center space-x-2 bg-white border rounded-lg p-2 shadow-sm w-full max-w-lg">
-            <input type="text" value={`${window.location.origin}/${createdProjectSlug}`} readOnly className="flex-grow bg-transparent outline-none text-gray-700 px-2" />
+            <input type="text" value={`${APP_URL}/${createdProjectSlug}`} readOnly className="flex-grow bg-transparent outline-none text-gray-700 px-2" />
             <Button onClick={handleCopyLink} className="shrink-0">
               {copyButtonText === 'Kopyala' ? <Copy size={16} className="mr-2" /> : <Check size={16} className="mr-2" />}
               {copyButtonText}
             </Button>
           </div>
-          <Button onClick={() => router.push('/dashboard')} variant="link" className="mt-8">Dashboard'a Dön</Button>
+          <Button onClick={() => router.push('/dashboard')} variant="link" className="mt-8 text-gray-600 hover:text-gray-900">
+            Dashboard'a Dön
+          </Button>
         </div>
       ) : (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid lg:grid-cols-3 gap-8">
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid lg:grid-cols-5 gap-8 items-start">
             {/* ===== Left Panel: Editor ===== */}
-            <div className="lg:col-span-2 space-y-6">
-            {/* Project Name & AI Founder Mode */}
-            <div className="bg-white p-6 rounded-lg shadow space-y-4">
-              <Label htmlFor="projectName" className="text-lg font-bold">🚀 Proje Adı</Label>
-              <Input
-                id="projectName"
-                value={config.name}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => updateConfig('name', e.target.value)}
-                placeholder="Harika projenizin adı"
-              />
-              <Button onClick={() => setIsAiModalOpen(true)} variant="outline" className="w-full">
-                ✨ AI Founder Mode ile Otomatik Doldur
-              </Button>
-            </div>
-
-            {/* Hero Section */}
-            <div className="bg-white p-6 rounded-lg shadow space-y-4">
-              <h2 className="text-lg font-bold">🖼️ Ana Ekran</h2>
-              {/* ... other fields ... */}
-            </div>
-
-            {/* Benefits Section */}
-            <div className="bg-white p-6 rounded-xl shadow-md space-y-4 border border-gray-100">
-              <div className="flex justify-between items-center">
-                <h2 className="text-lg font-bold text-gray-800">🌟 Değer Vaatleri</h2>
-                <Button 
-                  onClick={() => addListItem('benefits')} 
-                  size="sm"
-                  className="bg-blue-600 hover:bg-blue-700 text-white"
-                >
-                  Yeni Ekle
-                </Button>
-              </div>
-              <div className="space-y-4">
-                {config.benefits.map((benefit: Benefit, index: number) => (
-                  <div key={index} className="border border-gray-200 p-4 rounded-lg space-y-3 hover:shadow-md transition-shadow">
-                    <div className="flex justify-between items-start">
-                      <h3 className="font-medium text-gray-800">Değer {index + 1}</h3>
-                      <Button 
-                        onClick={() => removeListItem('benefits', index)} 
-                        variant="ghost" 
-                        size="sm" 
-                        className="text-red-500 hover:bg-red-50"
-                      >
-                        Sil
-                      </Button>
-                    </div>
-                    <div className="space-y-2">
-                      <div>
-                        <Label htmlFor={`benefit-title-${index}`} className="text-sm text-gray-600">Başlık</Label>
-                        <Input 
-                          id={`benefit-title-${index}`}
-                          value={benefit.title} 
-                          onChange={(e) => updateListItem('benefits', index, 'title', e.target.value)} 
-                          placeholder="Örn: Hızlı Teslimat"
-                          className="mt-1"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor={`benefit-desc-${index}`} className="text-sm text-gray-600">Açıklama</Label>
-                        <Input 
-                          id={`benefit-desc-${index}`}
-                          value={benefit.description} 
-                          onChange={(e) => updateListItem('benefits', index, 'description', e.target.value)} 
-                          placeholder="Bu değer müşterinize ne sağlıyor?"
-                          className="mt-1"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                {config.benefits.length === 0 && (
-                  <div className="text-center py-6 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
-                    <p className="text-gray-500 text-sm">Henüz değer vaadi eklenmemiş</p>
-                    <Button 
-                      onClick={() => addListItem('benefits')} 
-                      variant="outline" 
-                      size="sm" 
-                      className="mt-2 text-blue-600 border-blue-200 hover:bg-blue-50"
-                    >
-                      İlk Değeri Ekle
+            <div className="lg:col-span-2 sticky top-6">
+              <div className="h-[88vh] overflow-y-auto space-y-6 pr-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>🚀 Proje Adı</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <Input
+                      id="projectName"
+                      value={config.name}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => updateConfig('name', e.target.value)}
+                      placeholder="Harika projenizin adı"
+                    />
+                    <Button onClick={() => setIsAiModalOpen(true)} variant="outline" className="w-full">
+                      ✨ AI Founder Mode ile Otomatik Doldur
                     </Button>
-                  </div>
-                )}
-              </div>
-            </div>
+                  </CardContent>
+                </Card>
 
-            {/* Features Section */}
-            <div className="bg-white p-6 rounded-xl shadow-md space-y-4 border border-gray-100">
-              <div className="flex justify-between items-center">
-                <h2 className="text-lg font-bold text-gray-800">🛠️ Ana Özellikler</h2>
-                <Button 
-                  onClick={() => addListItem('features')} 
-                  size="sm"
-                  className="bg-blue-600 hover:bg-blue-700 text-white"
-                >
-                  Yeni Ekle
-                </Button>
-              </div>
-              <div className="space-y-4">
-                {config.features.map((feature: Feature, index: number) => (
-                  <div key={index} className="border border-gray-200 p-4 rounded-lg space-y-3 hover:shadow-md transition-shadow">
-                    <div className="flex justify-between items-start">
-                      <h3 className="font-medium text-gray-800">Özellik {index + 1}</h3>
-                      <Button 
-                        onClick={() => removeListItem('features', index)} 
-                        variant="ghost" 
-                        size="sm" 
-                        className="text-red-500 hover:bg-red-50"
-                      >
-                        Sil
-                      </Button>
-                    </div>
-                    <div className="space-y-2">
-                      <div>
-                        <Label htmlFor={`feature-title-${index}`} className="text-sm text-gray-600">Başlık</Label>
-                        <Input 
-                          id={`feature-title-${index}`}
-                          value={feature.title} 
-                          onChange={(e) => updateListItem('features', index, 'title', e.target.value)} 
-                          placeholder="Örn: Kolay Kullanım"
-                          className="mt-1"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor={`feature-desc-${index}`} className="text-sm text-gray-600">Açıklama</Label>
-                        <Input 
-                          id={`feature-desc-${index}`}
-                          value={feature.description} 
-                          onChange={(e) => updateListItem('features', index, 'description', e.target.value)} 
-                          placeholder="Bu özellik ne işe yarıyor?"
-                          className="mt-1"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                {config.features.length === 0 && (
-                  <div className="text-center py-6 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
-                    <p className="text-gray-500 text-sm">Henüz özellik eklenmemiş</p>
-                    <Button 
-                      onClick={() => addListItem('features')} 
-                      variant="outline" 
-                      size="sm" 
-                      className="mt-2 text-blue-600 border-blue-200 hover:bg-blue-50"
-                    >
-                      İlk Özelliği Ekle
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* FAQ Section */}
-            <div className="bg-white p-6 rounded-xl shadow-md space-y-6 border border-gray-100">
-              <h2 className="text-lg font-bold text-gray-800">❓ Sıkça Sorulan Sorular</h2>
-              <div className="space-y-6">
-                <div className="border border-gray-200 p-4 rounded-lg space-y-4">
-                  <div className="flex justify-between items-center">
-                    <div className="space-y-1">
-                      <Label htmlFor="whoIsItForTitle" className="font-medium text-gray-800">Kimler İçin?</Label>
-                      <p className="text-sm text-gray-500">Hedef kitlenizi tanımlayın</p>
-                    </div>
-                    <Button 
-                      onClick={() => addFaqItem('whoIsItFor')} 
-                      size="sm"
-                      variant="outline"
-                      className="border-blue-200 text-blue-600 hover:bg-blue-50"
-                    >
-                      Yeni Ekle
-                    </Button>
-                  </div>
-                  <Input 
-                    id="whoIsItForTitle" 
-                    value={config.faqSections.whoIsItFor.title} 
-                    onChange={(e) => updateConfig('faqSections.whoIsItFor.title', e.target.value)}
-                    placeholder="Örn: Girişimciler için"
-                    className="mt-2"
+              {/* Hero Section */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>🖼️ Ana Ekran</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                <div>
+                  <Label htmlFor="title">Başlık</Label>
+                  <Input id="title" value={config.title} onChange={(e) => updateConfig('title', e.target.value)} />
+                </div>
+                <div>
+                  <Label htmlFor="subtitle">Alt Başlık</Label>
+                  <Input id="subtitle" value={config.subtitle} onChange={(e) => updateConfig('subtitle', e.target.value)} />
+                </div>
+                <div>
+                  <Label htmlFor="description">Açıklama</Label>
+                  <Input id="description" value={config.description} onChange={(e) => updateConfig('description', e.target.value)} />
+                </div>
+                <div>
+                  <Label htmlFor="buttonText">Buton Metni</Label>
+                  <Input id="buttonText" value={config.buttonText} onChange={(e) => updateConfig('buttonText', e.target.value)} />
+                </div>
+                <div>
+                  <Label htmlFor="thankYouMessage">Teşekkür Mesajı</Label>
+                  <Input id="thankYouMessage" value={config.thankYouMessage} onChange={(e) => updateConfig('thankYouMessage', e.target.value)} />
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="formFields-name"
+                    checked={config.formFields.name}
+                    onCheckedChange={(checked) => updateConfig('formFields.name', checked)}
                   />
+                  <Label htmlFor="formFields-name">İsim Alanı</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="formFields-email"
+                    checked={config.formFields.email}
+                    onCheckedChange={(checked) => updateConfig('formFields.email', checked)}
+                  />
+                  <Label htmlFor="formFields-email">E-posta Alanı</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="formFields-phone"
+                    checked={config.formFields.phone}
+                    onCheckedChange={(checked) => updateConfig('formFields.phone', checked)}
+                  />
+                  <Label htmlFor="formFields-phone">Telefon Alanı</Label>
+                </div>
+                <h3 className="text-md font-bold pt-4">Renkler</h3>
                   <div className="space-y-2">
-                    {config.faqSections.whoIsItFor.items.map((item: string, index: number) => (
-                      <div key={index} className="flex items-center gap-2 group">
-                        <div className="flex-1">
-                          <Input 
-                            value={item} 
-                            onChange={(e) => updateConfig(`faqSections.whoIsItFor.items.${index}`, e.target.value)} 
-                            placeholder="Hedef kitle öğesi ekleyin"
-                            className="bg-gray-50"
-                          />
-                        </div>
+                    <div className="flex items-center justify-between border rounded-lg px-3 py-1.5">
+                      <Label htmlFor="backgroundColor" className="text-sm font-medium">Arkaplan</Label>
+                      <Input
+                        id="backgroundColor"
+                        type="color"
+                        value={config.backgroundColor}
+                        onChange={(e) => updateConfig('backgroundColor', e.target.value)}
+                        className="w-28 h-7 p-0.5 border-none rounded-md cursor-pointer"
+                      />
+                    </div>
+                     <div className="flex items-center justify-between border rounded-lg px-3 py-1.5">
+                      <Label htmlFor="textColor" className="text-sm font-medium">Metin</Label>
+                      <Input
+                        id="textColor"
+                        type="color"
+                        value={config.textColor}
+                        onChange={(e) => updateConfig('textColor', e.target.value)}
+                        className="w-28 h-7 p-0.5 border-none rounded-md cursor-pointer"
+                      />
+                    </div>
+                     <div className="flex items-center justify-between border rounded-lg px-3 py-1.5">
+                      <Label htmlFor="accentColor" className="text-sm font-medium">Vurgu</Label>
+                      <Input
+                        id="accentColor"
+                        type="color"
+                        value={config.accentColor}
+                        onChange={(e) => updateConfig('accentColor', e.target.value)}
+                        className="w-28 h-7 p-0.5 border-none rounded-md cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Benefits Section */}
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <CardTitle>🌟 Değer Vaatleri</CardTitle>
+                  <Button 
+                    onClick={() => addListItem('benefits')} 
+                    size="sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-white"
+                  >
+                    Yeni Ekle
+                  </Button>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {config.benefits.map((benefit: Benefit, index: number) => (
+                    <div key={index} className="border border-gray-200 p-4 rounded-lg space-y-3 hover:shadow-md transition-shadow">
+                      <div className="flex justify-between items-start">
+                        <h3 className="font-medium text-gray-800">Değer {index + 1}</h3>
                         <Button 
-                          onClick={() => removeFaqItem('whoIsItFor', index)} 
+                          onClick={() => removeListItem('benefits', index)} 
                           variant="ghost" 
-                          size="icon" 
-                          className="opacity-0 group-hover:opacity-100 text-red-500 hover:bg-red-50"
+                          size="sm" 
+                          className="text-red-500 hover:bg-red-50"
                         >
-                          <Trash2 className="h-4 w-4" />
+                          Sil
                         </Button>
                       </div>
-                    ))}
-                    {config.faqSections.whoIsItFor.items.length === 0 && (
-                      <div className="text-center py-4 bg-gray-50 rounded-md text-sm text-gray-500">
-                        Henüz hedef kitle eklenmemiş
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="border border-gray-200 p-4 rounded-lg space-y-4">
-                  <div className="flex justify-between items-center">
-                    <div className="space-y-1">
-                      <Label htmlFor="whatCanItDoTitle" className="font-medium text-gray-800">Neler Yapabilir?</Label>
-                      <p className="text-sm text-gray-500">Ürün/hizmetinizin yeteneklerini listeleyin</p>
-                    </div>
-                    <Button 
-                      onClick={() => addFaqItem('whatCanItDo')} 
-                      size="sm"
-                      variant="outline"
-                      className="border-blue-200 text-blue-600 hover:bg-blue-50"
-                    >
-                      Yeni Ekle
-                    </Button>
-                  </div>
-                  <Input 
-                    id="whatCanItDoTitle" 
-                    value={config.faqSections.whatCanItDo.title} 
-                    onChange={(e) => updateConfig('faqSections.whatCanItDo.title', e.target.value)}
-                    placeholder="Örn: İşinizi nasıl kolaylaştırır?"
-                    className="mt-2"
-                  />
-                  <div className="space-y-2">
-                    {config.faqSections.whatCanItDo.items.map((item: string, index: number) => (
-                      <div key={index} className="flex items-center gap-2 group">
-                        <div className="flex-1">
+                      <div className="space-y-2">
+                        <div>
+                          <Label htmlFor={`benefit-title-${index}`} className="text-sm text-gray-600">Başlık</Label>
                           <Input 
-                            value={item} 
-                            onChange={(e) => updateConfig(`faqSections.whatCanItDo.items.${index}`, e.target.value)} 
-                            placeholder="Özellik veya yetenek ekleyin"
-                            className="bg-gray-50"
+                            id={`benefit-title-${index}`}
+                            value={benefit.title} 
+                            onChange={(e) => updateListItem('benefits', index, 'title', e.target.value)} 
+                            placeholder="Örn: Hızlı Teslimat"
+                            className="mt-1"
                           />
                         </div>
-                        <Button 
-                          onClick={() => removeFaqItem('whatCanItDo', index)} 
-                          variant="ghost" 
-                          size="icon" 
-                          className="opacity-0 group-hover:opacity-100 text-red-500 hover:bg-red-50"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                        <div>
+                          <Label htmlFor={`benefit-desc-${index}`} className="text-sm text-gray-600">Açıklama</Label>
+                          <Input 
+                            id={`benefit-desc-${index}`}
+                            value={benefit.description} 
+                            onChange={(e) => updateListItem('benefits', index, 'description', e.target.value)} 
+                            placeholder="Bu değer müşterinize ne sağlıyor?"
+                            className="mt-1"
+                          />
+                        </div>
                       </div>
-                    ))}
-                    {config.faqSections.whatCanItDo.items.length === 0 && (
-                      <div className="text-center py-4 bg-gray-50 rounded-md text-sm text-gray-500">
-                        Henüz özellik eklenmemiş
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="p-6 bg-white rounded-xl shadow-lg border border-gray-200 sticky bottom-4 flex flex-col gap-4">
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Button 
-                  onClick={handleSaveProject} 
-                  className="flex-1 py-6 text-base font-medium" 
-                  disabled={loading}
-                  size="lg"
-                >
-                  {loading ? (
-                    <span className="flex items-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      {isEditing ? 'Kaydediliyor...' : 'Oluşturuluyor...'}
-                    </span>
-                  ) : isEditing ? (
-                    'Değişiklikleri Kaydet'
-                  ) : (
-                    'Projeyi Oluştur ve Yayınla'
+                    </div>
+                  ))}
+                  {config.benefits.length === 0 && (
+                    <div className="text-center py-6 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
+                      <p className="text-gray-500 text-sm">Henüz değer vaadi eklenmemiş</p>
+                      <Button 
+                        onClick={() => addListItem('benefits')} 
+                        variant="outline" 
+                        size="sm" 
+                        className="mt-2 text-blue-600 border-blue-200 hover:bg-blue-50"
+                      >
+                        İlk Değeri Ekle
+                      </Button>
+                    </div>
                   )}
-                </Button>
-                {isEditing && (
+                </CardContent>
+              </Card>
+
+              {/* Features Section */}
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <CardTitle>🛠️ Ana Özellikler</CardTitle>
                   <Button 
-                    variant="outline" 
-                    onClick={() => setShowDeleteDialog(true)}
+                    onClick={() => addListItem('features')} 
+                    size="sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-white"
+                  >
+                    Yeni Ekle
+                  </Button>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {config.features.map((feature: Feature, index: number) => (
+                    <div key={index} className="border border-gray-200 p-4 rounded-lg space-y-3 hover:shadow-md transition-shadow">
+                      <div className="flex justify-between items-start">
+                        <h3 className="font-medium text-gray-800">Özellik {index + 1}</h3>
+                        <Button 
+                          onClick={() => removeListItem('features', index)} 
+                          variant="ghost" 
+                          size="sm" 
+                          className="text-red-500 hover:bg-red-50"
+                        >
+                          Sil
+                        </Button>
+                      </div>
+                      <div className="space-y-2">
+                        <div>
+                          <Label htmlFor={`feature-title-${index}`} className="text-sm text-gray-600">Başlık</Label>
+                          <Input 
+                            id={`feature-title-${index}`}
+                            value={feature.title} 
+                            onChange={(e) => updateListItem('features', index, 'title', e.target.value)} 
+                            placeholder="Örn: Kolay Kullanım"
+                            className="mt-1"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor={`feature-desc-${index}`} className="text-sm text-gray-600">Açıklama</Label>
+                          <Input 
+                            id={`feature-desc-${index}`}
+                            value={feature.description} 
+                            onChange={(e) => updateListItem('features', index, 'description', e.target.value)} 
+                            placeholder="Bu özellik ne işe yarıyor?"
+                            className="mt-1"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  {config.features.length === 0 && (
+                    <div className="text-center py-6 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
+                      <p className="text-gray-500 text-sm">Henüz özellik eklenmemiş</p>
+                      <Button 
+                        onClick={() => addListItem('features')} 
+                        variant="outline" 
+                        size="sm" 
+                        className="mt-2 text-blue-600 border-blue-200 hover:bg-blue-50"
+                      >
+                        İlk Özelliği Ekle
+                      </Button>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* FAQ Section */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>❓ Sıkça Sorulan Sorular</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="border border-gray-200 p-4 rounded-lg space-y-4">
+                    <div className="flex justify-between items-center">
+                      <div className="space-y-1">
+                        <Label htmlFor="whoIsItForTitle" className="font-medium text-gray-800">Kimler İçin?</Label>
+                        <p className="text-sm text-gray-500">Hedef kitlenizi tanımlayın</p>
+                      </div>
+                      <Button 
+                        onClick={() => addFaqItem('whoIsItFor')} 
+                        size="sm"
+                        variant="outline"
+                        className="border-blue-200 text-blue-600 hover:bg-blue-50"
+                      >
+                        Yeni Ekle
+                      </Button>
+                    </div>
+                    <Input 
+                      id="whoIsItForTitle" 
+                      value={config.faqSections.whoIsItFor.title} 
+                      onChange={(e) => updateConfig('faqSections.whoIsItFor.title', e.target.value)}
+                      placeholder="Örn: Girişimciler için"
+                      className="mt-2"
+                    />
+                    <div className="space-y-2">
+                      {config.faqSections.whoIsItFor.items.map((item: string, index: number) => (
+                        <div key={index} className="flex items-center gap-2 group">
+                          <div className="flex-1">
+                            <Input 
+                              value={item} 
+                              onChange={(e) => updateConfig(`faqSections.whoIsItFor.items.${index}`, e.target.value)} 
+                              placeholder="Hedef kitle öğesi ekleyin"
+                              className="bg-gray-50"
+                            />
+                          </div>
+                          <Button 
+                            onClick={() => removeFaqItem('whoIsItFor', index)} 
+                            variant="ghost" 
+                            size="icon" 
+                            className="text-gray-400 hover:text-red-500 hover:bg-red-50"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ))}
+                      {config.faqSections.whoIsItFor.items.length === 0 && (
+                        <div className="text-center py-4 bg-gray-50 rounded-md text-sm text-gray-500">
+                          Henüz hedef kitle eklenmemiş
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="border border-gray-200 p-4 rounded-lg space-y-4">
+                    <div className="flex justify-between items-center">
+                      <div className="space-y-1">
+                        <Label htmlFor="whatCanItDoTitle" className="font-medium text-gray-800">Neler Yapabilir?</Label>
+                        <p className="text-sm text-gray-500">Ürün/hizmetinizin yeteneklerini listeleyin</p>
+                      </div>
+                      <Button 
+                        onClick={() => addFaqItem('whatCanItDo')} 
+                        size="sm"
+                        variant="outline"
+                        className="border-blue-200 text-blue-600 hover:bg-blue-50"
+                      >
+                        Yeni Ekle
+                      </Button>
+                    </div>
+                    <Input 
+                      id="whatCanItDoTitle" 
+                      value={config.faqSections.whatCanItDo.title} 
+                      onChange={(e) => updateConfig('faqSections.whatCanItDo.title', e.target.value)}
+                      placeholder="Örn: İşinizi nasıl kolaylaştırır?"
+                      className="mt-2"
+                    />
+                    <div className="space-y-2">
+                      {config.faqSections.whatCanItDo.items.map((item: string, index: number) => (
+                        <div key={index} className="flex items-center gap-2 group">
+                          <div className="flex-1">
+                            <Input 
+                              value={item} 
+                              onChange={(e) => updateConfig(`faqSections.whatCanItDo.items.${index}`, e.target.value)} 
+                              placeholder="Özellik veya yetenek ekleyin"
+                              className="bg-gray-50"
+                            />
+                          </div>
+                          <Button 
+                            onClick={() => removeFaqItem('whatCanItDo', index)} 
+                            variant="ghost" 
+                            size="icon" 
+                            className="text-gray-400 hover:text-red-500 hover:bg-red-50"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ))}
+                      {config.faqSections.whatCanItDo.items.length === 0 && (
+                        <div className="text-center py-4 bg-gray-50 rounded-md text-sm text-gray-500">
+                          Henüz özellik eklenmemiş
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <div className="p-6 bg-white rounded-xl shadow-lg border border-gray-200 sticky bottom-4 flex flex-col gap-4">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button 
+                    onClick={handleSaveProject} 
+                    className="flex-1 py-6 text-base font-medium" 
                     disabled={loading}
-                    className="py-6 text-base font-medium border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700"
+                    size="lg"
                   >
-                    <Trash2 className="w-5 h-5 mr-2" />
-                    Projeyi Sil
+                    {loading ? (
+                      <span className="flex items-center">
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        {isEditing ? 'Kaydediliyor...' : 'Oluşturuluyor...'}
+                      </span>
+                    ) : isEditing ? (
+                      'Değişiklikleri Kaydet'
+                    ) : (
+                      'Projeyi Oluştur ve Yayınla'
+                    )}
                   </Button>
-                )}
-              </div>
-              <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-500" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span>Değişiklikleriniz otomatik olarak kaydedilir</span>
-              </div>
-            </div>
-
-            {/* Delete Confirmation Dialog */}
-            <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>Projeyi Sil</DialogTitle>
-                  <DialogDescription>
-                    Bu işlem geri alınamaz. Projeyi silmek istediğinize emin misiniz?
-                  </DialogDescription>
-                </DialogHeader>
-                <DialogFooter className="sm:justify-start">
-                  <Button 
-                    type="button"
-                    variant="destructive"
-                    onClick={handleDeleteProject}
-                  >
-                    Sil
-                  </Button>
-                  <DialogClose asChild>
-                    <Button type="button" variant="outline">
-                      İptal
+                  {isEditing && (
+                    <Button 
+                      variant="outline" 
+                      onClick={() => setShowDeleteDialog(true)}
+                      disabled={loading}
+                      className="py-6 text-base font-medium border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700"
+                    >
+                      <Trash2 className="w-5 h-5 mr-2" />
+                      Projeyi Sil
                     </Button>
-                  </DialogClose>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
+                  )}
+                </div>
+                <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span>Değişiklikleriniz otomatik olarak kaydedilir</span>
+                </div>
+              </div>
 
+              {/* Delete Confirmation Dialog */}
+              <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Projeyi Sil</DialogTitle>
+                    <DialogDescription>
+                      Bu işlem geri alınamaz. Projeyi silmek istediğinize emin misiniz?
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter className="sm:justify-start">
+                    <Button 
+                      type="button"
+                      variant="destructive"
+                      onClick={handleDeleteProject}
+                    >
+                      Sil
+                    </Button>
+                    <DialogClose asChild>
+                      <Button type="button" variant="outline">
+                        İptal
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+              </div>
             </div>
 
             {/* ===== Right Panel: Live Preview ===== */}
-            <div className="lg:col-span-1 hidden lg:block">
-              <div className="sticky top-6">
+            <div className="lg:col-span-3 hidden lg:block sticky top-6">
+              <div className="w-full h-[88vh] border rounded-lg overflow-hidden shadow-lg">
                 <ProjectPreview config={config} />
               </div>
             </div>
