@@ -29,6 +29,7 @@ export interface UserProfile {
   projectsCount: number;
   voiceCreditsUsed: number;
   transactionId?: string;
+  invoice_id?: string;
   subscription: {
     planId: string;
     maxForms: number;
@@ -172,7 +173,7 @@ export async function getUserProfile(uid: string): Promise<UserProfile | null> {
 
 export async function getUserByTransactionId(transactionId: string): Promise<UserProfile | null> {
     const usersRef = collection(db, "users");
-    const q = query(usersRef, where("transactionId", "==", transactionId));
+    const q = query(usersRef, where("invoice_id", "==", transactionId));
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {
