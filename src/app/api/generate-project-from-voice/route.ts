@@ -3,6 +3,9 @@ import OpenAI from 'openai';
 import formidable from 'formidable';
 import fs from 'fs';
 import { Writable } from 'stream';
+import { auth } from '~/lib/firebase-admin'; // Use admin SDK for server-side auth
+import { getUserProfile, decrementVoiceCredits } from '~/lib/firestore';
+import { getPlanBySlug } from '~/lib/plans';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -92,6 +95,31 @@ const generateProjectConfig = async (prompt: string) => {
 
 export async function POST(req: Request) {
   try {
+    const authToken = req.headers.get('Authorization')?.split('Bearer ')[1];
+    if (!authToken) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    let decodedToken;
+    try {
+      decodedToken = await auth.verifyIdToken(authToken);
+    } catch (error) {
+      return NextResponse.json({ error: 'Invalid auth token' }, { status: 401 });
+    }
+    const { uid } = decodedToken;
+
+    const userProfile = await getUserProfile(uid);
+    if (!userProfile) {
+      return NextResponse.json({ error: 'User profile not found' }, { status: 404 });
+    }
+
+    const currentPlan = getPlanBySlug(userProfile.plan);
+    const voiceCredits = currentPlan?.features.find(f => f.includes("Sesle Proje Oluşturma"))?.split(" ")[0] ? parseInt(currentPlan?.features.find(f => f.includes("Sesle Proje Oluşturma"))?.split(" ")[0] as string) : 0;
+
+    if (!currentPlan || voiceCredits === 0 || userProfile.voiceCreditsUsed >= voiceCredits) {
+        return NextResponse.json({ error: 'Insufficient credits or plan does not support voice generation.' }, { status: 403 });
+    }
+
     const { files } = await formidableParse(req);
     const audioFile = files.audio;
 
@@ -107,6 +135,8 @@ export async function POST(req: Request) {
     });
 
     const projectConfig = await generateProjectConfig(transcription.text);
+
+    await decrementVoiceCredits(uid);
 
     // Clean up the uploaded file
     fs.unlinkSync(firstAudioFile.filepath);

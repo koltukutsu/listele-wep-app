@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { auth } from '~/lib/firebase-admin';
+import { getUserProfile, createProject } from '~/lib/firestore'; // Import createProject
+import { getPlanBySlug } from '~/lib/plans';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -7,6 +10,31 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   try {
+    const authToken = req.headers.get('Authorization')?.split('Bearer ')[1];
+    if (!authToken) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    let decodedToken;
+    try {
+      decodedToken = await auth.verifyIdToken(authToken);
+    } catch (error) {
+      return NextResponse.json({ error: 'Invalid auth token' }, { status: 401 });
+    }
+    const { uid } = decodedToken;
+
+    const userProfile = await getUserProfile(uid);
+    if (!userProfile) {
+      return NextResponse.json({ error: 'User profile not found' }, { status: 404 });
+    }
+
+    const currentPlan = getPlanBySlug(userProfile.plan);
+    const maxProjects = currentPlan ? (currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] ? parseInt(currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] as string) : 0) : 0;
+
+    if (!currentPlan || (currentPlan.name !== "Sınırsız" && userProfile.projectsCount >= maxProjects)) {
+      return NextResponse.json({ error: 'Project limit reached.' }, { status: 403 });
+    }
+    
     const { prompt } = await req.json();
 
     if (!prompt) {
@@ -73,7 +101,14 @@ export async function POST(req: Request) {
       formFields: { name: true, email: true, phone: false },
     };
 
-    return NextResponse.json(fullConfig);
+    // Create the project in Firestore
+    const projectId = await createProject(uid, {
+      name: fullConfig.name,
+      slug: fullConfig.name.toLowerCase().replace(/\s+/g, '-').slice(0, 50), // Generate a simple slug
+      config: fullConfig,
+    });
+
+    return NextResponse.json({ ...fullConfig, projectId }); // Return projectId
 
   } catch (error) {
     console.error('[GENERATE_PROJECT_ERROR]', error);

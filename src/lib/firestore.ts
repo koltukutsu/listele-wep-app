@@ -10,7 +10,8 @@ import {
   updateDoc, 
   deleteDoc,
   serverTimestamp,
-  Timestamp 
+  Timestamp,
+  increment
 } from "firebase/firestore";
 import { User } from "firebase/auth";
 import { db } from "./firebase";
@@ -24,8 +25,10 @@ export interface UserProfile {
   provider: 'google' | 'email';
   createdAt: Timestamp;
   lastLoginAt: Timestamp;
-  plan: 'free' | 'basic' | 'pro' | 'enterprise';
+  plan: 'free' | 'basic' | 'pro' | 'unlimited';
   projectsCount: number;
+  voiceCreditsUsed: number;
+  transactionId?: string;
   subscription: {
     planId: string;
     maxForms: number;
@@ -68,50 +71,52 @@ export interface Lead {
   notes?: string;
 }
 
-export const plans = {
-  free: {
-    name: 'Free',
-    price: '0 TL',
-    priceDescription: 'per month',
-    features: ['1 Project', '50 Submissions', 'Basic Analytics'],
-    maxProjects: 1,
-    maxSubmissions: 50,
-  },
-  basic: {
-    name: 'Basic',
-    price: '5 TL',
-    priceDescription: 'per month',
-    features: ['3 Projects', '500 Submissions', 'Advanced Analytics', 'Email Support'],
-    maxProjects: 3,
-    maxSubmissions: 500,
-  },
-  pro: {
-    name: 'Pro',
-    price: '10 TL',
-    priceDescription: 'per month',
-    features: [
-      '5 Projects',
-      '2,500 Submissions',
-      'Priority Support',
-      'Custom Domain (soon)',
-    ],
-    maxProjects: 5,
-    maxSubmissions: 2500,
-  },
-  enterprise: {
-    name: 'Enterprise',
-    price: '20 TL',
-    priceDescription: 'per month',
-    features: [
-      '25 Projects',
-      'Unlimited Submissions',
-      'Dedicated Support',
-      'Team Features (soon)',
-    ],
-    maxProjects: 25,
-    maxSubmissions: -1, // Unlimited
-  },
-};
+// This is an old plan structure and will be removed.
+// The new plan structure is in a different file.
+// export const plans = {
+//   free: {
+//     name: 'Free',
+//     price: '0 TL',
+//     priceDescription: 'per month',
+//     features: ['1 Project', '50 Submissions', 'Basic Analytics'],
+//     maxProjects: 1,
+//     maxSubmissions: 50,
+//   },
+//   basic: {
+//     name: 'Basic',
+//     price: '5 TL',
+//     priceDescription: 'per month',
+//     features: ['3 Projects', '500 Submissions', 'Advanced Analytics', 'Email Support'],
+//     maxProjects: 3,
+//     maxSubmissions: 500,
+//   },
+//   pro: {
+//     name: 'Pro',
+//     price: '10 TL',
+//     priceDescription: 'per month',
+//     features: [
+//       '5 Projects',
+//       '2,500 Submissions',
+//       'Priority Support',
+//       'Custom Domain (soon)',
+//     ],
+//     maxProjects: 5,
+//     maxSubmissions: 2500,
+//   },
+//   enterprise: {
+//     name: 'Enterprise',
+//     price: '20 TL',
+//     priceDescription: 'per month',
+//     features: [
+//       '25 Projects',
+//       'Unlimited Submissions',
+//       'Dedicated Support',
+//       'Team Features (soon)',
+//     ],
+//     maxProjects: 25,
+//     maxSubmissions: -1, // Unlimited
+//   },
+// };
 
 // User operations
 export async function createUserProfile(user: User, provider: 'google' | 'email'): Promise<void> {
@@ -135,6 +140,7 @@ export async function createUserProfile(user: User, provider: 'google' | 'email'
     provider,
     plan: 'free',
     projectsCount: 0,
+    voiceCreditsUsed: 0,
     subscription: {
       planId: 'free',
       maxForms: 1,
@@ -163,6 +169,37 @@ export async function getUserProfile(uid: string): Promise<UserProfile | null> {
   
   return null;
 }
+
+export async function getUserByTransactionId(transactionId: string): Promise<UserProfile | null> {
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("transactionId", "==", transactionId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+        return null;
+    }
+
+    const doc = querySnapshot.docs[0];
+    return {
+        ...doc.data(),
+        uid: doc.id,
+    } as UserProfile;
+}
+
+export async function updateUserProfile(uid: string, updates: Partial<UserProfile>): Promise<void> {
+    const userRef = doc(db, "users", uid);
+    await updateDoc(userRef, {
+        ...updates,
+        updatedAt: serverTimestamp()
+    });
+}
+
+export const decrementVoiceCredits = async (uid: string) => {
+  const userDocRef = doc(db, 'users', uid);
+  await updateDoc(userDocRef, {
+    voiceCreditsUsed: increment(1)
+  });
+};
 
 // Project operations
 export async function getUserProjects(userId: string): Promise<Project[]> {

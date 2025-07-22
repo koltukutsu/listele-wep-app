@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "~/lib/firebase";
-import { getUserProjects, Project, getUserProfile, UserProfile, plans, deleteProject } from "~/lib/firestore";
+import { getUserProjects, Project, getUserProfile, UserProfile, deleteProject } from "~/lib/firestore";
+import { getPlanBySlug } from "~/lib/plans";
 import { BarChart, Users, Edit, Share2, ExternalLink, PlusCircle, Trash2 } from 'lucide-react';
 import { toast } from "sonner";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card";
@@ -75,7 +76,8 @@ export default function DashboardPage() {
     );
   }
 
-  const canCreateProject = userProfile && userProfile.projectsCount < plans[userProfile.plan].maxProjects;
+  const currentPlan = userProfile ? getPlanBySlug(userProfile.plan) : null;
+  const canCreateProject = currentPlan && (currentPlan.name === "Sınırsız" || (userProfile && userProfile.projectsCount < (currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] ? parseInt(currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] as string) : 0)));
 
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8">
@@ -106,43 +108,48 @@ export default function DashboardPage() {
               <CardHeader>
                 <div className="flex justify-between items-start">
                   <CardTitle className="text-lg font-bold mb-1">{project.name}</CardTitle>
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    project.status === 'published' ? 'bg-green-100 text-green-800' :
-                    'bg-yellow-100 text-yellow-800'
-                  }`}>
-                    {project.status === 'published' ? 'Yayında' : 'Taslak'}
-                  </span>
+                  {project.status === 'published' ? (
+                    <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-400">
+                      <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                      Yayında!
+                    </span>
+                  ) : (
+                    <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-400">
+                      Taslak
+                    </span>
+                  )}
                 </div>
                 <CardDescription>/{project.slug}</CardDescription>
               </CardHeader>
-              <CardContent className="flex-grow">
-                <div className="flex items-center gap-6 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <BarChart className="h-4 w-4" />
-                    <span>{project.stats?.totalVisits || 0} Görüntülenme</span>
-                  </div>
-                  <div className="flex items-center gap-2">
+              <CardContent className="flex-grow space-y-4">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <BarChart className="h-4 w-4" />
+                  <span>{project.stats?.totalVisits || 0} Görüntülenme</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Users className="h-4 w-4" />
-                    <span>{project.stats?.totalSignups || 0} Kayıt</span>
+                    <span>
+                      {currentPlan && currentPlan.name !== "Sınırsız" && project.stats?.totalSignups >= 50 ? '50+' : project.stats?.totalSignups || 0} Kayıt
+                    </span>
                   </div>
+                  <Link href={`/dashboard/leads/${project.id}`} passHref>
+                    <Button size="sm" variant="default">Kayıtları Gör</Button>
+                  </Link>
                 </div>
               </CardContent>
               <CardFooter className="bg-gray-50 dark:bg-gray-800/50 p-3 flex justify-end items-center gap-2 border-t">
-                 <Button variant="ghost" size="sm" onClick={() => handleShare(project.slug)}>
-                    <Share2 className="h-4 w-4" />
+                 <Button variant="outline" size="sm" onClick={() => handleShare(project.slug)}>
+                    <Share2 className="h-4 w-4 mr-1" />
+                    Paylaş!
                   </Button>
-                <Link href={`/dashboard/leads/${project.id}`}>
-                  <Button variant="ghost" size="sm">
-                    <BarChart className="h-4 w-4" />
-                  </Button>
-                </Link>
                 <Link href={`/dashboard/editor/${project.id}`}>
                   <Button variant="ghost" size="sm">
                     <Edit className="h-4 w-4" />
                   </Button>
                 </Link>
                 <Link href={`${APP_URL}/${project.slug}`} target="_blank">
-                  <Button variant="default" size="sm">
+                  <Button variant="ghost" size="sm">
                     <ExternalLink className="h-4 w-4" />
                   </Button>
                 </Link>

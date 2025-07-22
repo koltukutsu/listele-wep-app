@@ -1,11 +1,16 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '~/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '~/components/ui/dialog';
 import { Textarea } from './ui/textarea';
 import { toast } from 'sonner';
-import { Zap, PartyPopper } from 'lucide-react';
+import { Zap, PartyPopper, Info } from 'lucide-react';
+import Link from 'next/link';
+import { UserProfile, getUserProfile } from '~/lib/firestore';
+import { getPlanBySlug } from '~/lib/plans';
+import { onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "~/lib/firebase";
 
 interface AIFounderModalProps {
   isOpen: boolean;
@@ -16,6 +21,23 @@ interface AIFounderModalProps {
 export default function AIFounderModal({ isOpen, onClose, onApplyConfig }: AIFounderModalProps) {
   const [prompt, setPrompt] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        const profile = await getUserProfile(currentUser.uid);
+        setUserProfile(profile);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const currentPlan = userProfile ? getPlanBySlug(userProfile.plan) : null;
+  const maxProjects = currentPlan ? (currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] ? parseInt(currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] as string) : 0) : 0;
+  const canCreateProject = currentPlan && (currentPlan.name === "Sınırsız" || (userProfile && userProfile.projectsCount < maxProjects));
 
   const handleGenerate = async () => {
     if (!prompt.trim()) {
@@ -25,16 +47,19 @@ export default function AIFounderModal({ isOpen, onClose, onApplyConfig }: AIFou
     
     setIsLoading(true);
     try {
+      const token = await user?.getIdToken();
       const response = await fetch('/api/generate-project', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({ prompt }),
       });
 
       if (!response.ok) {
-        throw new Error('Proje oluşturulurken bir hata oluştu.');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Proje oluşturulurken bir hata oluştu.');
       }
 
       const newConfig = await response.json();
@@ -72,8 +97,17 @@ export default function AIFounderModal({ isOpen, onClose, onApplyConfig }: AIFou
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPrompt(e.target.value)}
             rows={5}
             className="w-full"
-            disabled={isLoading}
+            disabled={isLoading || !canCreateProject}
           />
+          {!canCreateProject && (
+            <div className="mt-2 text-sm text-yellow-600 bg-yellow-50 border border-yellow-200 rounded-lg p-3 flex items-center gap-2">
+              <Info className="h-5 w-5" />
+              <span>
+                Proje oluşturma limitinize ulaştınız. Daha fazla proje oluşturmak için
+                <Link href="/pricing" className="font-semibold underline ml-1">planınızı yükseltin</Link>.
+              </span>
+            </div>
+          )}
         </div>
 
         <DialogFooter>
@@ -87,7 +121,7 @@ export default function AIFounderModal({ isOpen, onClose, onApplyConfig }: AIFou
           </Button>
           <Button
             onClick={handleGenerate}
-            disabled={isLoading}
+            disabled={isLoading || !canCreateProject}
             className="w-full sm:w-auto"
           >
             {isLoading ? (

@@ -16,7 +16,8 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const project = await getProjectBySlug(params.slug);
+  const { slug } = params;
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     return {
@@ -46,7 +47,8 @@ export async function generateMetadata(
 
 
 export default async function ProjectPage({ params }: { params: { slug: string }}) {
-  const project: Project | null = await getProjectBySlug(params.slug);
+  const { slug } = params;
+  const project: Project | null = await getProjectBySlug(slug);
 
   if (!project) {
     notFound();

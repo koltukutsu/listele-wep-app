@@ -2,7 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { getProjectById, getProjectLeads, Project, Lead } from '~/lib/firestore';
+import { getProjectById, getProjectLeads, Project, Lead, getUserProfile, UserProfile } from '~/lib/firestore';
+import { getPlanBySlug } from '~/lib/plans';
+import { onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "~/lib/firebase";
 import { toast } from 'sonner';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
@@ -16,6 +19,19 @@ export default function LeadsPage() {
   const [project, setProject] = useState<Project | null>(null);
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        const profile = await getUserProfile(currentUser.uid);
+        setUserProfile(profile);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     if (!projectId) return;
@@ -41,13 +57,19 @@ export default function LeadsPage() {
     fetchData();
   }, [projectId]);
 
+  const currentPlan = userProfile ? getPlanBySlug(userProfile.plan) : null;
+  const maxLeads = currentPlan ? (currentPlan.features.find(f => f.includes("Potansiyel Müşteri"))?.split(" ")[0] ? parseInt(currentPlan.features.find(f => f.includes("Potansiyel Müşteri"))?.split(" ")[0] as string) : 0) : 0;
+  
+  const displayedLeads = leads.slice(0, maxLeads);
+  const hasMoreLeads = currentPlan && currentPlan.name !== "Sınırsız" && leads.length > maxLeads;
+
   const exportData = (format: 'csv' | 'json' | 'xlsx') => {
-    if (leads.length === 0) {
+    if (displayedLeads.length === 0) {
       toast.info('Dışa aktarılacak veri bulunmuyor.');
       return;
     }
 
-    const dataToExport = leads.map(lead => ({
+    const dataToExport = displayedLeads.map(lead => ({
       'Ad Soyad': lead.name || '',
       'E-posta': lead.email,
       'Telefon': lead.phone || '',
@@ -104,10 +126,12 @@ export default function LeadsPage() {
     );
   }
 
+  const conversionRate = project.stats.totalVisits > 0 ? (project.stats.totalSignups / project.stats.totalVisits) * 100 : 0;
+
   const stats = [
     { name: 'Toplam Ziyaretçi', stat: project.stats.totalVisits || 0, icon: Eye },
-    { name: 'Toplam Kayıt', stat: project.stats.totalSignups || 0, icon: Users },
-    { name: 'Dönüşüm Oranı', stat: `${(project.stats.conversionRate || 0).toFixed(2)}%`, icon: Percent },
+    { name: 'Toplam Kayıt', stat: currentPlan && currentPlan.name !== "Sınırsız" && project.stats.totalSignups >= 50 ? '50+' : project.stats.totalSignups || 0, icon: Users },
+    { name: 'Dönüşüm Oranı', stat: `${conversionRate.toFixed(2)}%`, icon: Percent },
   ];
 
   return (
@@ -170,8 +194,8 @@ export default function LeadsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                {leads.length > 0 ? (
-                  leads.map(lead => (
+                {displayedLeads.length > 0 ? (
+                  displayedLeads.map(lead => (
                     <tr key={lead.id}>
                       <td className="px-6 py-4 whitespace-nowrap">{lead.name || '-'}</td>
                       <td className="px-6 py-4 whitespace-nowrap">{lead.email || '-'}</td>
@@ -185,6 +209,20 @@ export default function LeadsPage() {
                   <tr>
                     <td colSpan={4} className="text-center py-8 text-muted-foreground">
                       Henüz kayıt bulunmuyor. Projenizin linkini paylaşarak veri toplamaya başlayın!
+                    </td>
+                  </tr>
+                )}
+                {hasMoreLeads && (
+                  <tr>
+                    <td colSpan={4} className="text-center py-4 bg-gray-50 dark:bg-gray-800">
+                      <div className="flex flex-col items-center justify-center gap-2">
+                        <p className="text-muted-foreground">
+                          {maxLeads}+ potansiyel müşteriyi görmek için planınızı yükseltin.
+                        </p>
+                        <Link href="/pricing">
+                          <Button size="sm">Planları Gör</Button>
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 )}

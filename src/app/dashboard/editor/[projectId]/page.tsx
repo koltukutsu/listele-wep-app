@@ -14,6 +14,7 @@ import type { Project } from "~/lib/firestore";
 import ProjectPreview from "~/components/project-preview";
 import Confetti from 'react-confetti';
 import AIFounderModal from '~/components/ai-founder-modal';
+import { OnboardingChecklist } from "~/components/onboarding-checklist";
 import { PartyPopper, Copy, Check, Trash2, X } from 'lucide-react';
 import {
   Dialog,
@@ -26,6 +27,8 @@ import {
 } from '~/components/ui/dialog';
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { APP_URL } from "~/lib/config";
+import { getPlanBySlug } from "~/lib/plans";
+import { getUserProfile } from "~/lib/firestore";
 
 interface Benefit {
   title: string;
@@ -93,6 +96,8 @@ export default function ProjectEditorPage() {
     const [copyButtonText, setCopyButtonText] = useState('Kopyala');
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [showChecklist, setShowChecklist] = useState(false);
+    const [showUpgradeDialog, setShowUpgradeDialog] = useState(false);
 
     const isEditing = projectId !== 'new';
 
@@ -113,6 +118,9 @@ export default function ProjectEditorPage() {
                         toast.error('Proje yüklenirken bir hata oluştu.');
                         console.error('Error fetching project:', error);
                     }
+                } else {
+                    // This is a new project, show the checklist.
+                    setShowChecklist(true);
                 }
             } else {
                 router.push("/login");
@@ -231,6 +239,17 @@ export default function ProjectEditorPage() {
         setTimeout(() => setCopyButtonText('Kopyala'), 2000);
     };
 
+    const handleCustomDomainSave = async () => {
+        if (!user) return;
+        const userProfile = await getUserProfile(user.uid);
+        if (userProfile?.plan === 'free') {
+            setShowUpgradeDialog(true);
+        } else {
+            // Handle custom domain saving for paid users
+            toast.info("Custom domain functionality is coming soon for pro users!");
+        }
+    }
+
     if (authLoading) {
     return <main className="flex min-h-screen flex-col items-center justify-center p-24"><p>Yükleniyor...</p></main>;
   }
@@ -262,6 +281,9 @@ export default function ProjectEditorPage() {
             {/* ===== Left Panel: Editor ===== */}
             <div className="lg:col-span-2 sticky top-6">
               <div className="h-[88vh] overflow-y-auto space-y-6 pr-4">
+                
+                {showChecklist && <OnboardingChecklist config={config} setConfig={setConfig} />}
+
                 <Card>
                   <CardHeader>
                     <CardTitle>🚀 Proje Adı</CardTitle>
@@ -275,6 +297,25 @@ export default function ProjectEditorPage() {
                     />
                     <Button onClick={() => setIsAiModalOpen(true)} variant="outline" className="w-full">
                       ✨ AI Founder Mode ile Otomatik Doldur
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* Custom Domain Section */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>🌐 Özel Alan Adı</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-gray-500">
+                      Projenize profesyonel bir dokunuş katmak için kendi alan adınızı bağlayın. (Pro Özellik)
+                    </p>
+                    <Input
+                      id="customDomain"
+                      placeholder="ornek.com"
+                    />
+                    <Button onClick={handleCustomDomainSave} className="w-full">
+                      Alanı Kaydet
                     </Button>
                   </CardContent>
                 </Card>
@@ -673,6 +714,24 @@ export default function ProjectEditorPage() {
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
+
+              {/* Upgrade Dialog */}
+                <Dialog open={showUpgradeDialog} onOpenChange={setShowUpgradeDialog}>
+                    <DialogContent>
+                        <DialogHeader>
+                        <DialogTitle>Pro'ya Yükselt</DialogTitle>
+                        <DialogDescription>
+                            Özel alan adları bir Pro özelliğidir. Kendi alan adınızı bağlamak ve daha fazla özelliğin kilidini açmak için planınızı yükseltin.
+                        </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter>
+                            <Button onClick={() => router.push('/pricing')}>Yükselt</Button>
+                            <DialogClose asChild>
+                                <Button variant="outline">İptal</Button>
+                            </DialogClose>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
               </div>
             </div>
 

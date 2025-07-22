@@ -9,11 +9,12 @@ import {
   getIdToken,
 } from "firebase/auth";
 import { auth, googleProvider } from "~/lib/firebase";
-import { createUserProfile } from "~/lib/firestore";
+import { createUserProfile, getUserProfile } from "~/lib/firestore";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useCookies } from "react-cookie";
 
 interface AuthFormProps {
   onSuccess?: () => void;
@@ -25,42 +26,35 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [cookies, setCookie] = useCookies(["firebase-auth-token"]);
 
-  const handleAuth = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleAuth = async (provider: "google" | "email") => {
     setLoading(true);
-
     try {
-      if (isSignUp) {
-        // Create user with email and password
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        
-        // Create user profile in Firestore
-        await createUserProfile(user, 'email');
-        
-        // Send email verification
-        await sendEmailVerification(user);
-        
-        toast.success("Hesap oluşturuldu! Doğrulama e-postası gönderildi.");
-        if (onSuccess) onSuccess();
-        else router.push("/dashboard");
+      let userCredential;
+      if (provider === "google") {
+        userCredential = await signInWithPopup(auth, googleProvider);
+        await createUserProfile(userCredential.user, 'google');
       } else {
-        // Sign in with email and password
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        
-        // Set cookie for server-side authentication
-        const token = await getIdToken(user);
-        document.cookie = `firebase-auth-token=${token}; path=/; max-age=86400`; // 1 day expiration
-        
-        // Update last login time
-        await createUserProfile(user, 'email');
-        
-        toast.success("Başarıyla giriş yapıldı!");
-        if (onSuccess) onSuccess();
-        else router.push("/dashboard");
+        if (isSignUp) {
+          userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          await createUserProfile(userCredential.user, 'email');
+        } else {
+          userCredential = await signInWithEmailAndPassword(auth, email, password);
+        }
       }
+      
+      const user = userCredential.user;
+      const idToken = await getIdToken(user);
+      setCookie("firebase-auth-token", idToken, { path: "/" });
+
+      const userProfile = await getUserProfile(userCredential.user.uid);
+      if (userProfile && userProfile.projectsCount > 0) {
+        router.push("/dashboard");
+      } else {
+        router.push("/onboarding");
+      }
+
     } catch (error: any) {
       console.error("Auth error:", error);
       
@@ -89,21 +83,19 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
-    
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const user = result.user;
+      const userCredential = await signInWithPopup(auth, googleProvider);
+      const user = userCredential.user;
+      const idToken = await getIdToken(user);
+      setCookie("firebase-auth-token", idToken, { path: "/" });
+      await createUserProfile(userCredential.user, 'google');
       
-      // Set cookie for server-side authentication
-      const token = await getIdToken(user);
-      document.cookie = `firebase-auth-token=${token}; path=/; max-age=86400`; // 1 day expiration
-      
-      // Create or update user profile in Firestore
-      await createUserProfile(user, 'google');
-      
-      toast.success("Google ile başarıyla giriş yapıldı!");
-      if (onSuccess) onSuccess();
-      else router.push("/dashboard");
+      const userProfile = await getUserProfile(userCredential.user.uid);
+      if (userProfile && userProfile.projectsCount > 0) {
+        router.push("/dashboard");
+      } else {
+        router.push("/onboarding");
+      }
     } catch (error: any) {
       console.error("Google sign-in error:", error);
       
@@ -127,7 +119,7 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
       <h2 className="text-2xl font-bold text-center mb-6">
         {isSignUp ? "Hesap Oluştur" : "Giriş Yap"}
       </h2>
-      <form onSubmit={handleAuth} className="space-y-4">
+      <form onSubmit={(e) => { e.preventDefault(); handleAuth("email"); }} className="space-y-4">
         <div>
           <label
             htmlFor="email"
