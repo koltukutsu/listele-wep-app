@@ -7,16 +7,16 @@ import type { Metadata, ResolvingMetadata } from 'next';
 import { APP_URL } from '~/lib/config';
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
   const project = await getProjectBySlug(slug);
 
   if (!project) {
@@ -45,9 +45,8 @@ export async function generateMetadata(
   };
 }
 
-
-export default async function ProjectPage({ params }: { params: { slug: string }}) {
-  const { slug } = params;
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const project: Project | null = await getProjectBySlug(slug);
 
   if (!project) {
@@ -76,15 +75,27 @@ export default async function ProjectPage({ params }: { params: { slug: string }
     console.error('Failed to track visit:', error);
   }
 
-  // Manually serialize Timestamp objects to numbers
+  // Helper function to convert Timestamp to number
+  const convertTimestamp = (timestamp: any): number | undefined => {
+    if (!timestamp) return undefined;
+    if (typeof timestamp === 'number') return timestamp;
+    if (timestamp.toMillis) return timestamp.toMillis();
+    return undefined;
+  };
+
+  // Manually serialize all Timestamp objects to numbers
   const serializableProject = {
     ...project,
-    createdAt: typeof project.createdAt === 'number' ? project.createdAt : project.createdAt.toMillis(),
-    updatedAt: typeof project.updatedAt === 'number' ? project.updatedAt : project.updatedAt.toMillis(),
+    createdAt: convertTimestamp(project.createdAt) || Date.now(),
+    updatedAt: convertTimestamp(project.updatedAt) || Date.now(),
     stats: {
-      ...project.stats,
-      lastVisitAt: project.stats.lastVisitAt ? (typeof project.stats.lastVisitAt === 'number' ? project.stats.lastVisitAt : project.stats.lastVisitAt.toMillis()) : undefined,
-      lastSignupAt: project.stats.lastSignupAt ? (typeof project.stats.lastSignupAt === 'number' ? project.stats.lastSignupAt : project.stats.lastSignupAt.toMillis()) : undefined,
+      totalVisits: project.stats.totalVisits || 0,
+      totalSignups: project.stats.totalSignups || 0,
+      conversionRate: project.stats.conversionRate || 0,
+      galleryViews: (project.stats as any).galleryViews || 0,
+      lastVisitAt: convertTimestamp(project.stats.lastVisitAt),
+      lastSignupAt: convertTimestamp(project.stats.lastSignupAt),
+      lastGalleryView: convertTimestamp((project.stats as any).lastGalleryView),
     },
   };
   

@@ -55,10 +55,10 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
 
   if (submitted) {
     return (
-      <main className="bg-white text-gray-800 min-h-screen flex items-center justify-center">
+      <main className="bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-200 min-h-screen flex items-center justify-center">
         <div className="text-center p-8 max-w-lg">
            <h2 className="text-3xl font-bold mb-2">{project.config.thankYouMessage || "Harika! Aramıza Hoş Geldin."}</h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-400">
               Bu yolculukta ilk adımı attın. Gelişmelerden seni haberdar edeceğiz. Geleceği birlikte inşa edeceğimiz için heyecanlıyız!
             </p>
         </div>
@@ -67,12 +67,12 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
   }
 
   return (
-    <main className="bg-white text-gray-800">
+    <main className="bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-200">
       {/* Hero Section */}
       <section className="text-center py-20 px-4">
         <div className="container mx-auto max-w-2xl">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">{project.config.title}</h1>
-          <p className="text-lg text-gray-600 mb-8">{project.config.subtitle}</p>
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">{project.config.subtitle}</p>
           <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
             {project.config.formFields.name && (
               <input
@@ -81,7 +81,7 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
                 placeholder="Adın ve Soyadın"
                 value={formData.name}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded-md bg-gray-100 border-gray-200 focus:ring-2 focus:ring-offset-2"
+                className="w-full px-4 py-3 rounded-md bg-gray-100 dark:bg-slate-800 border-gray-200 dark:border-slate-700 focus:ring-2 focus:ring-offset-2"
                 style={{'--tw-ring-color': project.config.accentColor} as React.CSSProperties}
               />
             )}
@@ -93,7 +93,7 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
                 required
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded-md bg-gray-100 border-gray-200 focus:ring-2 focus:ring-offset-2"
+                className="w-full px-4 py-3 rounded-md bg-gray-100 dark:bg-slate-800 border-gray-200 dark:border-slate-700 focus:ring-2 focus:ring-offset-2"
                 style={{'--tw-ring-color': project.config.accentColor} as React.CSSProperties}
               />
             )}
@@ -104,7 +104,7 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
                 placeholder="Telefon Numaran"
                 value={formData.phone}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded-md bg-gray-100 border-gray-200 focus:ring-2 focus:ring-offset-2"
+                className="w-full px-4 py-3 rounded-md bg-gray-100 dark:bg-slate-800 border-gray-200 dark:border-slate-700 focus:ring-2 focus:ring-offset-2"
                 style={{'--tw-ring-color': project.config.accentColor} as React.CSSProperties}
               />
             )}
@@ -116,7 +116,7 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
             >
               {loading ? 'Gönderiliyor...' : project.config.buttonText}
             </button>
-            <p className="text-xs text-gray-500 pt-2">
+            <p className="text-xs text-gray-500 dark:text-gray-400 pt-2">
               Verileriniz yalnızca erken erişim duyuruları için kullanılacaktır. Spam gönderilmez.
             </p>
             {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -126,20 +126,20 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
 
       {/* Benefits Section */}
       {project.config.benefits && project.config.benefits.length > 0 && (
-        <section className="py-16 px-4 bg-gray-50">
+        <section className="py-16 px-4 bg-gray-50 dark:bg-slate-800">
           <div className="container mx-auto max-w-5xl">
              <div className="text-center mb-12 max-w-xl mx-auto">
               <h2 className="text-3xl font-bold">{project.config.targetAudience.title}</h2>
-              <p className="text-gray-600 mt-2">{project.config.targetAudience.description}</p>
+              <p className="text-gray-600 dark:text-gray-400 mt-2">{project.config.targetAudience.description}</p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {project.config.benefits.map((benefit: any, index: number) => {
                 const Icon = benefitIcons[index % benefitIcons.length] || Clock;
                 return (
-                  <div key={index} className="bg-white p-6 rounded-lg border border-gray-200">
+                  <div key={index} className="bg-white dark:bg-slate-900 p-6 rounded-lg border border-gray-200 dark:border-slate-700">
                     <Icon className="h-8 w-8 mb-4" style={{ color: project.config.accentColor }} />
                     <h3 className="text-lg font-bold mb-2">{benefit.title}</h3>
-                    <p className="text-gray-600 text-sm">{benefit.description}</p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{benefit.description}</p>
                   </div>
                 );
               })}
@@ -154,12 +154,12 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
           <div className="container mx-auto max-w-2xl">
             <Accordion type="single" collapsible defaultValue="who-is-it-for" className="w-full space-y-4">
               {project.config.faqSections.whoIsItFor?.items?.length > 0 && (
-                 <AccordionItem value="who-is-it-for" className="border border-gray-200 rounded-lg px-6">
+                 <AccordionItem value="who-is-it-for" className="border border-gray-200 dark:border-slate-700 rounded-lg px-6">
                    <AccordionTrigger className="text-lg font-medium">
                       {project.config.faqSections.whoIsItFor.title}
                    </AccordionTrigger>
                    <AccordionContent>
-                      <ul className="list-disc pl-5 text-gray-600 space-y-2">
+                      <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-2">
                         {project.config.faqSections.whoIsItFor.items.map((item: string, i: number) => (
                            <li key={i}>{item}</li>
                         ))}
@@ -168,12 +168,12 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
                  </AccordionItem>
               )}
                {project.config.faqSections.whatCanItDo?.items?.length > 0 && (
-                 <AccordionItem value="what-can-it-do" className="border border-gray-200 rounded-lg px-6">
+                 <AccordionItem value="what-can-it-do" className="border border-gray-200 dark:border-slate-700 rounded-lg px-6">
                    <AccordionTrigger className="text-lg font-medium">
                       {project.config.faqSections.whatCanItDo.title}
                    </AccordionTrigger>
                    <AccordionContent>
-                      <ul className="list-disc pl-5 text-gray-600 space-y-2">
+                      <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-2">
                         {project.config.faqSections.whatCanItDo.items.map((item: string, i: number) => (
                           <li key={i}>{item}</li>
                         ))}
@@ -187,8 +187,8 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
       )}
       
       {/* Footer */}
-      <footer className="text-center py-8 bg-gray-50 border-t">
-        <p className="text-gray-600">{project.config.footerText}</p>
+      <footer className="text-center py-8 bg-gray-50 dark:bg-slate-800 border-t dark:border-slate-700">
+        <p className="text-gray-600 dark:text-gray-400">{project.config.footerText}</p>
       </footer>
     </main>
   );

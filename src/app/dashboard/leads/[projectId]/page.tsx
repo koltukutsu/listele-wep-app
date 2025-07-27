@@ -58,7 +58,7 @@ export default function LeadsPage() {
   }, [projectId]);
 
   const currentPlan = userProfile ? getPlanBySlug(userProfile.plan) : null;
-  const maxLeads = currentPlan ? (currentPlan.features.find(f => f.includes("Potansiyel Müşteri"))?.split(" ")[0] ? parseInt(currentPlan.features.find(f => f.includes("Potansiyel Müşteri"))?.split(" ")[0] as string) : 0) : 0;
+  const maxLeads = currentPlan ? (currentPlan.features.find(f => f.includes("Form Doldurma"))?.split(" ")[0] ? parseInt(currentPlan.features.find(f => f.includes("Form Doldurma"))?.split(" ")[0] as string) : 0) : 0;
   
   const displayedLeads = leads.slice(0, maxLeads);
   const hasMoreLeads = currentPlan && currentPlan.name !== "Sınırsız" && leads.length > maxLeads;
@@ -217,7 +217,7 @@ export default function LeadsPage() {
                     <td colSpan={4} className="text-center py-4 bg-gray-50 dark:bg-gray-800">
                       <div className="flex flex-col items-center justify-center gap-2">
                         <p className="text-muted-foreground">
-                          {maxLeads}+ potansiyel müşteriyi görmek için planınızı yükseltin.
+                          {maxLeads}+ form doldurmasını görmek için planınızı yükseltin.
                         </p>
                         <Link href="/pricing">
                           <Button size="sm">Planları Gör</Button>

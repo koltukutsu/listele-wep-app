@@ -5,11 +5,12 @@ export const tiers = [
       price: "0 TL",
       priceMonthly: 0,
       features: [
-        "1 Proje",
-        "50 Potansiyel Müşteri/Proje",
+        "2 Proje",
+        "75 Form Doldurma/Proje",
         "listele.io Markası",
+        "Sadece Herkese Açık Projeler",
       ],
-      lacks: ["Sesle Proje Oluşturma"],
+      lacks: ["Sesle Proje Oluşturma", "Özel Projeler"],
     },
     {
       name: "Temel",
@@ -18,9 +19,10 @@ export const tiers = [
       priceMonthly: 10,
       features: [
         "5 Proje",
-        "100 Potansiyel Müşteri/Proje",
+        "200 Form Doldurma/Proje",
         "Marka olmadan yayınla",
         "2 Sesle Proje Oluşturma/ay",
+        "Özel Projeler",
       ],
       lacks: [],
     },
@@ -31,9 +33,10 @@ export const tiers = [
       priceMonthly: 49,
       features: [
         "25 Proje",
-        "1,000 Potansiyel Müşteri/Proje",
+        "2,000 Form Doldurma/Proje",
         "Marka olmadan yayınla",
         "20 Sesle Proje Oluşturma/ay",
+        "Özel Projeler",
       ],
       lacks: [],
     },
@@ -44,9 +47,10 @@ export const tiers = [
       priceMonthly: 99,
       features: [
           "Sınırsız Proje",
-          "Sınırsız Potansiyel Müşteri",
+          "Sınırsız Form Doldurma",
           "Marka olmadan yayınla",
           "100 Sesle Proje Oluşturma/ay",
+          "Özel Projeler",
       ],
       lacks: [],
     }

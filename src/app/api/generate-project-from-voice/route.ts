@@ -94,6 +94,11 @@ const generateProjectConfig = async (prompt: string) => {
 
 
 export async function POST(req: Request) {
+  // Check if payments/AI features are enabled
+  if (process.env.NEXT_PUBLIC_PAYMENT_ENABLED !== 'true') {
+    return NextResponse.json({ error: 'AI features are not currently available' }, { status: 403 });
+  }
+
   try {
     const authToken = req.headers.get('Authorization')?.split('Bearer ')[1];
     if (!authToken) {

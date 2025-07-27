@@ -9,6 +9,11 @@ const openai = new OpenAI({
 });
 
 export async function POST(req: Request) {
+  // Check if payments/AI features are enabled
+  if (process.env.NEXT_PUBLIC_PAYMENT_ENABLED !== 'true') {
+    return NextResponse.json({ error: 'AI features are not currently available' }, { status: 403 });
+  }
+
   try {
     const authToken = req.headers.get('Authorization')?.split('Bearer ')[1];
     if (!authToken) {
@@ -28,17 +33,20 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'User profile not found' }, { status: 404 });
     }
 
-    const currentPlan = getPlanBySlug(userProfile.plan);
-    const maxProjects = currentPlan ? (currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] ? parseInt(currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] as string) : 0) : 0;
-
-    if (!currentPlan || (currentPlan.name !== "Sınırsız" && userProfile.projectsCount >= maxProjects)) {
-      return NextResponse.json({ error: 'Project limit reached.' }, { status: 403 });
-    }
-    
-    const { prompt } = await req.json();
+    const { prompt, isDemo } = await req.json();
 
     if (!prompt) {
       return NextResponse.json({ error: 'Prompt is required' }, { status: 400 });
+    }
+
+    // Skip project limit check for demo projects
+    if (!isDemo) {
+      const currentPlan = getPlanBySlug(userProfile.plan);
+      const maxProjects = currentPlan ? (currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] ? parseInt(currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] as string) : 0) : 0;
+
+      if (!currentPlan || (currentPlan.name !== "Sınırsız" && userProfile.projectsCount >= maxProjects)) {
+        return NextResponse.json({ error: 'Project limit reached.' }, { status: 403 });
+      }
     }
 
     const completion = await openai.chat.completions.create({

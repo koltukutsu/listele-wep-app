@@ -11,7 +11,9 @@ import {
   deleteDoc,
   serverTimestamp,
   Timestamp,
-  increment
+  increment,
+  orderBy,
+  limit
 } from "firebase/firestore";
 import { User } from "firebase/auth";
 import { db } from "./firebase";
@@ -28,8 +30,7 @@ export interface UserProfile {
   plan: 'free' | 'basic' | 'pro' | 'unlimited';
   projectsCount: number;
   voiceCreditsUsed: number;
-  transactionId?: string;
-  invoice_id?: string;
+  stripeCustomerId?: string;
   subscription: {
     planId: string;
     maxForms: number;
@@ -237,7 +238,7 @@ export async function createProject(userId: string, projectData: Partial<Project
     userId,
     name: projectData.name || 'Yeni Proje',
     slug: projectData.slug || '',
-    status: 'draft',
+    status: 'published',
     createdAt: serverTimestamp() as Timestamp,
     updatedAt: serverTimestamp() as Timestamp,
     config: projectData.config || {},
@@ -385,6 +386,25 @@ export async function getProjectLeads(projectId: string): Promise<Lead[]> {
   })) as Lead[];
 }
 
+export async function getPublicProjects(): Promise<Project[]> {
+  try {
+    const projectsRef = collection(db, "projects");
+    const q = query(
+      projectsRef, 
+      where("status", "==", "published"),
+      orderBy("createdAt", "desc"),
+      limit(1000) // Limit to prevent too many URLs in sitemap
+    );
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as Project));
+  } catch (error) {
+    console.error("Error fetching public projects for sitemap:", error);
+    return [];
+  }
+}
 
 // Analytics operations
 export async function deleteUser(uid: string): Promise<void> {
@@ -438,5 +458,151 @@ export async function trackVisit(projectId: string, metadata: {
       'stats.conversionRate': conversionRate,
       'stats.lastVisitAt': serverTimestamp()
     });
+  }
+}
+
+// Referral operations
+export async function trackReferral(referredUserId: string, referrerCode: string, metadata?: Record<string, any>): Promise<void> {
+  try {
+    const referralsRef = collection(db, "referrals");
+    
+    await addDoc(referralsRef, {
+      referredUserId,
+      referrerCode,
+      status: 'pending',
+      createdAt: serverTimestamp(),
+      metadata
+    });
+
+    console.log('🔗 Referral tracked:', { referredUserId, referrerCode });
+  } catch (error) {
+    console.error('Error tracking referral:', error);
+  }
+}
+
+export async function getReferralStats(userId: string): Promise<{
+  totalReferrals: number;
+  successfulReferrals: number;
+  pendingReferrals: number;
+  bonusProjectsEarned: number;
+}> {
+  try {
+    const referralsRef = collection(db, "referrals");
+    const q = query(referralsRef, where("referrerCode", "==", `REF_${userId.slice(-8).toUpperCase()}`));
+    const snapshot = await getDocs(q);
+    
+    const referrals = snapshot.docs.map(doc => doc.data());
+    const successful = referrals.filter(r => r.status === 'completed').length;
+    const pending = referrals.filter(r => r.status === 'pending').length;
+    
+    return {
+      totalReferrals: referrals.length,
+      successfulReferrals: successful,
+      pendingReferrals: pending,
+      bonusProjectsEarned: successful
+    };
+  } catch (error) {
+    console.error('Error getting referral stats:', error);
+    return { totalReferrals: 0, successfulReferrals: 0, pendingReferrals: 0, bonusProjectsEarned: 0 };
+  }
+}
+
+// Public project gallery operations
+export async function getFeaturedProjects(limitCount: number = 12): Promise<Project[]> {
+  try {
+    const projectsRef = collection(db, "projects");
+    // Simplified query to avoid complex indexing requirements
+    const q = query(
+      projectsRef,
+      where("status", "==", "published"),
+      where("featured", "==", true),
+      orderBy("createdAt", "desc"),
+      limit(limitCount)
+    );
+    
+    const snapshot = await getDocs(q);
+    const projects = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as Project));
+    
+    // Sort by totalSignups in memory since we can't use multiple orderBy easily
+    return projects.sort((a, b) => {
+      const aSignups = a.stats?.totalSignups || 0;
+      const bSignups = b.stats?.totalSignups || 0;
+      return bSignups - aSignups;
+    });
+  } catch (error) {
+    console.error('Error fetching featured projects:', error);
+    return [];
+  }
+}
+
+export async function getPublicProjectsByCategory(category?: string, limitCount: number = 20): Promise<Project[]> {
+  try {
+    const projectsRef = collection(db, "projects");
+    let q;
+    
+    if (category) {
+      // Query with category filter
+      q = query(
+        projectsRef,
+        where("status", "==", "published"),
+        where("config.isPublic", "==", true),
+        where("config.category", "==", category),
+        orderBy("createdAt", "desc"),
+        limit(limitCount)
+      );
+    } else {
+      // Query without category filter
+      q = query(
+        projectsRef,
+        where("status", "==", "published"),
+        where("config.isPublic", "==", true),
+        orderBy("createdAt", "desc"),
+        limit(limitCount)
+      );
+    }
+    
+    const snapshot = await getDocs(q);
+    const projects = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as Project));
+    
+    // Sort by totalSignups in memory to avoid complex indexing requirements
+    return projects.sort((a, b) => {
+      const aSignups = a.stats?.totalSignups || 0;
+      const bSignups = b.stats?.totalSignups || 0;
+      return bSignups - aSignups;
+    });
+  } catch (error) {
+    console.error('Error fetching public projects:', error);
+    return [];
+  }
+}
+
+export async function toggleProjectPublicStatus(projectId: string, isPublic: boolean): Promise<void> {
+  try {
+    const projectRef = doc(db, "projects", projectId);
+    await updateDoc(projectRef, {
+      'config.isPublic': isPublic,
+      'config.publishedToGallery': isPublic ? serverTimestamp() : null
+    });
+  } catch (error) {
+    console.error('Error toggling project public status:', error);
+    throw error;
+  }
+}
+
+export async function incrementProjectViews(projectId: string): Promise<void> {
+  try {
+    const projectRef = doc(db, "projects", projectId);
+    await updateDoc(projectRef, {
+      'stats.galleryViews': increment(1),
+      'stats.lastGalleryView': serverTimestamp()
+    });
+  } catch (error) {
+    console.error('Error incrementing project views:', error);
   }
 }

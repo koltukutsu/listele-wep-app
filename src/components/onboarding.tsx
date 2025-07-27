@@ -70,11 +70,14 @@ export function Onboarding() {
 
   if (step === 1) {
     return (
-      <div className="p-8 max-w-lg w-full text-center">
-        <h1 className="text-2xl font-bold">Welcome to listele.io</h1>
-        <p className="mt-2 text-muted-foreground">Let's bring your idea to life.</p>
-        <button onClick={() => setStep(2)} className="mt-4 px-4 py-2 bg-primary text-primary-foreground rounded">
-          Let's start
+      <div className="p-8 max-w-lg w-full text-center bg-white dark:bg-slate-800 border border-lime-200 dark:border-slate-700 rounded-lg shadow-lg">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Listele.io'ya Hoş Geldin</h1>
+        <p className="mt-2 text-gray-600 dark:text-gray-400">Fikrini hayata geçirme zamanı geldi.</p>
+        <button 
+          onClick={() => setStep(2)} 
+          className="mt-4 px-6 py-3 bg-gradient-to-r from-lime-400 to-green-500 hover:from-lime-500 hover:to-green-600 text-black font-semibold rounded-lg transition-all hover:shadow-lg transform hover:scale-105"
+        >
+          Hadi Başlayalım
         </button>
       </div>
     );
@@ -82,18 +85,22 @@ export function Onboarding() {
 
   if (step === 2) {
     return (
-      <div className="p-8 max-w-lg w-full">
-        <h2 className="text-xl font-semibold">What is your amazing idea?</h2>
-        <p className="mt-2 text-muted-foreground mb-4">Describe your project, and our AI founder will build the first version for you in seconds.</p>
+      <div className="p-8 max-w-lg w-full bg-white dark:bg-slate-800 border border-lime-200 dark:border-slate-700 rounded-lg shadow-lg">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Harika Fikrin Nedir?</h2>
+        <p className="mt-2 text-gray-600 dark:text-gray-400 mb-4">Projenizi tanımlayın, yapay zeka founder'ımız dakikalar içinde ilk versiyonunu sizin için oluşturur.</p>
         <textarea
-          className="mt-2 w-full p-2 border rounded"
-          placeholder="e.g., A subscription box for rare indoor plants."
+          className="mt-2 w-full p-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-lime-500 focus:border-lime-500 transition-colors"
+          placeholder="örn: Nadir iç mekan bitkileri için abonelik kutusu."
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           rows={4}
         />
-        <button onClick={handleGenerate} disabled={loading || !prompt} className="mt-4 w-full px-4 py-2 bg-primary text-primary-foreground rounded flex items-center justify-center disabled:bg-gray-400">
-          {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Generate Project"}
+        <button 
+          onClick={handleGenerate} 
+          disabled={loading || !prompt} 
+          className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-lime-400 to-green-500 hover:from-lime-500 hover:to-green-600 disabled:from-gray-400 disabled:to-gray-500 text-black font-semibold rounded-lg flex items-center justify-center transition-all hover:shadow-lg transform hover:scale-105 disabled:transform-none disabled:shadow-none"
+        >
+          {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Projeyi Oluştur"}
         </button>
       </div>
     );
@@ -101,11 +108,11 @@ export function Onboarding() {
   
   if (step === 3) {
     return (
-        <div className="text-center">
+        <div className="text-center text-gray-900 dark:text-gray-100">
           <Confetti />
-          <h2 className="text-2xl font-semibold">We're building your vision!</h2>
-          <p className="mt-2 text-lg">Your new project is being created.</p>
-          <p className="mt-4">Redirecting you to the editor...</p>
+          <h2 className="text-2xl font-semibold">Vizyonunuz Hayata Geçiyor!</h2>
+          <p className="mt-2 text-lg">Yeni projeniz oluşturuluyor.</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Editöre yönlendiriliyorsunuz...</p>
         </div>
     )
   }

@@ -15,6 +15,7 @@ import { Input } from "./ui/input";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useCookies } from "react-cookie";
+import { trackUserActivation } from "~/lib/analytics";
 
 interface AuthFormProps {
   onSuccess?: () => void;
@@ -52,6 +53,10 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
       if (userProfile && userProfile.projectsCount > 0) {
         router.push("/dashboard");
       } else {
+        // Track first login for new users
+        if (isSignUp || !userProfile) {
+          await trackUserActivation('first_login');
+        }
         router.push("/onboarding");
       }
 
@@ -116,14 +121,14 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
 
   return (
     <div className="w-full max-w-sm">
-      <h2 className="text-2xl font-bold text-center mb-6">
+      <h2 className="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-gray-100">
         {isSignUp ? "Hesap Oluştur" : "Giriş Yap"}
       </h2>
       <form onSubmit={(e) => { e.preventDefault(); handleAuth("email"); }} className="space-y-4">
         <div>
           <label
             htmlFor="email"
-            className="text-sm font-medium text-gray-700"
+            className="text-sm font-medium text-gray-700 dark:text-gray-300"
           >
             E-posta Adresi
           </label>
@@ -134,13 +139,13 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="E-posta adresiniz"
             required
-            className="mt-1"
+            className="mt-1 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
           />
         </div>
         <div>
           <label
             htmlFor="password"
-            className="text-sm font-medium text-gray-700"
+            className="text-sm font-medium text-gray-700 dark:text-gray-300"
           >
             Şifreniz
           </label>
@@ -151,13 +156,13 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Şifreniz"
             required
-            className="mt-1"
+            className="mt-1 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
           />
         </div>
         <Button
           type="submit"
           disabled={loading}
-          className="w-full !bg-primary hover:!bg-primary/90 !text-primary-foreground"
+          className="w-full bg-gradient-to-r from-lime-400 to-green-500 hover:from-lime-500 hover:to-green-600 text-black font-semibold"
         >
           {loading ? "Yükleniyor..." : isSignUp ? "Kayıt Ol" : "Giriş Yap"}
         </Button>
@@ -165,10 +170,10 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
       
       <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
+          <span className="w-full border-t border-gray-300 dark:border-slate-600" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white px-2 text-muted-foreground">veya</span>
+          <span className="bg-white dark:bg-slate-900 px-2 text-gray-500 dark:text-gray-400">veya</span>
         </div>
       </div>
       
@@ -176,7 +181,7 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
         onClick={handleGoogleSignIn}
         disabled={loading}
         variant="outline"
-        className="w-full"
+        className="w-full border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800"
       >
         <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
           <path
@@ -202,7 +207,7 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
       <div className="text-center mt-4">
         <button
           onClick={() => setIsSignUp(!isSignUp)}
-          className="text-sm text-gray-600 hover:underline"
+          className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:underline transition-colors"
         >
           {isSignUp
             ? "Zaten bir hesabın var mı? Giriş Yap"

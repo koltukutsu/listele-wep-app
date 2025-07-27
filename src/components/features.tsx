@@ -1,78 +1,58 @@
 "use client";
 
 import {
-  Zap,
-  Code,
-  Gauge,
-  Database,
-  Globe,
-  Wallet,
-} from "lucide-react";
-import { motion } from "framer-motion";
+    Code,
+    Zap,
+    Gauge,
+    Database,
+    Globe,
+    Wallet,
+  } from "lucide-react";
+  import { motion } from "framer-motion";
+import { Button } from "./ui/button";
 
 export default function Features() {
   const features = [
     {
-      icon: <Code size={32} className="text-gray-800"/>,
+      icon: <Code size={32} className="text-lime-600 dark:text-lime-400"/>,
       title: "Founder Mode AI & Kodsuz Editör",
       description:
         "İster fikrini sesli anlat, yapay zeka senin için tasarlasın, ister sürükle-bırak kolaylığıyla kendi vizyonunu yarat. Teknik bilgi, geçmişte kaldı.",
     },
     {
-      icon: <Zap size={32} className="text-gray-800"/>,
+      icon: <Zap size={32} className="text-lime-600 dark:text-lime-400"/>,
       title: "Anında Lansman",
       description:
         "Fikrin hazır olduğunda, dünya da hazır olmalı. Tek tıkla projen yayında ve ilk ziyaretçilerini karşılamaya hazır. Beklemek yok, sadece aksiyon.",
     },
     {
-      icon: <Gauge size={32} className="text-gray-800"/>,
+      icon: <Gauge size={32} className="text-lime-600 dark:text-lime-400"/>,
       title: "Büyüme Panelin",
       description:
         "Sadece rakamları değil, büyümeyi gör. İlk destekçilerinin nereden geldiğini anla, stratejini verilerle şekillendir ve bir sonraki adımını güvenle at.",
     },
     {
-      icon: <Database size={32} className="text-gray-800"/>,
+      icon: <Database size={32} className="text-lime-600 dark:text-lime-400"/>,
       title: "İlk Destekçilerin Güvende",
       description:
         "Topluluğun en değerli varlığın. Tüm veriler güvenle saklanır ve kontrol tamamen sendedir. Listeni dilediğin zaman al, kendi yolunda ilerle.",
     },
     {
-      icon: <Globe size={32} className="text-gray-800"/>,
+      icon: <Globe size={32} className="text-lime-600 dark:text-lime-400"/>,
       title: "Markanı İnşa Et",
       description:
         "Girişimin büyüdükçe, markan da büyür. Kendi alan adını kolayca bağlayarak kurumsal kimliğini bir üst seviyeye taşı.",
     },
     {
-      icon: <Wallet size={32} className="text-gray-800"/>,
+      icon: <Wallet size={32} className="text-lime-600 dark:text-lime-400"/>,
       title: "Maliyetsiz Başlangıç",
       description:
         "Büyük fikirlerin önündeki en büyük engelin bütçe olmaması gerektiğine inanıyoruz. İlk adımlarını atarken cüzdanını düşünme. Sadece fikrine odaklan.",
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { scale: 0.9, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.4,
-      },
-    },
-  };
-
   return (
-    <section className="py-20 sm:py-28 bg-gray-50 dark:bg-gray-900">
+    <section className="py-20 sm:py-28 bg-green-50 dark:bg-slate-800">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -81,30 +61,29 @@ export default function Features() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold">Kurucunun Cephaneliği</h2>
-          <p className="max-w-2xl mx-auto text-lg text-muted-foreground mt-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Kurucunun Cephaneliği</h2>
+          <p className="max-w-2xl mx-auto text-lg text-gray-700 dark:text-gray-300 mt-4">
             Fikrini hayata geçirmek için ihtiyacın olan her şey burada. Hız, veri ve topluluk... Hepsi senin kontrolünde.
           </p>
         </motion.div>
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {features.map((feature, index) => (
-            <motion.div
+            <div
               key={index}
-              variants={itemVariants}
-              className="p-8 border rounded-lg bg-white dark:bg-gray-800/50"
+              className="p-8 border border-lime-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 hover:shadow-lg hover:border-lime-300 dark:hover:border-slate-600 transition-all duration-300"
             >
-              <div className="p-4 inline-block bg-primary/10 rounded-lg mb-4">
+              <div className="p-4 inline-block bg-lime-100 dark:bg-lime-900/30 rounded-lg mb-4">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-              <p className="text-muted-foreground">{feature.description}</p>
-            </motion.div>
+              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{feature.title}</h3>
+              <p className="text-gray-700 dark:text-gray-300">{feature.description}</p>
+            </div>
           ))}
         </motion.div>
       </div>
