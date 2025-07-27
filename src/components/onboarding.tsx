@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Confetti } from "./magicui/confetti";
 import { Loader2 } from "lucide-react";
-import { getAuth } from "firebase/auth";
-import { app } from "~/lib/firebase";
+import { auth } from "~/lib/firebase";
 
 export function Onboarding() {
   const [step, setStep] = useState(1);
@@ -13,7 +12,6 @@ export function Onboarding() {
   const [loading, setLoading] = useState(false);
   const [projectId, setProjectId] = useState<string | null>(null);
   const router = useRouter();
-  const auth = getAuth(app);
 
   const handleGenerate = async () => {
     if (!prompt) return;

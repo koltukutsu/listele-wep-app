@@ -8,8 +8,7 @@ import { Users, Gift, TrendingUp, Copy, Check, Share2 } from "lucide-react";
 import { getReferralStats } from "~/lib/firestore";
 import { trackFeatureUsage } from "~/lib/analytics";
 import { toast } from "sonner";
-import { getAuth } from "firebase/auth";
-import { app } from "~/lib/firebase";
+import { auth } from "~/lib/firebase";
 import { APP_URL } from "~/lib/config";
 
 interface ReferralStats {
@@ -23,7 +22,6 @@ export function ReferralDashboard() {
   const [stats, setStats] = useState<ReferralStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [copiedLink, setCopiedLink] = useState(false);
-  const auth = getAuth(app);
   const user = auth.currentUser;
 
   const referralCode = user ? `REF_${user.uid.slice(-8).toUpperCase()}` : "";

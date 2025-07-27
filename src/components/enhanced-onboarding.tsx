@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Confetti } from "./magicui/confetti";
 import { Loader2, Sparkles, Users, TrendingUp, Zap, Eye, Share2, BarChart3, CheckCircle, ArrowRight, ArrowLeft } from "lucide-react";
-import { getAuth } from "firebase/auth";
-import { app } from "~/lib/firebase";
+import { auth } from "~/lib/firebase";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
@@ -108,7 +107,6 @@ export function EnhancedOnboarding() {
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [startTime] = useState(Date.now());
   const router = useRouter();
-  const auth = getAuth(app);
 
   // Check payment enabled status and redirect to dashboard if disabled
   useEffect(() => {
