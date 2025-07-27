@@ -91,7 +91,7 @@ export const organizationStructuredData = {
   "description": siteConfig.description,
   "url": APP_URL,
   "logo": `${APP_URL}/Logo.png`,
-  "foundingDate": "2024",
+  "foundingDate": "2025",
   "founders": [
     {
       "@type": "Person",
@@ -121,7 +121,7 @@ export const softwareApplicationStructuredData = {
   "operatingSystem": "Web",
   "browserRequirements": "Requires JavaScript",
   "softwareVersion": "1.0",
-  "datePublished": "2024-01-01",
+  "datePublished": "2025-07-27",
   "inLanguage": "tr",
   "availableLanguage": "Turkish",
   "offers": {

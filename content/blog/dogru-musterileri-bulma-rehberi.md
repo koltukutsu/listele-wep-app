@@ -7,7 +7,7 @@ tags: ["müşteri segmentasyonu", "customer development", "persona", "market res
 author:
   name: "Listelee.io"
   email: "info@listelee.io"
-publishedAt: "2024-01-22T10:00:00Z"
+publishedAt: "2025-07-22T10:00:00Z"
 readingTime: 10
 seo:
   title: "Doğru Müşteri Bulma: Startup İçin Müşteri Segmentasyonu ve İhtiyaç Analizi"

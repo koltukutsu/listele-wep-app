@@ -7,7 +7,7 @@ tags: ["yatırımcı sunumu", "startup metrics", "finansman", "pitch deck", "ver
 author:
   name: "Listelee.io"
   email: "info@listelee.io"
-publishedAt: "2024-01-29T10:00:00Z"
+publishedAt: "2025-07-29T10:00:00Z"
 readingTime: 12
 seo:
   title: "Startup Yatırımcı Sunumu: Hangi Veriler ve Metrikler Gerekli?"

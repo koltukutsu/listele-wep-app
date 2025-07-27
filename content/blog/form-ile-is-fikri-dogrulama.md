@@ -7,7 +7,7 @@ tags: ["iş fikri doğrulama", "mvp", "müşteri geri bildirimi", "startup", "fo
 author:
   name: "Listelee.io"
   email: "info@listelee.io"
-publishedAt: "2024-01-15T10:00:00Z"
+publishedAt: "2025-07-15T10:00:00Z"
 readingTime: 8
 seo:
   title: "İş Fikri Doğrulama: Form ile Müşteri Geri Bildirimi Alma Rehberi"
