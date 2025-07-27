@@ -257,7 +257,7 @@ export default function ShowcasePage() {
               </div>
             </div>
             
-            {/* Category Pills */}
+            {/* Category Pills with SEO Links */}
             <div className="mt-4 pt-4 border-t border-lime-100 dark:border-slate-700">
               <div className="flex flex-wrap gap-2">
                 <Button
@@ -272,19 +272,44 @@ export default function ShowcasePage() {
                   Tüm Projeler
                 </Button>
                 {PROJECT_CATEGORIES.filter(cat => cat.value !== "all").map((category) => (
-                  <Button
-                    key={category.value}
-                    onClick={() => setSelectedCategory(category.value)}
-                    variant={selectedCategory === category.value ? "default" : "outline"}
-                    size="sm"
-                    className={selectedCategory === category.value 
-                      ? "bg-gradient-to-r from-lime-400 to-green-500 text-black hover:from-lime-500 hover:to-green-600" 
-                      : "border-lime-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-slate-700"
-                    }
-                  >
-                    {category.label}
-                  </Button>
+                  <div key={category.value} className="flex items-center gap-1">
+                    <Button
+                      onClick={() => setSelectedCategory(category.value)}
+                      variant={selectedCategory === category.value ? "default" : "outline"}
+                      size="sm"
+                      className={selectedCategory === category.value 
+                        ? "bg-gradient-to-r from-lime-400 to-green-500 text-black hover:from-lime-500 hover:to-green-600" 
+                        : "border-lime-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-slate-700"
+                      }
+                    >
+                      {category.label}
+                    </Button>
+                    <Link href={`/kategori/${category.value}`} className="opacity-70 hover:opacity-100 transition-opacity">
+                      <ExternalLink className="w-3 h-3 text-gray-500 dark:text-gray-400" />
+                    </Link>
+                  </div>
                 ))}
+              </div>
+              
+              {/* SEO Category Links Section */}
+              <div className="mt-6 p-4 bg-lime-50 dark:bg-slate-800 rounded-lg border border-lime-200 dark:border-slate-700">
+                <h4 className="text-sm font-semibold text-lime-800 dark:text-lime-400 mb-3">
+                  🎯 Kategoriye Özel Sayfalar
+                </h4>
+                <p className="text-xs text-lime-700 dark:text-lime-300 mb-3">
+                  Her kategori için özel hazırlanmış sayfaları keşfet ve daha detaylı proje örnekleri incele:
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
+                  {PROJECT_CATEGORIES.filter(cat => cat.value !== "all").map((category) => (
+                    <Link 
+                      key={category.value}
+                      href={`/kategori/${category.value}`}
+                      className="text-xs px-2 py-1 bg-white dark:bg-slate-700 border border-lime-200 dark:border-slate-600 rounded text-lime-700 dark:text-lime-300 hover:bg-lime-100 dark:hover:bg-slate-600 transition-colors text-center"
+                    >
+                      {category.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

@@ -2,6 +2,20 @@ import { MetadataRoute } from 'next'
 import { APP_URL } from '~/lib/config'
 import { getPublicProjects } from '~/lib/firestore'
 
+// Define categories for SEO category pages
+const CATEGORIES = [
+  'e-commerce',
+  'saas', 
+  'local-business',
+  'consulting',
+  'education',
+  'health',
+  'technology',
+  'food',
+  'fashion',
+  'travel'
+];
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages that should always be in sitemap
   const staticPages: MetadataRoute.Sitemap = [
@@ -18,6 +32,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${APP_URL}/showcase`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
       url: `${APP_URL}/login`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
@@ -29,7 +49,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
-  ]
+  ];
+
+  // Add category pages for SEO
+  const categoryPages: MetadataRoute.Sitemap = CATEGORIES.map((category) => ({
+    url: `${APP_URL}/kategori/${category}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
 
   // Add dynamic project pages
   try {
@@ -51,17 +79,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }
       }
       
+      // Determine priority based on project stats
+      let priority = 0.7;
+      if (project.stats?.totalSignups > 50) {
+        priority = 0.9; // High performing projects get higher priority
+      } else if (project.stats?.totalSignups > 10) {
+        priority = 0.8;
+      }
+      
       return {
         url: `${APP_URL}/${project.slug}`,
         lastModified,
         changeFrequency: 'weekly' as const,
-        priority: 0.7,
+        priority,
       };
     });
     
-    return [...staticPages, ...projectPages];
+    return [...staticPages, ...categoryPages, ...projectPages];
   } catch (error) {
-    console.error('Error generating sitemap:', error);
-    return staticPages;
+    console.error('Error fetching public projects for sitemap:', error);
+    return [...staticPages, ...categoryPages];
   }
 } 

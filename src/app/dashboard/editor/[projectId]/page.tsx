@@ -179,7 +179,32 @@ export default function ProjectEditorPage() {
     };
 
     const generateSlug = (name: string): string => {
-        return name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+        // Remove Turkish characters and convert to ASCII equivalents
+        const turkishMap: { [key: string]: string } = {
+            'ş': 's', 'Ş': 'S', 'ğ': 'g', 'Ğ': 'G',
+            'ü': 'u', 'Ü': 'U', 'ö': 'o', 'Ö': 'O',
+            'ı': 'i', 'İ': 'I', 'ç': 'c', 'Ç': 'C'
+        };
+        
+        let slug = name;
+        Object.keys(turkishMap).forEach(char => {
+            slug = slug.replace(new RegExp(char, 'g'), turkishMap[char]);
+        });
+        
+        return slug
+            .toLowerCase()
+            .trim()
+            // Remove unwanted characters but keep useful ones for SEO
+            .replace(/[^a-z0-9\s\-\_]/g, '')
+            // Replace multiple whitespace/underscores with hyphens
+            .replace(/[\s\_]+/g, '-')
+            // Remove multiple consecutive hyphens
+            .replace(/-+/g, '-')
+            // Remove leading/trailing hyphens
+            .replace(/^-+|-+$/g, '')
+            // Ensure slug is not too long for SEO (max 60 chars)
+            .substring(0, 60)
+            .replace(/-+$/, ''); // Remove trailing hyphens again
     };
 
     const handlePrivacyToggle = () => {
