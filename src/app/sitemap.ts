@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 import { APP_URL } from '~/lib/config'
-import { getPublicProjects } from '~/lib/firestore'
+import { getPublicProjects, getAllBlogPosts } from '~/lib/firestore'
 
 // Define categories for SEO category pages
 const CATEGORIES = [
@@ -38,6 +38,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
+      url: `${APP_URL}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
       url: `${APP_URL}/login`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
@@ -59,9 +65,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // Add dynamic project pages
+  // Add dynamic project pages and blog posts
   try {
-    const publicProjects = await getPublicProjects();
+    const [publicProjects, blogPosts] = await Promise.all([
+      getPublicProjects(),
+      getAllBlogPosts(true)
+    ]);
     const projectPages: MetadataRoute.Sitemap = publicProjects.map((project) => {
       let lastModified = new Date();
       
@@ -94,8 +103,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority,
       };
     });
+
+    // Add blog post pages
+    const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => {
+      let lastModified = new Date();
+      
+      if (post.updatedAt) {
+        if (typeof post.updatedAt === 'object' && 'seconds' in post.updatedAt) {
+          lastModified = new Date(post.updatedAt.seconds * 1000);
+        } else if (typeof post.updatedAt === 'number') {
+          lastModified = new Date(post.updatedAt);
+        }
+      }
+      
+      return {
+        url: `${APP_URL}/blog/${post.slug}`,
+        lastModified,
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+      };
+    });
     
-    return [...staticPages, ...categoryPages, ...projectPages];
+    return [...staticPages, ...categoryPages, ...projectPages, ...blogPages];
   } catch (error) {
     console.error('Error fetching public projects for sitemap:', error);
     return [...staticPages, ...categoryPages];

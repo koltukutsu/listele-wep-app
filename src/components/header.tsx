@@ -78,6 +78,11 @@ export default function Header() {
                 Tüm Projeler
               </Button>
             </Link>
+            <Link href="/blog">
+              <Button variant="ghost" className="text-gray-700 dark:text-gray-300 hover:text-lime-600 dark:hover:text-lime-400 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+                Blog
+              </Button>
+            </Link>
             <Link href="/pricing">
               <Button variant="ghost" className="text-gray-700 dark:text-gray-300 hover:text-lime-600 dark:hover:text-lime-400 hover:bg-lime-50 dark:hover:bg-lime-900/20">
                 Fiyatlandırma
@@ -138,6 +143,11 @@ export default function Header() {
                         <DropdownMenuItem asChild>
                           <Link href="/showcase" className="w-full cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-lime-900/20">
                             Tüm Projeler
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link href="/blog" className="w-full cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+                            Blog
                           </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
@@ -225,6 +235,11 @@ export default function Header() {
                       <DropdownMenuItem asChild>
                         <Link href="/showcase" className="w-full cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-lime-900/20">
                           Tüm Projeler
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link href="/blog" className="w-full cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+                          Blog
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild>

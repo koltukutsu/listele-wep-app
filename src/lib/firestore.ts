@@ -73,6 +73,33 @@ export interface Lead {
   notes?: string;
 }
 
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string; // Markdown content
+  author: {
+    name: string;
+    email: string;
+    avatar?: string;
+  };
+  category: string;
+  tags: string[];
+  featuredImage?: string;
+  status: 'draft' | 'published' | 'archived';
+  seo: {
+    title: string;
+    description: string;
+    keywords: string[];
+  };
+  publishedAt?: Timestamp;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+  readingTime: number; // Estimated reading time in minutes
+  views: number;
+}
+
 // This is an old plan structure and will be removed.
 // The new plan structure is in a different file.
 // export const plans = {
@@ -604,5 +631,215 @@ export async function incrementProjectViews(projectId: string): Promise<void> {
     });
   } catch (error) {
     console.error('Error incrementing project views:', error);
+  }
+}
+
+// Blog operations
+export async function getAllBlogPosts(publishedOnly: boolean = true): Promise<BlogPost[]> {
+  try {
+    const blogRef = collection(db, "blogPosts");
+    let q;
+    
+    if (publishedOnly) {
+      q = query(
+        blogRef,
+        where("status", "==", "published"),
+        orderBy("publishedAt", "desc")
+      );
+    } else {
+      q = query(blogRef, orderBy("createdAt", "desc"));
+    }
+    
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as BlogPost));
+  } catch (error) {
+    console.error('Error fetching blog posts:', error);
+    return [];
+  }
+}
+
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  try {
+    const blogRef = collection(db, "blogPosts");
+    const q = query(blogRef, where("slug", "==", slug), where("status", "==", "published"));
+    const snapshot = await getDocs(q);
+    
+    if (snapshot.empty) {
+      return null;
+    }
+    
+    const post = {
+      id: snapshot.docs[0].id,
+      ...snapshot.docs[0].data()
+    } as BlogPost;
+    
+    // Increment view count
+    await incrementBlogPostViews(post.id);
+    
+    return post;
+  } catch (error) {
+    console.error('Error fetching blog post by slug:', error);
+    return null;
+  }
+}
+
+export async function getBlogPostsByCategory(category: string): Promise<BlogPost[]> {
+  try {
+    const blogRef = collection(db, "blogPosts");
+    const q = query(
+      blogRef,
+      where("category", "==", category),
+      where("status", "==", "published"),
+      orderBy("publishedAt", "desc")
+    );
+    
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as BlogPost));
+  } catch (error) {
+    console.error('Error fetching blog posts by category:', error);
+    return [];
+  }
+}
+
+export async function getBlogPostsByTag(tag: string): Promise<BlogPost[]> {
+  try {
+    const blogRef = collection(db, "blogPosts");
+    const q = query(
+      blogRef,
+      where("tags", "array-contains", tag),
+      where("status", "==", "published"),
+      orderBy("publishedAt", "desc")
+    );
+    
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as BlogPost));
+  } catch (error) {
+    console.error('Error fetching blog posts by tag:', error);
+    return [];
+  }
+}
+
+export async function getRecentBlogPosts(limitCount: number = 6): Promise<BlogPost[]> {
+  try {
+    const blogRef = collection(db, "blogPosts");
+    const q = query(
+      blogRef,
+      where("status", "==", "published"),
+      orderBy("publishedAt", "desc"),
+      limit(limitCount)
+    );
+    
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as BlogPost));
+  } catch (error) {
+    console.error('Error fetching recent blog posts:', error);
+    return [];
+  }
+}
+
+export async function createBlogPost(blogPostData: Omit<BlogPost, 'id' | 'createdAt' | 'updatedAt' | 'views'>): Promise<string> {
+  try {
+    const blogRef = collection(db, "blogPosts");
+    
+    const newPost: Omit<BlogPost, 'id'> = {
+      ...blogPostData,
+      createdAt: serverTimestamp() as Timestamp,
+      updatedAt: serverTimestamp() as Timestamp,
+      views: 0
+    };
+    
+    const docRef = await addDoc(blogRef, newPost);
+    return docRef.id;
+  } catch (error) {
+    console.error('Error creating blog post:', error);
+    throw error;
+  }
+}
+
+export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Promise<void> {
+  try {
+    const blogRef = doc(db, "blogPosts", id);
+    await updateDoc(blogRef, {
+      ...updates,
+      updatedAt: serverTimestamp()
+    });
+  } catch (error) {
+    console.error('Error updating blog post:', error);
+    throw error;
+  }
+}
+
+export async function deleteBlogPost(id: string): Promise<void> {
+  try {
+    const blogRef = doc(db, "blogPosts", id);
+    await deleteDoc(blogRef);
+  } catch (error) {
+    console.error('Error deleting blog post:', error);
+    throw error;
+  }
+}
+
+export async function incrementBlogPostViews(postId: string): Promise<void> {
+  try {
+    const postRef = doc(db, "blogPosts", postId);
+    await updateDoc(postRef, {
+      views: increment(1)
+    });
+  } catch (error) {
+    console.error('Error incrementing blog post views:', error);
+  }
+}
+
+export async function getBlogCategories(): Promise<string[]> {
+  try {
+    const blogRef = collection(db, "blogPosts");
+    const q = query(blogRef, where("status", "==", "published"));
+    const snapshot = await getDocs(q);
+    
+    const categories = new Set<string>();
+    snapshot.docs.forEach(doc => {
+      const data = doc.data();
+      if (data.category) {
+        categories.add(data.category);
+      }
+    });
+    
+    return Array.from(categories).sort();
+  } catch (error) {
+    console.error('Error fetching blog categories:', error);
+    return [];
+  }
+}
+
+export async function getBlogTags(): Promise<string[]> {
+  try {
+    const blogRef = collection(db, "blogPosts");
+    const q = query(blogRef, where("status", "==", "published"));
+    const snapshot = await getDocs(q);
+    
+    const tags = new Set<string>();
+    snapshot.docs.forEach(doc => {
+      const data = doc.data();
+      if (data.tags && Array.isArray(data.tags)) {
+        data.tags.forEach((tag: string) => tags.add(tag));
+      }
+    });
+    
+    return Array.from(tags).sort();
+  } catch (error) {
+    console.error('Error fetching blog tags:', error);
+    return [];
   }
 }
