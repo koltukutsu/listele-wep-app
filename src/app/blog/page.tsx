@@ -1,4 +1,4 @@
-import { getAllBlogPosts, getBlogCategories, getBlogTags } from '~/lib/firestore';
+import { getAllBlogPosts, getBlogCategories, getBlogTags, convertToFirestoreBlogPost } from '~/lib/blog';
 import BlogListingClient from './BlogListingClient';
 import type { Metadata } from 'next';
 import { APP_URL } from '~/lib/config';
@@ -51,11 +51,14 @@ export const metadata: Metadata = {
 
 export default async function BlogPage() {
   // Fetch initial data for server-side rendering
-  const [posts, categories, tags] = await Promise.all([
+  const [localPosts, categories, tags] = await Promise.all([
     getAllBlogPosts(true),
     getBlogCategories(),
     getBlogTags()
   ]);
+
+  // Convert local posts to Firestore format for compatibility
+  const posts = localPosts.map(convertToFirestoreBlogPost);
 
   // Generate structured data for the blog page
   const blogStructuredData = {
@@ -75,13 +78,13 @@ export default async function BlogPage() {
       "@type": "WebPage",
       "@id": `${APP_URL}/blog`
     },
-    "blogPost": posts.slice(0, 10).map(post => ({
+    "blogPost": localPosts.slice(0, 10).map(post => ({
       "@type": "BlogPosting",
       "headline": post.title,
       "description": post.excerpt,
       "url": `${APP_URL}/blog/${post.slug}`,
-      "datePublished": post.publishedAt ? new Date(post.publishedAt.seconds * 1000).toISOString() : undefined,
-      "dateModified": new Date(post.updatedAt.seconds * 1000).toISOString(),
+      "datePublished": post.publishedAt,
+      "dateModified": post.updatedAt,
       "author": {
         "@type": "Person",
         "name": post.author.name

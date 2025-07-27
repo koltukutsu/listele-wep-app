@@ -1,9 +1,8 @@
-import { getBlogPostBySlug, getRecentBlogPosts } from '~/lib/firestore';
+import { getBlogPostBySlug, getRecentBlogPosts, convertToFirestoreBlogPost } from '~/lib/blog';
 import { notFound } from 'next/navigation';
 import BlogPostClient from './BlogPostClient';
 import type { Metadata } from 'next';
 import { APP_URL } from '~/lib/config';
-import type { BlogPost } from '~/lib/firestore';
 
 type Props = {
   params: Promise<{
@@ -22,8 +21,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const publishDate = post.publishedAt ? new Date(post.publishedAt.seconds * 1000) : new Date();
-  const modifiedDate = new Date(post.updatedAt.seconds * 1000);
+  const publishDate = new Date(post.publishedAt);
+  const modifiedDate = new Date(post.updatedAt);
 
   return {
     title: post.seo.title || `${post.title} | Listelee.io Blog`,
@@ -79,18 +78,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const [post, recentPosts] = await Promise.all([
+  const [localPost, localRecentPosts] = await Promise.all([
     getBlogPostBySlug(slug),
     getRecentBlogPosts(5)
   ]);
 
-  if (!post) {
+  if (!localPost) {
     notFound();
   }
 
+  // Convert to Firestore format for compatibility
+  const post = convertToFirestoreBlogPost(localPost);
+  const recentPosts = localRecentPosts.map(convertToFirestoreBlogPost);
+
   // Generate structured data for the blog post
-  const publishDate = post.publishedAt ? new Date(post.publishedAt.seconds * 1000) : new Date();
-  const modifiedDate = new Date(post.updatedAt.seconds * 1000);
+  const publishDate = new Date(localPost.publishedAt);
+  const modifiedDate = new Date(localPost.updatedAt);
   
   const blogPostStructuredData = {
     "@context": "https://schema.org",

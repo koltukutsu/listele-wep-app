@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { APP_URL } from '~/lib/config'
-import { getPublicProjects, getAllBlogPosts } from '~/lib/firestore'
+import { getPublicProjects } from '~/lib/firestore'
+import { getAllBlogPosts } from '~/lib/blog'
 
 // Define categories for SEO category pages
 const CATEGORIES = [
@@ -109,11 +110,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       let lastModified = new Date();
       
       if (post.updatedAt) {
-        if (typeof post.updatedAt === 'object' && 'seconds' in post.updatedAt) {
-          lastModified = new Date(post.updatedAt.seconds * 1000);
-        } else if (typeof post.updatedAt === 'number') {
-          lastModified = new Date(post.updatedAt);
-        }
+        lastModified = new Date(post.updatedAt);
       }
       
       return {

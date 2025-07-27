@@ -30,6 +30,7 @@
 		"firebase-admin": "^13.4.0",
 		"formidable": "^3.5.4",
 		"framer-motion": "^12.23.6",
+		"gray-matter": "^4.0.3",
 		"lucide-react": "^0.511.0",
 		"motion": "^12.12.1",
 		"next": "15.3.2",
