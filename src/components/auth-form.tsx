@@ -1,18 +1,18 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, 
   signInWithPopup,
-  sendEmailVerification,
   getIdToken,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { auth, googleProvider } from "~/lib/firebase";
 import { createUserProfile, getUserProfile } from "~/lib/firestore";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { useCookies } from "react-cookie";
 import { trackUserActivation } from "~/lib/analytics";
@@ -27,43 +27,68 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [cookies, setCookie] = useCookies(["firebase-auth-token"]);
 
-  const handleAuth = async (provider: "google" | "email") => {
-    setLoading(true);
-    try {
-      let userCredential;
-      if (provider === "google") {
-        userCredential = await signInWithPopup(auth, googleProvider);
-        await createUserProfile(userCredential.user, 'google');
-      } else {
-        if (isSignUp) {
-          userCredential = await createUserWithEmailAndPassword(auth, email, password);
-          await createUserProfile(userCredential.user, 'email');
+  // Handle authentication state and redirects
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user && !loading) {
+        // User is authenticated, handle redirect
+        const redirectPath = searchParams.get('redirect') || '/dashboard';
+        const userProfile = await getUserProfile(user.uid);
+        
+        if (userProfile && userProfile.projectsCount > 0) {
+          router.push(redirectPath.startsWith('/dashboard') ? redirectPath : '/dashboard');
         } else {
-          userCredential = await signInWithEmailAndPassword(auth, email, password);
+          router.push('/onboarding');
         }
       }
-      
-      const user = userCredential.user;
-      const idToken = await getIdToken(user);
-      setCookie("firebase-auth-token", idToken, { path: "/" });
+    });
 
-      const userProfile = await getUserProfile(userCredential.user.uid);
-      if (userProfile && userProfile.projectsCount > 0) {
-        router.push("/dashboard");
+    return () => unsubscribe();
+  }, [router, searchParams, loading]);
+
+  const setAuthCookie = async (user: any) => {
+    try {
+      const idToken = await getIdToken(user, true); // Force refresh token
+      setCookie("firebase-auth-token", idToken, { 
+        path: "/",
+        maxAge: 60 * 60 * 24 * 7, // 1 week
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production'
+      });
+    } catch (error) {
+      console.error("Error setting auth cookie:", error);
+    }
+  };
+
+  const handleEmailAuth = async (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    
+    try {
+      let userCredential;
+      
+      if (isSignUp) {
+        userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await createUserProfile(userCredential.user, 'email');
+        await trackUserActivation('first_login');
+        toast.success("Hesap başarıyla oluşturuldu!");
       } else {
-        // Track first login for new users
-        if (isSignUp || !userProfile) {
-          await trackUserActivation('first_login');
-        }
-        router.push("/onboarding");
+        userCredential = await signInWithEmailAndPassword(auth, email, password);
+        toast.success("Başarıyla giriş yapıldı!");
+      }
+      
+      await setAuthCookie(userCredential.user);
+      
+      if (onSuccess) {
+        onSuccess();
       }
 
     } catch (error: any) {
-      console.error("Auth error:", error);
+      console.error("Email auth error:", error);
       
-      // Handle specific Firebase auth errors
       switch (error.code) {
         case 'auth/email-already-in-use':
           toast.error("Bu e-posta adresi zaten kullanımda.");
@@ -78,6 +103,9 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
         case 'auth/invalid-email':
           toast.error("Geçersiz e-posta adresi.");
           break;
+        case 'auth/too-many-requests':
+          toast.error("Çok fazla deneme yapıldı. Lütfen daha sonra tekrar deneyin.");
+          break;
         default:
           toast.error("Bir hata oluştu. Lütfen tekrar deneyin.");
       }
@@ -88,19 +116,27 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
+    
     try {
+      // Ensure the popup is triggered by direct user interaction
       const userCredential = await signInWithPopup(auth, googleProvider);
       const user = userCredential.user;
-      const idToken = await getIdToken(user);
-      setCookie("firebase-auth-token", idToken, { path: "/" });
-      await createUserProfile(userCredential.user, 'google');
       
-      const userProfile = await getUserProfile(userCredential.user.uid);
-      if (userProfile && userProfile.projectsCount > 0) {
-        router.push("/dashboard");
-      } else {
-        router.push("/onboarding");
+      await setAuthCookie(user);
+      await createUserProfile(user, 'google');
+      
+      // Check if this is a new user
+      const userProfile = await getUserProfile(user.uid);
+      if (!userProfile || userProfile.projectsCount === 0) {
+        await trackUserActivation('first_login');
       }
+      
+      toast.success("Google ile başarıyla giriş yapıldı!");
+      
+      if (onSuccess) {
+        onSuccess();
+      }
+
     } catch (error: any) {
       console.error("Google sign-in error:", error);
       
@@ -109,7 +145,13 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
           toast.error("Giriş işlemi iptal edildi.");
           break;
         case 'auth/popup-blocked':
-          toast.error("Pop-up engellendi. Lütfen pop-up'ları etkinleştirin.");
+          toast.error("Pop-up engellendi. Lütfen tarayıcınızda pop-up'ları etkinleştirin ve tekrar deneyin.");
+          break;
+        case 'auth/cancelled-popup-request':
+          // Don't show error for this, user likely clicked multiple times
+          break;
+        case 'auth/network-request-failed':
+          toast.error("Ağ hatası. İnternet bağlantınızı kontrol edin.");
           break;
         default:
           toast.error("Google ile giriş yapılamadı. Lütfen tekrar deneyin.");
@@ -124,7 +166,8 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
       <h2 className="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-gray-100">
         {isSignUp ? "Hesap Oluştur" : "Giriş Yap"}
       </h2>
-      <form onSubmit={(e) => { e.preventDefault(); handleAuth("email"); }} className="space-y-4">
+      
+      <form onSubmit={handleEmailAuth} className="space-y-4">
         <div>
           <label
             htmlFor="email"
@@ -182,6 +225,7 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
         disabled={loading}
         variant="outline"
         className="w-full border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800"
+        type="button"
       >
         <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
           <path
@@ -208,6 +252,7 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
         <button
           onClick={() => setIsSignUp(!isSignUp)}
           className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:underline transition-colors"
+          type="button"
         >
           {isSignUp
             ? "Zaten bir hesabın var mı? Giriş Yap"

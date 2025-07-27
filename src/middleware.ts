@@ -1,28 +1,49 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  const response = NextResponse.next();
   const { pathname } = request.nextUrl;
   
-  // Using a more reliable way to get the token, directly from the request cookies
-  const currentUserCookie = request.cookies.get('firebase-auth-token');
-  const currentUser = currentUserCookie ? currentUserCookie.value : undefined;
+  // Get the firebase auth token from cookies
+  const authCookie = request.cookies.get('firebase-auth-token');
+  const isAuthenticated = !!authCookie?.value;
 
-  // Redirect to login if not authenticated and trying to access dashboard
-  if (!currentUser && pathname.startsWith('/dashboard')) {
+  // Define protected routes
+  const isProtectedRoute = pathname.startsWith('/dashboard') || 
+                          pathname.startsWith('/onboarding') ||
+                          pathname === '/profile';
+  
+  // Define auth routes (should redirect if already authenticated)
+  const isAuthRoute = pathname === '/login' || pathname === '/auth/callback';
+
+  // Redirect to login if not authenticated and trying to access protected routes
+  if (!isAuthenticated && isProtectedRoute) {
     const loginUrl = new URL('/login', request.url);
-    loginUrl.searchParams.set('redirect', pathname); // Pass redirect path
+    loginUrl.searchParams.set('redirect', pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  // Redirect to dashboard if logged in and trying to access login page
-  if (currentUser && pathname === '/login') {
-    return NextResponse.redirect(new URL('/dashboard', request.url));
+  // Redirect to dashboard if authenticated and trying to access auth routes
+  if (isAuthenticated && isAuthRoute) {
+    const redirectPath = request.nextUrl.searchParams.get('redirect');
+    const dashboardUrl = new URL(redirectPath || '/dashboard', request.url);
+    return NextResponse.redirect(dashboardUrl);
   }
+  
+  // Add security headers
+  const response = NextResponse.next();
+  response.headers.set('X-Frame-Options', 'DENY');
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   
   return response;
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/login'],
+  matcher: [
+    '/dashboard/:path*', 
+    '/login', 
+    '/onboarding/:path*',
+    '/profile/:path*',
+    '/auth/:path*'
+  ],
 }; 

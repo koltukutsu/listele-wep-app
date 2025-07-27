@@ -16,10 +16,15 @@ const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Configure Google Auth Provider
+// Configure Google Auth Provider with better settings
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
-  prompt: 'select_account'
+  prompt: 'select_account',
+  access_type: 'offline',
 });
 
-export { app, auth, db, googleProvider }; 
+// Add required scopes for better user info
+googleProvider.addScope('email');
+googleProvider.addScope('profile');
+
+export { auth, db, googleProvider }; 
