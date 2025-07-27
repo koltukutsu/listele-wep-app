@@ -67,7 +67,7 @@ export default function Header() {
       >
         <Link href="/" className="flex items-center gap-2">
           <Logo />
-          <span className="font-bold text-gray-900 dark:text-white">Listele.io</span>
+          <span className="font-bold text-gray-900 dark:text-white">Listelee.io</span>
         </Link>
 
         <div className="flex items-center gap-4">

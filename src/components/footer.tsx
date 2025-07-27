@@ -26,7 +26,7 @@ export default function Footer() {
           </div>
           <div>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              &copy; {new Date().getFullYear()} Listele.io - Fikirleri hayata geçiren platform
+              &copy; {new Date().getFullYear()} Listelee.io - Fikirleri hayata geçiren platform
             </p>
           </div>
         </div>

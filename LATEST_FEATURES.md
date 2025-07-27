@@ -1,6 +1,6 @@
-# Listele.io – Latest Features Overview
+# Listelee.io – Latest Features Overview
 
-Welcome to **Listele.io** – the launchpad that turns raw startup ideas into thriving ventures. Below is a concise overview of the current feature-set as of **July 2025**.
+Welcome to **Listelee.io** – the launchpad that turns raw startup ideas into thriving ventures. Below is a concise overview of the current feature-set as of **July 2025**.
 
 ---
 

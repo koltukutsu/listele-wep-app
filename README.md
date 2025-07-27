@@ -1,6 +1,6 @@
-# Listele.io - Fikrini Listele, İşini Test Et
+# Listelee.io - Fikrini Listelee, İşini Test Et
 
-![Listele.io](/public/opengraph-image.png)
+![Listelee.io](/public/opengraph-image.png)
 
 <p>
   Türkiye’deki girişimciler için dakikalar içinde bekleme listesi sayfası kurup fikrini gerçek kullanıcılarla test etmeyi sağlayan no-code platform.

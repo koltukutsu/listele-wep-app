@@ -1,4 +1,4 @@
-# Listele.io - Social Media Content Prompts
+# Listelee.io - Social Media Content Prompts
 
 This document contains a systematic list of prompts for creating TikTok and Instagram Reels. Each prompt is designed to align with the content strategy pillars: Inspiration, Education, Product, and Community.
 
@@ -53,7 +53,7 @@ This document contains a systematic list of prompts for creating TikTok and Inst
 *   **Scene 4:** Show diverse, optimistic faces of young people looking thoughtfully into the camera. Represent the "potential users".
 *   **Scene 5:** Show a close-up of a finger clicking a "Publish" button on a clean, minimalist interface.
 *   **Scene 6:** A shot of a notification icon on a phone with the number '1' appearing, then quickly counting up: '10', '50', '100'. Show a subtle smile on the founder's face.
-*   **Final Scene:** End with the Listele.io logo and the tagline: **"Fikrini Listele, İşini Test Et."**
+*   **Final Scene:** End with the Listelee.io logo and the tagline: **"Fikrini Listelee, İşini Test Et."**
 
 **Visual Style:** Cinematic, high-contrast, with a shallow depth of field. Start with cool, dark tones and transition to warm, hopeful light.
 
@@ -73,7 +73,7 @@ Search for keywords like: "inspirational," "hopeful," "piano," "cinematic," "bui
 ### **Reel Prompt 2: "Stop Building, Start Listing"**
 
 **Pillar:** 2 - Education (Bilgi)
-**Goal:** To teach founders a core startup principle (validation before building) in a simple, memorable way and associate that principle directly with Listele.io. This is a "how-to" video disguised as a strong opinion.
+**Goal:** To teach founders a core startup principle (validation before building) in a simple, memorable way and associate that principle directly with Listelee.io. This is a "how-to" video disguised as a strong opinion.
 
 #### 1. **Voiceover Script (for ElevenLabs)**
 
@@ -119,7 +119,7 @@ Search for keywords like: "inspirational," "hopeful," "piano," "cinematic," "bui
 *   **Scene 4:** Show a simplified, animated representation of a landing page being built in seconds. It should just have a headline and a button. Use icons to represent the value proposition (e.g., a lightning bolt for 'fast', a shield for 'secure').
 *   **Scene 5:** Animate a cursor clicking the "Bekleme Listesine Katıl" button.
 *   **Scene 6:** Show an animation of a graph with a line going up, representing 'interest' or 'demand'.
-*   **Final Scene:** End with the Listele.io logo and the text: **"Önce Doğrula, Sonra Geliştir."** (First Validate, Then Build.)
+*   **Final Scene:** End with the Listelee.io logo and the text: **"Önce Doğrula, Sonra Geliştir."** (First Validate, Then Build.)
 
 **Visual Style:** Bright, clean, and modern. Use your brand colors. The animations should be smooth and the text easy to read. Think of it like a very dynamic PowerPoint slide.
 
@@ -153,7 +153,7 @@ Search for keywords like: "upbeat," "corporate," "tech," "explainer," "pop," "en
 >
 > Artık değil.
 >
-> Listele.io'nun yeni "Kurucu Modu" ile tanışın.
+> Listelee.io'nun yeni "Kurucu Modu" ile tanışın.
 >
 > İzle.
 >
@@ -183,12 +183,12 @@ Search for keywords like: "upbeat," "corporate," "tech," "explainer," "pop," "en
 
 **Content Breakdown:**
 
-1.  **Start with the AI Prompt:** Record your screen. Open the Listele.io "Founder Mode" interface.
+1.  **Start with the AI Prompt:** Record your screen. Open the Listelee.io "Founder Mode" interface.
 2.  **Type the Idea:** Clearly type the sample idea into the text box: "Ev yapımı, sağlıklı evcil hayvan mamalarını kapıya teslim eden bir abonelik servisi." Make sure the typing is visible and deliberate.
 3.  **The "Magic" Moment:** Click the "Generate" button. Use a video editor to add a "swoosh" sound effect and maybe a subtle "magic sparkle" overlay as the AI generates the page.
 4.  **The Reveal:** Show the fully generated landing page. Quickly scroll through the different sections the AI created: the headline, the features, etc. Use the cursor to highlight each section as the voiceover mentions it.
 5.  **Confetti Explosion:** When the voiceover says "Sana sadece 'Yayınla' demek kalıyor," show the cursor moving towards the publish button. As it clicks, use the **MagicUI Confetti** effect from your codebase to make confetti explode all over the screen. This is your "celebration" moment.
-6.  **Final CTA:** The screen fades to the Listele.io logo with the text: **"Sen Fikrini Söyle, Gerisini Bize Bırak."** (You state the idea, leave the rest of us.)
+6.  **Final CTA:** The screen fades to the Listelee.io logo with the text: **"Sen Fikrini Söyle, Gerisini Bize Bırak."** (You state the idea, leave the rest of us.)
 
 #### 3. **Music Suggestion (for Artlist/Epidemic Sound)**
 
@@ -206,7 +206,7 @@ Search for keywords: "magic," "tech," "upbeat," "quirky," "discovery," "fast." T
 ### **Reel Prompt 4: "Your Ideas Are Changing the Game"**
 
 **Pillar:** 4 - Community (Topluluk)
-**Goal:** To celebrate the users of Listele.io, creating powerful social proof and fostering a sense of community. It shows that the platform is not just a tool, but a platform for real people with real ideas.
+**Goal:** To celebrate the users of Listelee.io, creating powerful social proof and fostering a sense of community. It shows that the platform is not just a tool, but a platform for real people with real ideas.
 
 #### 1. **Voiceover Script (for ElevenLabs)**
 
@@ -228,7 +228,7 @@ Search for keywords: "magic," "tech," "upbeat," "quirky," "discovery," "fast." T
 >
 > Bunlar başlangıç.
 >
-> Listele.io bir araç olabilir, ama bu topluluğun kahramanı sizlersiniz.
+> Listelee.io bir araç olabilir, ama bu topluluğun kahramanı sizlersiniz.
 >
 > Fikirlerinizi bizimle paylaştığınız için teşekkürler.
 >
@@ -240,15 +240,15 @@ Search for keywords: "magic," "tech," "upbeat," "quirky," "discovery," "fast." T
 
 **Content Breakdown:**
 
-1.  **Opening:** Start with a shot of the Listele.io dashboard, showing a list of different project names. (e.g., "Sürdürülebilir Kahve," "AI Ders Asistanı," "El Yapımı Takı Atölyesi").
-2.  **Montage of Pages:** Create a dynamic, fast-cut sequence showcasing different-looking landing pages built with Listele.io.
+1.  **Opening:** Start with a shot of the Listelee.io dashboard, showing a list of different project names. (e.g., "Sürdürülebilir Kahve," "AI Ders Asistanı," "El Yapımı Takı Atölyesi").
+2.  **Montage of Pages:** Create a dynamic, fast-cut sequence showcasing different-looking landing pages built with Listelee.io.
     *   For the "kahve markası," show a page with earthy tones and images of coffee beans.
     *   For the "ders çalışma uygulaması," show a page with a techy, dark-mode theme and icons related to learning.
     *   For the "takı," show a page with elegant fonts and beautiful product photos.
-3.  **Map Animation:** As the voiceover mentions Istanbul, Ankara, and Izmir, show a simple animated map of Turkey with pins dropping on those cities, connecting them to a central Listele.io logo.
+3.  **Map Animation:** As the voiceover mentions Istanbul, Ankara, and Izmir, show a simple animated map of Turkey with pins dropping on those cities, connecting them to a central Listelee.io logo.
 4.  **Focus on the Founder:** Show stock footage of diverse, happy, and determined-looking young people. These represent your users.
 5.  **Interactive Element:** At the end, as the voiceover asks "Sıradaki parlak fikir kimden gelecek?", show a text box on screen with a blinking cursor, as if prompting the viewer to type their own idea.
-6.  **Final CTA:** End with the Listele.io logo and the text: **"Türkiye'nin Kurucuları Burada."** (Turkey's Founders are Here.)
+6.  **Final CTA:** End with the Listelee.io logo and the text: **"Türkiye'nin Kurucuları Burada."** (Turkey's Founders are Here.)
 
 #### 3. **Music Suggestion (for Artlist/Epidemic Sound)**
 

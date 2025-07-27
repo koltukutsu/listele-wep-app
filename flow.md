@@ -1,10 +1,10 @@
-# Listele.io Application Flow
+# Listelee.io Application Flow
 
-This document outlines the user flow for the Listele.io application, from the initial landing page to creating and managing a waitlist.
+This document outlines the user flow for the Listelee.io application, from the initial landing page to creating and managing a waitlist.
 
 ## 1. Landing Page and Authentication
 
-The user journey begins on the main landing page, which is designed to quickly communicate the value proposition of Listele.io.
+The user journey begins on the main landing page, which is designed to quickly communicate the value proposition of Listelee.io.
 
 ```mermaid
 flowchart TD

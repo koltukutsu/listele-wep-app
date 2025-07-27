@@ -71,7 +71,7 @@ export function Onboarding() {
   if (step === 1) {
     return (
       <div className="p-8 max-w-lg w-full text-center bg-white dark:bg-slate-800 border border-lime-200 dark:border-slate-700 rounded-lg shadow-lg">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Listele.io'ya Hoş Geldin</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Listelee.io'ya Hoş Geldin</h1>
         <p className="mt-2 text-gray-600 dark:text-gray-400">Fikrini hayata geçirme zamanı geldi.</p>
         <button 
           onClick={() => setStep(2)} 

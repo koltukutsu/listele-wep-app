@@ -37,7 +37,7 @@ export default function Hero() {
                 
                 <div className="mt-6">
                   <p className="text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-                    Fikirini Listele, İşini Test Et.
+                    Fikirini Listelee, İşini Test Et.
                   </p>
                 </div>
 

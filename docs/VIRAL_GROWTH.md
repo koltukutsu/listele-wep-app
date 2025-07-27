@@ -1,6 +1,6 @@
 # Viral Growth Mechanisms Implementation 🚀
 
-Bu dokuman, Listele.io için geliştirilmiş viral büyüme mekanizmalarının detaylı açıklamasını içerir.
+Bu dokuman, Listelee.io için geliştirilmiş viral büyüme mekanizmalarının detaylı açıklamasını içerir.
 
 ## 🎯 Amaç
 
@@ -281,4 +281,4 @@ trackFeatureUsage('project_gallery', 'viewed');
 - Quarterly success story highlights
 - Ongoing community moderation
 
-Bu viral growth sistemi ile Listele.io'nun organik büyüme hızında %300-500 artış bekleniyor! 🎯🚀 
+Bu viral growth sistemi ile Listelee.io'nun organik büyüme hızında %300-500 artış bekleniyor! 🎯🚀 

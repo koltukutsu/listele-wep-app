@@ -1,7 +1,7 @@
-# Listele.io - AI-Powered Project Landing Page Generator
+# Listelee.io - AI-Powered Project Landing Page Generator
 
 ## Website Overview
-Listele.io is a Turkish SaaS platform that helps entrepreneurs and creators quickly build professional landing pages for their project ideas. Users can create beautiful, conversion-optimized pages to collect leads and validate their business concepts.
+Listelee.io is a Turkish SaaS platform that helps entrepreneurs and creators quickly build professional landing pages for their project ideas. Users can create beautiful, conversion-optimized pages to collect leads and validate their business concepts.
 
 ## Key Features
 - **Quick Project Creation**: Generate landing pages in minutes, not hours
@@ -27,7 +27,7 @@ Listele.io is a Turkish SaaS platform that helps entrepreneurs and creators quic
 - Project idea validation
 
 ## Pricing Structure
-- **Free Plan**: 1 project, 50 leads per project, with Listele.io branding
+- **Free Plan**: 1 project, 50 leads per project, with Listelee.io branding
 - **Basic Plan**: 5 projects, 100 leads per project, custom branding
 - **Pro Plan**: 25 projects, 1,000 leads per project, AI features
 - **Unlimited Plan**: Unlimited projects and leads, full feature access
@@ -57,7 +57,7 @@ Listele.io is a Turkish SaaS platform that helps entrepreneurs and creators quic
 - Business Model: SaaS subscription
 
 ## User Journey
-1. User discovers Listele.io through marketing channels
+1. User discovers Listelee.io through marketing channels
 2. Signs up for free account
 3. Creates first project using templates or AI assistance
 4. Customizes landing page content and design

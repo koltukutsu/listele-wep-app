@@ -2,7 +2,7 @@
 
 ## Felsefemiz: Fikirden Gerçeğe, En Hızlı Yol
 
-Listele.io bir araçtan daha fazlasıdır; o senin ilk yatırımcın, en sadık destekçin ve en hızlı MVP (Minimum Viable Product) oluşturma partnerindir. Biz, o parlak fikrinle arandaki tüm engelleri kaldırmak için buradayız. Kodlama, karmaşık ayarlar veya saatler süren tasarımlar yok. Sadece sen, fikrin ve saniyeler içinde hayata geçen bir başlangıç.
+Listelee.io bir araçtan daha fazlasıdır; o senin ilk yatırımcın, en sadık destekçin ve en hızlı MVP (Minimum Viable Product) oluşturma partnerindir. Biz, o parlak fikrinle arandaki tüm engelleri kaldırmak için buradayız. Kodlama, karmaşık ayarlar veya saatler süren tasarımlar yok. Sadece sen, fikrin ve saniyeler içinde hayata geçen bir başlangıç.
 
 ### "Cool" Nedir?
 
@@ -12,6 +12,6 @@ Listele.io bir araçtan daha fazlasıdır; o senin ilk yatırımcın, en sadık 
 
 ### İlk Adım Deneyimi
 
-Bir startup kurmanın ilk adımı en zorudur. Listele.io, bu adımı bir kutlamaya dönüştürür. Her başarılı proje oluşturma, konfetiler ve motive edici mesajlarla bir lansman anı gibi hissettirir. Çünkü her büyük yolculuk, atılan o ilk adımla başlar ve biz o anı unutulmaz kılmak için buradayayız.
+Bir startup kurmanın ilk adımı en zorudur. Listelee.io, bu adımı bir kutlamaya dönüştürür. Her başarılı proje oluşturma, konfetiler ve motive edici mesajlarla bir lansman anı gibi hissettirir. Çünkü her büyük yolculuk, atılan o ilk adımla başlar ve biz o anı unutulmaz kılmak için buradayayız.
 
 **Unutma, her büyük fikir bir liste ile başlar. Hadi, seninkini başlatalım!**

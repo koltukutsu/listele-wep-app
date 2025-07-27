@@ -46,25 +46,35 @@ export default function PricingPage() {
             setSelectedPlan({ slug, price: '' }); // Price is not needed here
             setShowAuthModal(true);
         } else {
-            const token = await user.getIdToken();
-            const res = await fetch('/api/stripe/checkout', {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    planId: slug,
-                    success_url: `${window.location.origin}/payment-success`,
-                    cancel_url: `${window.location.origin}/payment-fail`,
-                })
-            });
-            const data = await res.json();
-            if (data.sessionId) {
-                const stripe = await stripePromise;
-                await stripe?.redirectToCheckout({ sessionId: data.sessionId });
-            } else {
-                toast.error(data.error || 'Could not create payment link.');
+            try {
+                const token = await user.getIdToken();
+                const res = await fetch('/api/stripe/checkout', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        planId: slug,
+                        success_url: `${window.location.origin}/payment-success`,
+                        cancel_url: `${window.location.origin}/payment-fail`,
+                    })
+                });
+                
+                if (!res.ok) {
+                    throw new Error('Payment service temporarily unavailable');
+                }
+                
+                const data = await res.json();
+                if (data.sessionId) {
+                    const stripe = await stripePromise;
+                    await stripe?.redirectToCheckout({ sessionId: data.sessionId });
+                } else {
+                    toast.error(data.error || 'Could not create payment link.');
+                }
+            } catch (error) {
+                console.error('Payment error:', error);
+                toast.error('Ödeme sistemi geçici olarak kullanılamıyor. Lütfen daha sonra tekrar deneyin.');
             }
         }
     };
@@ -87,7 +97,7 @@ export default function PricingPage() {
           <p className="mt-6 text-lg leading-8 text-gray-700 dark:text-gray-200 max-w-2xl mx-auto">
             {paymentEnabled 
               ? "Her plan özel olarak tasarlanmış güçlü özelliklerle geliyor. İhtiyaçlarınıza en uygun olanı seçin." 
-              : "Listele.io'nun sunduğu tüm özellikleri görün. Fiyatlandırma yakında aktif olacak."
+              : "Listelee.io'nun sunduğu tüm özellikleri görün. Fiyatlandırma yakında aktif olacak."
             }
           </p>
           {!paymentEnabled && (

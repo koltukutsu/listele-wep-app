@@ -1,7 +1,7 @@
 import { APP_URL } from './config'
 
 export const siteConfig = {
-  name: "Listele.io",
+  name: "Listelee.io",
   description: "Fikirlerini hızla hayata geçir. AI destekli platform ile projelerini oluştur, müşteri topla ve büyü. Türkiye'nin en hızlı landing page oluşturucusu.",
   keywords: [
     "landing page oluşturucu",
@@ -19,9 +19,9 @@ export const siteConfig = {
     "no-code landing page",
     "Türkçe landing page builder"
   ],
-  authors: [{ name: "Listele.io Team" }],
-  creator: "Listele.io",
-  publisher: "Listele.io",
+  authors: [{ name: "Listelee.io Team" }],
+  creator: "Listelee.io",
+  publisher: "Listelee.io",
   formatDetection: {
     email: false,
     address: false,
@@ -34,21 +34,21 @@ export const siteConfig = {
     type: "website",
     locale: "tr_TR",
     url: APP_URL,
-    title: "Listele.io - Fikirlerini Hızla Hayata Geçir",
+    title: "Listelee.io - Fikirlerini Hızla Hayata Geçir",
     description: "AI destekli platform ile projelerini oluştur, müşteri topla ve büyü. Türkiye'nin en hızlı landing page oluşturucusu.",
-    siteName: "Listele.io",
+    siteName: "Listelee.io",
     images: [
       {
         url: `${APP_URL}/opengraph-image.png`,
         width: 1200,
         height: 630,
-        alt: "Listele.io - AI-Powered Project Landing Page Generator",
+        alt: "Listelee.io - AI-Powered Project Landing Page Generator",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Listele.io - Fikirlerini Hızla Hayata Geçir",
+    title: "Listelee.io - Fikirlerini Hızla Hayata Geçir",
     description: "AI destekli platform ile projelerini oluştur, müşteri topla ve büyü.",
     images: [`${APP_URL}/twitter-image.png`],
     creator: "@listeleio",
@@ -69,7 +69,7 @@ export const siteConfig = {
 export const structuredData = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "Listele.io",
+  "name": "Listelee.io",
   "description": "AI destekli platform ile projelerini oluştur, müşteri topla ve büyü. Türkiye'nin en hızlı landing page oluşturucusu.",
   "url": APP_URL,
   "applicationCategory": "BusinessApplication",
@@ -82,7 +82,7 @@ export const structuredData = {
   },
   "author": {
     "@type": "Organization",
-    "name": "Listele.io"
+    "name": "Listelee.io"
   },
   "inLanguage": "tr",
   "availableLanguage": "Turkish"

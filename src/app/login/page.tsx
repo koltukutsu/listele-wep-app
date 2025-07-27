@@ -10,7 +10,7 @@ export default function LoginPage() {
       <div className="mb-8">
         <Link href="/" className="flex items-center gap-2 text-2xl font-bold">
           <Logo />
-          <span>Listele.io</span>
+          <span>Listelee.io</span>
         </Link>
       </div>
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-xl shadow-lg">

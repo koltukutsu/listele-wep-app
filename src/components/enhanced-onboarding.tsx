@@ -522,7 +522,7 @@ export function EnhancedOnboarding() {
                     Diğer Girişimciler Diyor Ki:
                   </h4>
                   <blockquote className="text-sm text-gray-600 dark:text-gray-400 italic">
-                    "Listele.io ile 2 dakikada yaptığım şeyi, eskiden 2 saatte yapıyordum. İnanılmaz!"
+                    "Listelee.io ile 2 dakikada yaptığım şeyi, eskiden 2 saatte yapıyordum. İnanılmaz!"
                   </blockquote>
                   <cite className="text-xs text-gray-500 dark:text-gray-400 block mt-2">— Ahmet K., SaaS Founder</cite>
                 </div>

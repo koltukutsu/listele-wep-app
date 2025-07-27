@@ -183,7 +183,7 @@ export default function DashboardPage() {
             🌟 Başarılı Projelerden İlham Al!
           </h3>
           <p className="text-green-100 mb-6 max-w-2xl mx-auto">
-            Listele.io ile hayata geçirilmiş projelerden öğren ve kendi başarı hikayeni oluştur.
+            Listelee.io ile hayata geçirilmiş projelerden öğren ve kendi başarı hikayeni oluştur.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/showcase">

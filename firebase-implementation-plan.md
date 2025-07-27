@@ -1,4 +1,4 @@
-# Firebase/Firestore Implementation Plan for Listele.io
+# Firebase/Firestore Implementation Plan for Listelee.io
 
 ## Overview
 This document outlines the Firebase/Firestore integration plan for the listele.io waitlist platform, including authentication, database structure, and feature implementations.
