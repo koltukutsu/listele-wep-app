@@ -118,7 +118,7 @@ Başarılı startup'ların %90'ı aynı gerçeği keşfetmiştir: **Doğru müş
 - **Facebook Grupları**: Hedef kitlenizin aktif olduğu gruplar
 - **Reddit**: İlgili subredditlerde problem tartışmaları
 - **Twitter**: Gerçek zamanlı şikayetler ve ihtiyaçlar
-- **LinkedIn**: B2B hedefler için professional tartışmalar
+- **LinkedIn**: B2B hedefler için profesyonel tartışmalar
 
 #### **Google Trends ve Anahtar Kelime Analizi:**
 - Hangi problemler artış eğiliminde?
@@ -268,7 +268,7 @@ Başarılı startup'ların %90'ı aynı gerçeği keşfetmiştir: **Doğru müş
 
 ### **Hafta 3: Kantitatif Doğrulama**  
 - Anket hazırlama ve dağıtma
-- Landing page + form testi
+- Açılış sayfası + form testi
 - Veri toplama ve analiz
 - Persona güncelleme
 
@@ -291,6 +291,6 @@ Başarılı startup kurmak için en önemli beceri kodlama değil, **müşteri e
 
 ---
 
-**Müşteri keşfi yolculuğunuza hemen başlamak için** [Listelee.io](/) ile landing page oluşturun ve ilk geri bildirimlerinizi toplamaya başlayın!
+**Müşteri keşfi yolculuğunuza hemen başlamak için** [Listelee.io](/) ile **açılış sayfanızı (landing page)** oluşturun ve ilk geri bildirimlerinizi toplamaya başlayın!
 
 *Bu rehber işinize yaradıysa, diğer girişimcilerle paylaşmayı unutmayın! 🌟* 

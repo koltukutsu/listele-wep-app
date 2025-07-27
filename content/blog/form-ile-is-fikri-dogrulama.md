@@ -33,7 +33,7 @@ Form ile doğrulama, iş fikrinizi henüz geliştirmeden önce potansiyel müşt
 ## 📊 Neden Form ile Başlamalısınız?
 
 ### 1. **Zaman ve Para Tasarrufu**
-Bir mobil uygulama geliştirmek 6 ay ve 50.000 TL alabilir. Ancak bir landing page ile form oluşturmak sadece 1 gün ve neredeyse hiç maliyet gerektirmez.
+Bir mobil uygulama geliştirmek 6 ay ve 50.000 TL alabilir. Ancak bir **açılış sayfası (landing page)** ile form oluşturmak sadece 1 gün ve neredeyse hiç maliyet gerektirmez.
 
 ### 2. **Gerçek Verilerle Karar Verme**  
 "Kesinlikle kullanırım" diyen arkadaşlarınızın yorumları yerine, gerçek müşterilerin e-posta adreslerini vererek gösterdikleri ilgi çok daha değerlidir.
@@ -56,7 +56,7 @@ Müşteriye ne fayda sağlayacağınızı net bir şekilde belirtin:
 - "İstanbul'un en popüler 25 spor salonuyla anlaşmalıyız"
 - Müşteri yorumları (varsa)
 
-### 4. **Açık ve Net CTA (Call to Action)**
+### 4. **Açık ve Net Eylem Çağrısı (CTA – Call to Action)**
 ❌ "Bilgi Al"  
 ✅ "Erken Erişim Listesine Katıl"  
 ✅ "İlk Kullanıcılar Arasında Ol"
@@ -83,12 +83,12 @@ Müşteriye ne fayda sağlayacağınızı net bir şekilde belirtin:
 ## 📈 Başarı Metrikleri: Neyi Ölçmelisiniz?
 
 ### **Temel KPI'lar:**
-- **Conversion Rate**: Ziyaretçi başına kayıt oranı
+**Dönüşüm Oranı (Conversion Rate)**: Ziyaretçi başına kayıt oranı
 - **E-posta Kalitesi**: Gerçek e-postalar mı?
 - **Geri Bildirim Kalitesi**: Detaylı yanıtlar alıyor musunuz?
 
 ### **Başarı Kriteri Örnekleri:**
-- %15+ conversion rate (sektöre göre değişir)
+- %15+ dönüşüm oranı (sektöre göre değişir)
 - 100+ kaliteli e-posta toplama
 - %60+ "kesinlikle kullanırım" yanıtı
 
@@ -96,8 +96,8 @@ Müşteriye ne fayda sağlayacağınızı net bir şekilde belirtin:
 
 **Problem**: Freelancerlar için proje yönetim aracı  
 **Hipotez**: Freelancerlar mevcut araçları çok karmaşık buluyor  
-**Test**: Landing page + form  
-**Sonuç**: 2 hafta içinde 340 e-posta, %18 conversion rate  
+**Test**: Açılış sayfası + form  
+**Sonuç**: 2 hafta içinde 340 e-posta, %18 dönüşüm oranı  
 **Aksiyon**: MVP geliştirmeye başladı  
 **Sonuç**: 6 ay içinde 1000+ ödemeyli kullanıcı
 
@@ -119,7 +119,7 @@ Arkadaşlarınız size "hayır" demekte zorlanır. Gerçek müşterilerle test e
 ## 🛠️ Araçlar ve Platformlar
 
 ### **Hızlı Başlangıç İçin:**
-- **Listelee.io**: Özelleştirilmiş landing page + form
+- **Listelee.io**: Özelleştirilmiş açılış sayfası (landing page) + form
 - **Typeform**: Etkileşimli formlar
 - **Google Forms**: Basit ve ücretsiz
 
@@ -145,6 +145,6 @@ Form ile doğrulama, girişimciliğin en değerli araçlarından biridir. Büyü
 
 ---
 
-**Hemen başlamak ister misiniz?** [Listelee.io](/) ile dakikalar içinde professional bir doğrulama formu oluşturun ve iş fikrinizin gerçek potansiyelini keşfedin!
+**Hemen başlamak ister misiniz?** [Listelee.io](/) ile dakikalar içinde profesyonel bir doğrulama formu oluşturun ve iş fikrinizin gerçek potansiyelini keşfedin!
 
 *Bu makale faydalı olduysa, sosyal medyada paylaşmayı unutmayın! 🚀* 

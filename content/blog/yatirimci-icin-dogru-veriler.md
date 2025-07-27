@@ -155,7 +155,7 @@ Bir yatırımcı, **100 startup'tan sadece 1-2'sinin** 10x+ getiri sağlayacağ�
 Revenue Streams:
 - Subscription Revenue: %70
 - Transaction Revenue: %20  
-- Professional Services: %10
+- Profesyonel Hizmetler: %10
 
 Cost Structure:
 - COGS: %30
@@ -235,13 +235,13 @@ Cost Structure:
 ### **Hikaye Yapısı:**
 
 #### **1. Before (Problem Era):**
-> "6 ay önce landing page'imizi yayınladığımızda, sadece %2 conversion rate alabiliyorduk..."
+> "6 ay önce açılış sayfamızı yayına aldığımızda, sadece %2 dönüşüm oranı elde edebiliyorduk..."
 
 #### **2. During (Solution Implementation):**
 > "Müşteri geri bildirimlerini analiz ettikten sonra, form alanlarını %50 azalttık ve value proposition'ımızı netleştirdik..."
 
 #### **3. After (Results):**
-> "Bugün %18 conversion rate'e ulaştık ve aylık %25 büyüme sağlıyoruz..."
+> "Bugün %18 dönüşüm oranına ulaştık ve aylık %25 büyüme sağlıyoruz..."
 
 ### **Veri Hikayesinde Kritik Elementler:**
 
@@ -299,7 +299,7 @@ Cost Structure:
 
 ### **E-commerce Benchmarks:**
 
-#### **Conversion Rates:**
+#### **Dönüşüm Oranları (Conversion Rates):**
 - **Best-in-class**: %3-5+
 - **Good**: %2-3
 - **Average**: %1-2
@@ -420,6 +420,6 @@ Yatırımcılarla olan ilişkinizde:
 
 ---
 
-**Yatırımcı sunum sürecinize hazır mısınız?** [Listelee.io](/) ile landing page'inizden başlayarak ilk traction verilerinizi toplamaya başlayın!
+**Yatırımcı sunum sürecinize hazır mısınız?** [Listelee.io](/) ile **açılış sayfanızdan (landing page)** başlayarak ilk traction verilerinizi toplamaya başlayın!
 
 *Bu rehber startup'ınızın finansman sürecine katkı sağladıysa, diğer girişimcilerle paylaşmayı unutmayın! 💼* 
