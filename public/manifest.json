@@ -1,0 +1,59 @@
+{
+  "name": "Listelee.io - Girişiminizi Hızla Hayata Geçirin",
+  "short_name": "Listelee.io",
+  "description": "Fikirlerini hızla hayata geçir. Dakikalar içinde projelerini oluştur, müşteri topla ve büyü. Fikrini herkese kanitla!",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png", 
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/Logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#3b82f6",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "tr",
+  "categories": ["business", "productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Yeni Proje Oluştur",
+      "short_name": "Yeni Proje",
+      "description": "Hızlıca yeni bir landing page projesi oluştur",
+      "url": "/onboarding",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    },
+    {
+      "name": "Proje Galerisi",
+      "short_name": "Galeri",
+      "description": "Başarılı proje örneklerini incele",
+      "url": "/showcase",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    },
+    {
+      "name": "Panel",
+      "short_name": "Dashboard",
+      "description": "Projelerini yönet ve analitikleri görüntüle",
+      "url": "/dashboard",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    }
+  ]
+} 
