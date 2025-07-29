@@ -14,37 +14,37 @@ import { Button } from "./ui/button";
 export default function Features() {
   const features = [
     {
-      icon: <Code size={32} className="text-[#D8FF00]"/>,
+      icon: <Code size={32} className="text-black dark:text-[#D8FF00]"/>,
       title: "Founder Mode AI & Kodsuz Editör",
       description:
         "İster fikrini sesli anlat, yapay zeka senin için tasarlasın, ister sürükle-bırak kolaylığıyla kendi vizyonunu yarat. Teknik bilgi, geçmişte kaldı.",
     },
     {
-      icon: <Zap size={32} className="text-[#D8FF00]"/>,
+      icon: <Zap size={32} className="text-black dark:text-[#D8FF00]"/>,
       title: "Anında Lansman",
       description:
         "Fikrin hazır olduğunda, dünya da hazır olmalı. Tek tıkla projen yayında ve ilk ziyaretçilerini karşılamaya hazır. Beklemek yok, sadece aksiyon.",
     },
     {
-      icon: <Gauge size={32} className="text-[#D8FF00]"/>,
+      icon: <Gauge size={32} className="text-black dark:text-[#D8FF00]"/>,
       title: "Büyüme Panelin",
       description:
         "Sadece rakamları değil, büyümeyi gör. İlk destekçilerinin nereden geldiğini anla, stratejini verilerle şekillendir ve bir sonraki adımını güvenle at.",
     },
     {
-      icon: <Database size={32} className="text-[#D8FF00]"/>,
+      icon: <Database size={32} className="text-black dark:text-[#D8FF00]"/>,
       title: "İlk Destekçilerin Güvende",
       description:
         "Topluluğun en değerli varlığın. Tüm veriler güvenle saklanır ve kontrol tamamen sendedir. Listeni dilediğin zaman al, kendi yolunda ilerle.",
     },
     {
-      icon: <Globe size={32} className="text-[#D8FF00]"/>,
+      icon: <Globe size={32} className="text-black dark:text-[#D8FF00]"/>,
       title: "Markanı İnşa Et",
       description:
         "Girişimin büyüdükçe, markan da büyür. Kendi alan adını kolayca bağlayarak kurumsal kimliğini bir üst seviyeye taşı.",
     },
     {
-      icon: <Wallet size={32} className="text-[#D8FF00]"/>,
+      icon: <Wallet size={32} className="text-black dark:text-[#D8FF00]"/>,
       title: "Maliyetsiz Başlangıç",
       description:
         "Büyük fikirlerin önündeki en büyük engelin bütçe olmaması gerektiğine inanıyoruz. İlk adımlarını atarken cüzdanını düşünme. Sadece fikrine odaklan.",
@@ -62,7 +62,7 @@ export default function Features() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-black dark:text-white">Kurucunun Cephaneliği</h2>
-          <p className="max-w-2xl mx-auto text-lg text-gray-700 dark:text-gray-300 mt-4">
+          <p className="max-w-2xl mx-auto text-lg text-gray-900 dark:text-gray-300 mt-4">
             Fikrini hayata geçirmek için ihtiyacın olan her şey burada. Hız, veri ve topluluk... Hepsi senin kontrolünde.
           </p>
         </motion.div>
@@ -82,7 +82,7 @@ export default function Features() {
                 {feature.icon}
               </div>
               <h3 className="text-xl font-bold mb-2 text-black dark:text-white">{feature.title}</h3>
-              <p className="text-gray-700 dark:text-gray-300">{feature.description}</p>
+              <p className="text-gray-900 dark:text-gray-300">{feature.description}</p>
             </div>
           ))}
         </motion.div>

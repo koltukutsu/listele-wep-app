@@ -45,7 +45,7 @@ export default function SocialProof() {
           <h2 className="text-3xl sm:text-4xl font-bold text-black dark:text-white">
             <span className="text-[#D8FF00]">{userCount}+</span> Girişimci Bize Güveniyor
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-gray-700 dark:text-gray-300 mt-4">
+          <p className="max-w-2xl mx-auto text-lg text-gray-900 dark:text-gray-300 mt-4">
             Bizim gibi düşünen, fikrini hızla hayata geçirmek isteyenlerin
             yorumları.
           </p>
@@ -62,7 +62,7 @@ export default function SocialProof() {
               key={index}
               className="p-8 border border-gray-200 dark:border-slate-700 rounded-lg bg-gray-50 dark:bg-slate-800 hover:shadow-xl hover:border-[#D8FF00] dark:hover:border-[#D8FF00] transition-all duration-300"
             >
-              <p className="text-lg mb-6 font-serif italic text-gray-800 dark:text-gray-200">
+              <p className="text-lg mb-6 font-serif italic text-gray-900 dark:text-gray-200">
                 "{testimonial.quote}"
               </p>
               <div className="flex items-center">
@@ -71,7 +71,7 @@ export default function SocialProof() {
                 </div>
                 <div className="ml-4">
                   <p className="font-bold text-black dark:text-white">{testimonial.name}</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-gray-800 dark:text-gray-400">
                     {testimonial.title}
                   </p>
                 </div>

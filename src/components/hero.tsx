@@ -41,7 +41,7 @@ export default function Hero() {
                   </p>
                 </div>
 
-                <p className="mt-6 text-gray-700 dark:text-gray-300 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
+                <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
                   <strong className="text-black dark:text-white">İş fikrinizi test etmek</strong> için güçlü form siteleri oluşturun. 
                   <strong className="text-black dark:text-white"> Gerçek talep</strong> ölçün, 
                   <strong className="text-black dark:text-white"> müşteri geri bildirimi</strong> toplayın ve 
@@ -50,13 +50,13 @@ export default function Hero() {
                 </p>
 
                 <div className="mt-8 flex flex-wrap justify-center gap-2 text-sm">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 font-medium">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-200 font-medium">
                     ✅ Fikir Doğrulama
                   </span>
-                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 font-medium">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-200 font-medium">
                     📊 Talep Ölçümü
                   </span>
-                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 font-medium">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-200 font-medium">
                     💰 Risk Azaltma
                   </span>
                 </div>
@@ -80,7 +80,7 @@ export default function Hero() {
                   )}
                 </div>
 
-                <div className="mt-8 text-sm text-gray-600 dark:text-gray-400">
+                <div className="mt-8 text-sm text-gray-800 dark:text-gray-400">
                   💳 Kredi kartı gerektirmez • 🎯 2 proje + 75 form ücretsiz • ⭐ Dakikalar içinde test et
                 </div>
               </motion.div>

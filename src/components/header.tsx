@@ -60,31 +60,31 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "py-3 md:py-4 flex flex-row gap-2 justify-between items-center md:px-10 sm:px-6 px-3 sticky top-0 z-50 border-b border-lime-200/50 dark:border-slate-700/50",
+          "py-3 md:py-4 flex flex-row gap-2 justify-between items-center md:px-10 sm:px-6 px-3 sticky top-0 z-50 border-b border-gray-200/50 dark:border-slate-700/50",
           scrolled &&
             "bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm shadow-sm"
         )}
       >
         <Link href="/" className="flex items-center gap-1 md:gap-2 shrink-0">
           <Logo />
-          <span className="font-bold text-gray-900 dark:text-white text-sm md:text-base">Listelee.io</span>
+          <span className="font-bold text-black dark:text-white text-sm md:text-base">Listelee.io</span>
         </Link>
 
         <div className="flex items-center gap-1 md:gap-4">
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-4">
             <Link href="/showcase">
-              <Button variant="ghost" className="text-gray-700 dark:text-gray-300 hover:text-lime-600 dark:hover:text-lime-400 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+              <Button variant="ghost" className="text-gray-900 dark:text-gray-300 hover:text-[#D8FF00] hover:bg-gray-50 dark:hover:bg-slate-800">
                 Tüm Projeler
               </Button>
             </Link>
             <Link href="/blog">
-              <Button variant="ghost" className="text-gray-700 dark:text-gray-300 hover:text-lime-600 dark:hover:text-lime-400 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+              <Button variant="ghost" className="text-gray-900 dark:text-gray-300 hover:text-[#D8FF00] hover:bg-gray-50 dark:hover:bg-slate-800">
                 Blog
               </Button>
             </Link>
             <Link href="/pricing">
-              <Button variant="ghost" className="text-gray-700 dark:text-gray-300 hover:text-lime-600 dark:hover:text-lime-400 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+              <Button variant="ghost" className="text-gray-900 dark:text-gray-300 hover:text-[#D8FF00] hover:bg-gray-50 dark:hover:bg-slate-800">
                 Fiyatlandırma
               </Button>
             </Link>
@@ -100,7 +100,7 @@ export default function Header() {
                 {paymentEnabled && (
                   <Button 
                     onClick={() => setIsVoiceModalOpen(true)}
-                    className="md:hidden bg-gradient-to-r from-lime-400 via-yellow-400 to-orange-400 hover:from-lime-500 hover:via-yellow-500 hover:to-orange-500 text-black font-bold shadow-lg animate-pulse p-2 h-8 w-8"
+                    className="md:hidden bg-[#D8FF00] hover:bg-[#B8E000] text-black font-bold shadow-lg p-2 h-8 w-8"
                     size="sm"
                   >
                     <Mic className="h-4 w-4" />
@@ -109,14 +109,14 @@ export default function Header() {
                 )}
 
                 {/* Connected User Menu and Quick Access */}
-                <div className="flex items-center bg-lime-50 dark:bg-slate-800 border border-lime-200 dark:border-slate-700 rounded-lg p-1 md:p-2">
+                <div className="flex items-center bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-1 md:p-2">
                   {/* User Menu */}
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" className="relative h-7 w-7 md:h-8 md:w-8 rounded-full hover:bg-lime-100 dark:hover:bg-slate-700">
+                      <Button variant="ghost" className="relative h-7 w-7 md:h-8 md:w-8 rounded-full hover:bg-gray-100 dark:hover:bg-slate-700">
                         <Avatar className="h-7 w-7 md:h-8 md:w-8">
                           <AvatarImage src={user.photoURL || ''} alt={user.displayName || 'User'} />
-                          <AvatarFallback className="bg-gradient-to-r from-lime-400 to-green-500 text-black text-xs font-bold">
+                          <AvatarFallback className="bg-[#D8FF00] text-black text-xs font-bold">
                             {user.displayName 
                               ? user.displayName.split(' ').map(n => n[0]).join('').toUpperCase()
                               : user.email?.[0].toUpperCase() || 'U'}
@@ -125,10 +125,10 @@ export default function Header() {
                         <span className="sr-only">Kullanıcı menüsü</span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 shadow-lg">
-                      <DropdownMenuLabel className="font-normal bg-lime-50 dark:bg-slate-700 rounded-md mx-1 mb-1">
+                    <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700 shadow-lg">
+                      <DropdownMenuLabel className="font-normal bg-gray-50 dark:bg-slate-700 rounded-md mx-1 mb-1">
                         <div className="flex flex-col space-y-1 p-2">
-                          <p className="text-sm font-medium leading-none text-gray-900 dark:text-gray-100">
+                          <p className="text-sm font-medium leading-none text-black dark:text-white">
                             {user.displayName || 'Kullanıcı'}
                           </p>
                           <p className="text-xs leading-none text-gray-500 dark:text-gray-400 truncate">
@@ -136,52 +136,52 @@ export default function Header() {
                           </p>
                         </div>
                       </DropdownMenuLabel>
-                      <DropdownMenuSeparator className="bg-lime-200 dark:bg-slate-600" />
+                      <DropdownMenuSeparator className="bg-gray-200 dark:bg-slate-600" />
                       
                       {/* Navigation items for mobile */}
                       <div className="md:hidden">
                         <DropdownMenuItem asChild>
-                          <Link href="/showcase" className="w-full cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+                          <Link href="/showcase" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
                             Tüm Projeler
                           </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                          <Link href="/blog" className="w-full cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+                          <Link href="/blog" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
                             Blog
                           </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                          <Link href="/pricing" className="w-full cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+                          <Link href="/pricing" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
                             Fiyatlandırma
                           </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuSeparator className="bg-lime-200 dark:bg-slate-600" />
+                        <DropdownMenuSeparator className="bg-gray-200 dark:bg-slate-600" />
                       </div>
                       
                       {/* User menu items */}
                       <DropdownMenuItem asChild>
-                        <Link href="/dashboard" className="w-full cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+                        <Link href="/dashboard" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
                           Panelim
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild>
-                        <Link href="/dashboard/profile" className="w-full cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+                        <Link href="/dashboard/profile" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
                           Profilim
                         </Link>
                       </DropdownMenuItem>
                       
                       {/* Mode toggle for mobile */}
                       <div className="md:hidden">
-                        <DropdownMenuSeparator className="bg-lime-200 dark:bg-slate-600" />
+                        <DropdownMenuSeparator className="bg-gray-200 dark:bg-slate-600" />
                         <div className="px-2 py-1">
                           <div className="flex items-center justify-between">
-                            <span className="text-sm text-gray-700 dark:text-gray-300">Tema</span>
+                            <span className="text-sm text-gray-900 dark:text-gray-300">Tema</span>
                             <ModeToggle />
                           </div>
                         </div>
                       </div>
                       
-                      <DropdownMenuSeparator className="bg-lime-200 dark:bg-slate-600" />
+                      <DropdownMenuSeparator className="bg-gray-200 dark:bg-slate-600" />
                       <DropdownMenuItem 
                         onClick={handleSignOut}
                         className="text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-900/20 cursor-pointer"
@@ -192,17 +192,17 @@ export default function Header() {
                   </DropdownMenu>
 
                   {/* Separator Line */}
-                  <div className="hidden md:block w-px h-6 bg-lime-200 dark:bg-slate-600 mx-3"></div>
+                  <div className="hidden md:block w-px h-6 bg-gray-200 dark:bg-slate-600 mx-3"></div>
 
                   {/* Quick Access Buttons - Desktop Only */}
                   <div className="hidden md:flex items-center gap-1">
                     <Link href="/dashboard">
-                      <Button variant="ghost" size="sm" className="text-lime-700 dark:text-lime-300 hover:text-lime-800 dark:hover:text-lime-200 hover:bg-lime-100 dark:hover:bg-lime-900/20 font-medium">
+                      <Button variant="ghost" size="sm" className="text-gray-900 dark:text-gray-300 hover:text-[#D8FF00] hover:bg-gray-100 dark:hover:bg-slate-700 font-medium">
                         Panelim
                       </Button>
                     </Link>
                     <Link href="/dashboard/profile">
-                      <Button variant="ghost" size="sm" className="text-lime-700 dark:text-lime-300 hover:text-lime-800 dark:hover:text-lime-200 hover:bg-lime-100 dark:hover:bg-lime-900/20 font-medium">
+                      <Button variant="ghost" size="sm" className="text-gray-900 dark:text-gray-300 hover:text-[#D8FF00] hover:bg-gray-100 dark:hover:bg-slate-700 font-medium">
                         Profilim
                       </Button>
                     </Link>
@@ -213,7 +213,7 @@ export default function Header() {
                 {paymentEnabled && (
                   <Button 
                     onClick={() => setIsVoiceModalOpen(true)}
-                    className="hidden md:flex bg-gradient-to-r from-lime-400 via-yellow-400 to-orange-400 hover:from-lime-500 hover:via-yellow-500 hover:to-orange-500 text-black font-bold shadow-lg animate-pulse"
+                    className="hidden md:flex bg-[#D8FF00] hover:bg-[#B8E000] text-black font-bold shadow-lg"
                   >
                     <Mic className="mr-2 h-4 w-4" />
                     Fikrini Söyle
@@ -231,26 +231,26 @@ export default function Header() {
                         <span className="sr-only">Menü</span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-48 bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 shadow-lg">
+                    <DropdownMenuContent align="end" className="w-48 bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700 shadow-lg">
                       <DropdownMenuItem asChild>
-                        <Link href="/showcase" className="w-full cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+                        <Link href="/showcase" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
                           Tüm Projeler
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild>
-                        <Link href="/blog" className="w-full cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+                        <Link href="/blog" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
                           Blog
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild>
-                        <Link href="/pricing" className="w-full cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-lime-900/20">
+                        <Link href="/pricing" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
                           Fiyatlandırma
                         </Link>
                       </DropdownMenuItem>
-                      <DropdownMenuSeparator className="bg-lime-200 dark:bg-slate-600" />
+                      <DropdownMenuSeparator className="bg-gray-200 dark:bg-slate-600" />
                       <div className="px-2 py-1">
                         <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-700 dark:text-gray-300">Tema</span>
+                          <span className="text-sm text-gray-900 dark:text-gray-300">Tema</span>
                           <ModeToggle />
                         </div>
                       </div>
@@ -258,7 +258,7 @@ export default function Header() {
                   </DropdownMenu>
                 </div>
                 <Link href="/login">
-                  <Button variant="secondary" size="sm" className="bg-lime-100 dark:bg-lime-900 text-lime-800 dark:text-lime-200 hover:bg-lime-200 dark:hover:bg-lime-800 border-lime-300 dark:border-lime-700 text-xs md:text-sm px-2 md:px-4">
+                  <Button variant="secondary" size="sm" className="bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-200 hover:bg-[#D8FF00] hover:text-black border-gray-300 dark:border-slate-600 text-xs md:text-sm px-2 md:px-4">
                     Giriş Yap
                   </Button>
                 </Link>

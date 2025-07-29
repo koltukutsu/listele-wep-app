@@ -21,7 +21,7 @@ export default function HowTo() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.8 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="max-w-3xl mx-auto text-lg text-gray-700 dark:text-gray-300 mb-12 sm:mb-16"
+          className="max-w-3xl mx-auto text-lg text-gray-900 dark:text-gray-300 mb-12 sm:mb-16"
         >
           Karmaşık süreçleri unut. Senin görevin hayal etmek, bizimki ise onu gerçeğe dönüştürmek. İşte bu kadar basit.
         </motion.p>
@@ -42,7 +42,7 @@ export default function HowTo() {
               </div>
               <h3 className="text-xl font-bold text-black dark:text-white">Vizyonunu Tanımla</h3>
             </div>
-            <p className="text-gray-700 dark:text-gray-300">
+            <p className="text-gray-900 dark:text-gray-300">
               Her büyük hikaye bir isimle başlar. Girişimine kimliğini kazandır, misyonunu tek cümlede anlat.
             </p>
           </div>
@@ -53,7 +53,7 @@ export default function HowTo() {
               </div>
               <h3 className="text-xl font-bold text-black dark:text-white">İlk Vitrinini Oluştur</h3>
             </div>
-            <p className="text-gray-700 dark:text-gray-300">
+            <p className="text-gray-900 dark:text-gray-300">
               Founder Mode AI ile fikrini anlat veya dakikalar içinde kendin tasarla. Potansiyel kullanıcılarınla ilk temas noktan hazır.
             </p>
           </div>
@@ -64,7 +64,7 @@ export default function HowTo() {
               </div>
               <h3 className="text-xl font-bold text-black dark:text-white">Topluluğunu Ateşle</h3>
             </div>
-            <p className="text-gray-700 dark:text-gray-300">
+            <p className="text-gray-900 dark:text-gray-300">
               İlk destekçilerini toplamaya başla. Lansman gününde seni bekleyen bir kitle olsun. Büyümeyi gerçek zamanlı izle.
             </p>
           </div>
