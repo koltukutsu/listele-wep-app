@@ -4,6 +4,7 @@ import { useState, type FormEvent, type ChangeEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
+import { trackConversion } from "~/lib/analytics";
 
 interface FormProps {
   projectId: string;
@@ -35,13 +36,20 @@ export default function WaitlistForm({ projectId }: FormProps) {
       setLoading(true);
 
       // Simulate API call delay
-      setTimeout(() => {
+      setTimeout(async () => {
         // Simulate duplicate email check (10% chance)
         if (Math.random() < 0.1) {
           toast.error("Bu e-posta zaten listede mevcut!");
           setLoading(false);
           return;
         }
+
+        // Track conversion for successful signup
+        await trackConversion('waitlist_signup', 1, {
+          project_id: projectId,
+          email_domain: email.split('@')[1],
+          signup_source: 'demo_form'
+        });
 
         toast.success("Bekleme listesine katıldığınız için teşekkürler! 🎉");
         setEmail("");

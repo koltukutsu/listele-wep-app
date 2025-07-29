@@ -74,7 +74,7 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-white dark:bg-slate-900">
-        <p className="text-gray-800 dark:text-gray-200">Yükleniyor...</p>
+        <p className="text-black dark:text-white">Yükleniyor...</p>
       </main>
     );
   }
@@ -83,15 +83,15 @@ export default function DashboardPage() {
   const canCreateProject = currentPlan && (currentPlan.name === "Sınırsız" || (userProfile && userProfile.projectsCount < (currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] ? parseInt(currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] as string) : 0)));
 
   return (
-    <div className="container mx-auto p-4 sm:p-6 lg:p-8 text-gray-900 dark:text-gray-100">
+    <div className="container mx-auto p-4 sm:p-6 lg:p-8 text-black dark:text-white">
       <div className="flex flex-col md:flex-row justify-between md:items-center mb-8 gap-4">
         <div>
           <h1 className="text-3xl font-bold">Projelerim</h1>
-          <p className="text-muted-foreground dark:text-gray-400">Mevcut projelerinizi yönetin ve yenilerini oluşturun.</p>
+          <p className="text-gray-600 dark:text-gray-400">Mevcut projelerinizi yönetin ve yenilerini oluşturun.</p>
         </div>
         <div className="flex flex-col items-end">
             <Link href="/dashboard/editor/new">
-              <Button disabled={!canCreateProject}>
+              <Button disabled={!canCreateProject} className="bg-[#D8FF00] hover:bg-[#B8E000] text-black">
                 <PlusCircle className="mr-2 h-4 w-4" />
                 Yeni Proje Oluştur
               </Button>
@@ -110,14 +110,14 @@ export default function DashboardPage() {
             <Card key={project.id} className="flex flex-col bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700">
               <CardHeader>
                 <div className="flex justify-between items-start">
-                  <CardTitle className="text-lg font-bold mb-1">{project.name}</CardTitle>
+                  <CardTitle className="text-lg font-bold mb-1 text-black dark:text-white">{project.name}</CardTitle>
                   {project.status === 'published' ? (
-                    <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-400">
-                      <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#D8FF00] text-black">
+                      <span className="h-2 w-2 rounded-full bg-black animate-pulse"></span>
                       Yayında!
                     </span>
                   ) : (
-                    <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-400">
+                    <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-gray-300">
                       Taslak
                     </span>
                   )}
@@ -125,38 +125,38 @@ export default function DashboardPage() {
                 <CardDescription className="dark:text-gray-400">/{project.slug}</CardDescription>
               </CardHeader>
               <CardContent className="flex-grow space-y-4">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-gray-400">
+                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                   <BarChart className="h-4 w-4" />
                   <span>{project.stats?.totalVisits || 0} Görüntülenme</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-gray-400">
+                  <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                     <Users className="h-4 w-4" />
                     <span>
                       {currentPlan && currentPlan.name !== "Sınırsız" && project.stats?.totalSignups >= 50 ? '50+' : project.stats?.totalSignups || 0} Kayıt
                     </span>
                   </div>
                   <Link href={`/dashboard/leads/${project.id}`} passHref>
-                    <Button size="sm" variant="default">Kayıtları Gör</Button>
+                    <Button size="sm" className="bg-[#D8FF00] hover:bg-[#B8E000] text-black">Kayıtları Gör</Button>
                   </Link>
                 </div>
               </CardContent>
               <CardFooter className="bg-gray-50 dark:bg-slate-800/50 p-3 flex justify-end items-center gap-2 border-t dark:border-slate-700">
-                 <Button variant="outline" size="sm" onClick={() => handleShare(project)}>
+                 <Button variant="outline" size="sm" onClick={() => handleShare(project)} className="border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
                     <Share2 className="h-4 w-4 mr-1" />
                     Paylaş!
                   </Button>
                 <Link href={`/dashboard/editor/${project.id}`}>
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
                     <Edit className="h-4 w-4" />
                   </Button>
                 </Link>
                 <Link href={`${APP_URL}/${project.slug}`} target="_blank">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
                     <ExternalLink className="h-4 w-4" />
                   </Button>
                 </Link>
-                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-700" onClick={() => setProjectToDelete(project.id)}>
+                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20" onClick={() => setProjectToDelete(project.id)}>
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </CardFooter>
@@ -164,10 +164,10 @@ export default function DashboardPage() {
           ))
         ) : (
           <div className="col-span-full text-center p-12 border-2 border-dashed rounded-lg border-gray-300 dark:border-slate-700">
-            <h3 className="text-xl font-semibold">İlk projenizi oluşturun</h3>
-            <p className="text-muted-foreground dark:text-gray-400 mt-2 mb-4">Harika fikirlerinizi hayata geçirme zamanı.</p>
+            <h3 className="text-xl font-semibold text-black dark:text-white">İlk projenizi oluşturun</h3>
+            <p className="text-gray-600 dark:text-gray-400 mt-2 mb-4">Harika fikirlerinizi hayata geçirme zamanı.</p>
             <Link href="/dashboard/editor/new">
-              <Button>
+              <Button className="bg-[#D8FF00] hover:bg-[#B8E000] text-black">
                 <PlusCircle className="mr-2 h-4 w-4" />
                 Proje Oluştur
               </Button>
@@ -178,16 +178,16 @@ export default function DashboardPage() {
 
       {/* CTA Section */}
       <section className="mt-16 text-center">
-        <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-xl p-8 text-white">
+        <div className="bg-[#D8FF00] rounded-xl p-8 text-black">
           <h3 className="text-2xl font-bold mb-4">
             🌟 Başarılı Projelerden İlham Al!
           </h3>
-          <p className="text-green-100 mb-6 max-w-2xl mx-auto">
+          <p className="text-black/80 mb-6 max-w-2xl mx-auto">
             Listelee.io ile hayata geçirilmiş projelerden öğren ve kendi başarı hikayeni oluştur.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/showcase">
-              <Button size="lg" className="bg-white text-green-600 hover:bg-gray-100">
+              <Button size="lg" className="bg-white text-black hover:bg-gray-100">
                 <Eye className="w-5 h-5 mr-2" />
                 Proje Galerisini Keşfet
               </Button>
@@ -204,17 +204,18 @@ export default function DashboardPage() {
       <AlertDialog open={!!projectToDelete} onOpenChange={(open) => !open && setProjectToDelete(null)}>
         <AlertDialogContent className="bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-700">
           <AlertDialogHeader>
-            <AlertDialogTitle>Projeyi Sil</AlertDialogTitle>
+            <AlertDialogTitle className="text-black dark:text-white">Projeyi Sil</AlertDialogTitle>
             <AlertDialogDescription className="dark:text-gray-400">
               Bu işlem geri alınamaz. Projeyi ve ilişkili tüm verileri kalıcı olarak silmek istediğinizden emin misiniz?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isDeleting} onClick={() => setProjectToDelete(null)}>İptal</AlertDialogCancel>
+            <AlertDialogCancel disabled={isDeleting} onClick={() => setProjectToDelete(null)} className="border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">İptal</AlertDialogCancel>
             <Button
               variant="destructive"
               disabled={isDeleting}
               onClick={handleDeleteProject}
+              className="bg-red-500 hover:bg-red-600 text-white"
             >
               {isDeleting ? "Siliniyor..." : "Evet, Sil"}
             </Button>

@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import type { Project, Lead } from '~/lib/firestore';
 import { addLead } from '~/lib/firestore';
+import { trackConversion } from '~/lib/analytics';
 import {
   Accordion,
   AccordionContent,
@@ -44,6 +46,17 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
         email: formData.email,
         phone: formData.phone || null,
       });
+      
+      // Track conversion for successful signup
+      await trackConversion('waitlist_signup', 1, {
+        project_id: project.id,
+        project_name: project.name,
+        email_domain: formData.email.split('@')[1],
+        signup_source: 'project_page',
+        has_name: !!formData.name,
+        has_phone: !!formData.phone
+      });
+      
       setSubmitted(true);
     } catch (err) {
       setError('Bir hata oluştu, lütfen tekrar deneyin.');

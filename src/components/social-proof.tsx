@@ -42,8 +42,8 @@ export default function SocialProof() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-            <span className="text-transparent bg-gradient-to-r from-lime-500 to-green-600 dark:from-lime-400 dark:to-green-400 bg-clip-text">{userCount}+</span> Girişimci Bize Güveniyor
+          <h2 className="text-3xl sm:text-4xl font-bold text-black dark:text-white">
+            <span className="text-[#D8FF00]">{userCount}+</span> Girişimci Bize Güveniyor
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-gray-700 dark:text-gray-300 mt-4">
             Bizim gibi düşünen, fikrini hızla hayata geçirmek isteyenlerin
@@ -60,17 +60,17 @@ export default function SocialProof() {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="p-8 border border-lime-200 dark:border-slate-700 rounded-lg bg-lime-50 dark:bg-slate-800 hover:shadow-xl hover:border-lime-300 dark:hover:border-slate-600 transition-all duration-300"
+              className="p-8 border border-gray-200 dark:border-slate-700 rounded-lg bg-gray-50 dark:bg-slate-800 hover:shadow-xl hover:border-[#D8FF00] dark:hover:border-[#D8FF00] transition-all duration-300"
             >
               <p className="text-lg mb-6 font-serif italic text-gray-800 dark:text-gray-200">
                 "{testimonial.quote}"
               </p>
               <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-lime-400 to-green-500 text-black font-semibold flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-[#D8FF00] text-black font-semibold flex items-center justify-center">
                   {testimonial.name.charAt(0)}
                 </div>
                 <div className="ml-4">
-                  <p className="font-bold text-gray-900 dark:text-white">{testimonial.name}</p>
+                  <p className="font-bold text-black dark:text-white">{testimonial.name}</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
                     {testimonial.title}
                   </p>

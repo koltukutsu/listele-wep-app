@@ -91,41 +91,41 @@ export default function BlogListingClient({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-lime-50 to-green-50 dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-white dark:bg-slate-900">
       
       {/* Header */}
-      <div className="bg-white dark:bg-slate-900 border-b border-lime-200 dark:border-slate-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           <div className="text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <BookOpen className="w-8 h-8 text-lime-500" />
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-lime-500 to-green-600 dark:from-lime-400 dark:to-green-400 bg-clip-text text-transparent">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
+              <BookOpen className="w-6 h-6 sm:w-8 sm:h-8 text-[#D8FF00]" />
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black dark:text-white">
                 Listelee.io Blog
               </h1>
-              <Sparkles className="w-8 h-8 text-lime-500" />
+              <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-[#D8FF00]" />
             </div>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-6">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-6 px-4">
               Girişimcilik dünyasından en güncel haberler, startup hikayeleri, teknoloji trendleri 
               ve proje geliştirme rehberleri. Başarılı girişimcilerden ilham al!
             </p>
             
             {/* Blog Stats */}
-            <div className="flex items-center justify-center gap-8 mb-8">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-8">
               <div className="flex items-center gap-2">
-                <TrendingUp className="w-5 h-5 text-lime-500" />
-                <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-[#D8FF00]" />
+                <span className="text-base sm:text-lg font-semibold text-black dark:text-white">
                   {posts.length} Makale
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <Filter className="w-5 h-5 text-green-500" />
-                <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                <Filter className="w-4 h-4 sm:w-5 sm:h-5 text-[#D8FF00]" />
+                <span className="text-base sm:text-lg font-semibold text-black dark:text-white">
                   {categories.length} Kategori
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <Eye className="w-5 h-5 text-blue-500" />
-                <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                <Eye className="w-4 h-4 sm:w-5 sm:h-5 text-[#D8FF00]" />
+                <span className="text-base sm:text-lg font-semibold text-black dark:text-white">
                   {formatNumber(posts.reduce((sum, post) => sum + (post.views || 0), 0))} Görüntüleme
                 </span>
               </div>
@@ -134,39 +134,39 @@ export default function BlogListingClient({
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         
         {/* Search and Filters */}
-        <div className="mb-8">
-          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-lime-200 dark:border-slate-700 p-6">
+        <div className="mb-6 sm:mb-8">
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-4 sm:p-6">
             
             {/* Search Bar */}
-            <div className="mb-6">
+            <div className="mb-4 sm:mb-6">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-4 h-4 sm:w-5 sm:h-5" />
                 <Input
                   placeholder="Makale ara... (başlık, içerik veya etiket)"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-lime-500 focus:border-lime-500"
+                  className="pl-9 sm:pl-10 text-sm sm:text-base border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-black dark:text-white focus:ring-[#D8FF00] focus:border-[#D8FF00]"
                 />
               </div>
             </div>
 
             {/* Category Filter */}
-            <div className="mb-6">
-              <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+            <div className="mb-4 sm:mb-6">
+              <h4 className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 sm:mb-3">
                 📂 Kategoriler
               </h4>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 <Button
                   onClick={() => setSelectedCategory("all")}
                   variant={selectedCategory === "all" ? "default" : "outline"}
                   size="sm"
-                  className={selectedCategory === "all" 
-                    ? "bg-gradient-to-r from-lime-400 to-green-500 text-black hover:from-lime-500 hover:to-green-600" 
-                    : "border-lime-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-slate-700"
-                  }
+                  className={`text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 ${selectedCategory === "all" 
+                    ? "bg-[#D8FF00] text-black hover:bg-[#B8E000]" 
+                    : "border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
+                  }`}
                 >
                   Tümü ({posts.length})
                 </Button>
@@ -178,10 +178,10 @@ export default function BlogListingClient({
                       onClick={() => setSelectedCategory(category)}
                       variant={selectedCategory === category ? "default" : "outline"}
                       size="sm"
-                      className={selectedCategory === category 
-                        ? "bg-gradient-to-r from-lime-400 to-green-500 text-black hover:from-lime-500 hover:to-green-600" 
-                        : "border-lime-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-slate-700"
-                      }
+                      className={`text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 ${selectedCategory === category 
+                        ? "bg-[#D8FF00] text-black hover:bg-[#B8E000]" 
+                        : "border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
+                      }`}
                     >
                       {category} ({categoryCount})
                     </Button>
@@ -192,18 +192,18 @@ export default function BlogListingClient({
 
             {/* Tag Filter */}
             <div>
-              <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+              <h4 className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 sm:mb-3">
                 🏷️ Etiketler
               </h4>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 <Button
                   onClick={() => setSelectedTag("all")}
                   variant={selectedTag === "all" ? "default" : "outline"}
                   size="sm"
-                  className={selectedTag === "all" 
-                    ? "bg-gradient-to-r from-blue-400 to-purple-500 text-white hover:from-blue-500 hover:to-purple-600" 
-                    : "border-blue-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700"
-                  }
+                  className={`text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 ${selectedTag === "all" 
+                    ? "bg-[#D8FF00] text-black hover:bg-[#B8E000]" 
+                    : "border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
+                  }`}
                 >
                   Tümü
                 </Button>
@@ -215,17 +215,17 @@ export default function BlogListingClient({
                       onClick={() => setSelectedTag(tag)}
                       variant={selectedTag === tag ? "default" : "outline"}
                       size="sm"
-                      className={selectedTag === tag 
-                        ? "bg-gradient-to-r from-blue-400 to-purple-500 text-white hover:from-blue-500 hover:to-purple-600" 
-                        : "border-blue-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700"
-                      }
+                      className={`text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 ${selectedTag === tag 
+                        ? "bg-[#D8FF00] text-black hover:bg-[#B8E000]" 
+                        : "border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
+                      }`}
                     >
                       {tag} ({tagCount})
                     </Button>
                   );
                 })}
                 {tags.length > 10 && (
-                  <Badge variant="outline" className="border-gray-300 dark:border-slate-600 text-gray-600 dark:text-gray-400">
+                  <Badge variant="outline" className="text-xs border-gray-300 dark:border-slate-600 text-gray-600 dark:text-gray-400">
                     +{tags.length - 10} daha
                   </Badge>
                 )}
@@ -233,8 +233,8 @@ export default function BlogListingClient({
             </div>
 
             {/* Filter Results Info */}
-            <div className="mt-6 pt-4 border-t border-lime-100 dark:border-slate-700">
-              <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
+            <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-100 dark:border-slate-700">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 <span>
                   {filteredPosts.length} sonuç gösteriliyor
                   {(searchTerm || selectedCategory !== "all" || selectedTag !== "all") && 
@@ -250,7 +250,7 @@ export default function BlogListingClient({
                       setSelectedCategory("all");
                       setSelectedTag("all");
                     }}
-                    className="text-lime-600 dark:text-lime-400 hover:bg-lime-50 dark:hover:bg-lime-900/20"
+                    className="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-700 text-xs sm:text-sm w-fit"
                   >
                     Filtreleri Temizle
                   </Button>
@@ -262,14 +262,14 @@ export default function BlogListingClient({
 
         {/* Blog Posts Grid */}
         {filteredPosts.length === 0 ? (
-          <div className="text-center py-16 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg">
-            <BookOpen className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+          <div className="text-center py-12 sm:py-16 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg mx-2 sm:mx-0">
+            <BookOpen className="w-12 h-12 sm:w-16 sm:h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+            <h3 className="text-lg sm:text-xl font-semibold text-black dark:text-white mb-2 px-4">
               {searchTerm || selectedCategory !== "all" || selectedTag !== "all" 
                 ? "Aramanızla eşleşen makale bulunamadı" 
                 : "Henüz hiç blog yazısı yayınlanmamış"}
             </h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">
+            <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 mb-6 px-4">
               {searchTerm || selectedCategory !== "all" || selectedTag !== "all"
                 ? "Farklı anahtar kelimeler veya filtreler deneyebilirsiniz."
                 : "İlk blog yazımız yakında yayınlanacak!"}
@@ -282,7 +282,7 @@ export default function BlogListingClient({
                   setSelectedCategory("all");
                   setSelectedTag("all");
                 }}
-                className="border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
+                className="border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 text-sm"
               >
                 Tüm Makaleleri Göster
               </Button>
@@ -290,18 +290,18 @@ export default function BlogListingClient({
           </div>
         ) : (
           <>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
               {paginatedPosts.map((post) => (
                 <Card key={post.id} className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden">
                   <CardHeader className="p-0">
                     {post.featuredImage && (
-                      <div className="aspect-video bg-gradient-to-br from-lime-100 to-green-100 dark:from-slate-700 dark:to-slate-600 flex items-center justify-center">
-                        <BookOpen className="w-12 h-12 text-lime-500 dark:text-lime-400" />
+                      <div className="aspect-video bg-gray-100 dark:bg-slate-700 flex items-center justify-center">
+                        <BookOpen className="w-8 h-8 sm:w-12 sm:h-12 text-[#D8FF00]" />
                       </div>
                     )}
-                    <div className="p-6">
+                    <div className="p-4 sm:p-6">
                       <div className="flex items-center gap-2 mb-3">
-                        <Badge variant="outline" className="border-lime-300 dark:border-lime-700 text-lime-800 dark:text-lime-200 bg-lime-50 dark:bg-lime-900/50">
+                        <Badge variant="outline" className="text-xs border-[#D8FF00] text-black dark:text-white bg-[#D8FF00] dark:bg-[#D8FF00]">
                           {post.category}
                         </Badge>
                         <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
@@ -309,7 +309,7 @@ export default function BlogListingClient({
                           {post.readingTime} dk okuma
                         </div>
                       </div>
-                      <CardTitle className="text-lg group-hover:text-lime-600 dark:group-hover:text-lime-400 transition-colors line-clamp-2 text-gray-900 dark:text-gray-100 mb-2">
+                      <CardTitle className="text-base sm:text-lg group-hover:text-[#D8FF00] transition-colors line-clamp-2 text-black dark:text-white mb-2">
                         <Link href={`/blog/${post.slug}`}>
                           {post.title}
                         </Link>
@@ -319,8 +319,8 @@ export default function BlogListingClient({
                       </CardDescription>
                     </div>
                   </CardHeader>
-                  <CardContent className="px-6 pb-6">
-                    <div className="space-y-4">
+                  <CardContent className="px-4 sm:px-6 pb-4 sm:pb-6">
+                    <div className="space-y-3 sm:space-y-4">
                       {/* Tags */}
                       <div className="flex flex-wrap gap-1">
                         {post.tags.slice(0, 3).map((tag) => (
@@ -340,11 +340,11 @@ export default function BlogListingClient({
                       </div>
 
                       {/* Meta Info */}
-                      <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 text-xs text-gray-500 dark:text-gray-400">
                         <div className="flex items-center gap-3">
                           <div className="flex items-center gap-1">
                             <User className="w-3 h-3" />
-                            {post.author.name}
+                            <span className="truncate">{post.author.name}</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
@@ -362,7 +362,7 @@ export default function BlogListingClient({
                         <Button 
                           size="sm"
                           variant="outline"
-                          className="w-full border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-lime-50 dark:hover:bg-lime-900/20 hover:border-lime-300 dark:hover:border-lime-700 hover:text-lime-700 dark:hover:text-lime-300"
+                          className="w-full text-sm border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:border-[#D8FF00] hover:text-[#D8FF00]"
                         >
                           Devamını Oku →
                         </Button>
@@ -375,38 +375,66 @@ export default function BlogListingClient({
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-2">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-2">
                 <Button
                   variant="outline"
+                  size="sm"
                   onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                   disabled={currentPage === 1}
-                  className="border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
+                  className="w-full sm:w-auto text-sm border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
                 >
                   ← Önceki
                 </Button>
                 
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                    <Button
-                      key={page}
-                      variant={currentPage === page ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setCurrentPage(page)}
-                      className={currentPage === page 
-                        ? "bg-gradient-to-r from-lime-400 to-green-500 text-black hover:from-lime-500 hover:to-green-600" 
-                        : "border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
-                      }
-                    >
-                      {page}
-                    </Button>
-                  ))}
+                <div className="flex items-center gap-1 overflow-x-auto max-w-full">
+                  {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+                    let page;
+                    if (totalPages <= 5) {
+                      page = i + 1;
+                    } else if (currentPage <= 3) {
+                      page = i + 1;
+                    } else if (currentPage >= totalPages - 2) {
+                      page = totalPages - 4 + i;
+                    } else {
+                      page = currentPage - 2 + i;
+                    }
+                    
+                    return (
+                      <Button
+                        key={page}
+                        variant={currentPage === page ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setCurrentPage(page)}
+                        className={`text-sm min-w-[40px] ${currentPage === page 
+                          ? "bg-[#D8FF00] text-black hover:bg-[#B8E000]" 
+                          : "border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
+                        }`}
+                      >
+                        {page}
+                      </Button>
+                    );
+                  })}
+                  {totalPages > 5 && currentPage < totalPages - 2 && (
+                    <>
+                      <span className="text-gray-400 px-1">...</span>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setCurrentPage(totalPages)}
+                        className="text-sm min-w-[40px] border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
+                      >
+                        {totalPages}
+                      </Button>
+                    </>
+                  )}
                 </div>
 
                 <Button
                   variant="outline"
+                  size="sm"
                   onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                   disabled={currentPage === totalPages}
-                  className="border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
+                  className="w-full sm:w-auto text-sm border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
                 >
                   Sonraki →
                 </Button>
@@ -416,25 +444,25 @@ export default function BlogListingClient({
         )}
 
         {/* CTA Section */}
-        <section className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-lime-400 to-green-500 rounded-xl p-8 text-black">
-            <BookOpen className="w-12 h-12 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold mb-4">
+        <section className="mt-12 sm:mt-16 text-center">
+          <div className="bg-[#D8FF00] rounded-xl p-6 sm:p-8 text-black mx-2 sm:mx-0">
+            <BookOpen className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-4" />
+            <h3 className="text-xl sm:text-2xl font-bold mb-4">
               Kendin de Bir Proje Oluştur! 🚀
             </h3>
-            <p className="text-black/80 mb-6 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-black/80 mb-6 max-w-2xl mx-auto px-4">
               Blog'da okuduğun hikayelere ilham al ve kendi startup yolculuğuna başla. 
               Listelee.io ile dakikalar içinde profesyonel landing page'ini oluştur.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Link href="/onboarding">
-                <Button size="lg" className="bg-white text-lime-600 hover:bg-gray-100 dark:bg-slate-800 dark:text-lime-400 dark:hover:bg-slate-700">
-                  <Sparkles className="w-5 h-5 mr-2" />
+                <Button size="lg" className="w-full sm:w-auto text-sm sm:text-base bg-white text-black hover:bg-gray-100 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700">
+                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Hemen Başla - Ücretsiz
                 </Button>
               </Link>
               <Link href="/showcase">
-                <Button size="lg" variant="outline" className="border-white text-black hover:bg-white/20">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto text-sm sm:text-base border-black text-black hover:bg-black/10">
                   Örnek Projeleri İncele
                 </Button>
               </Link>

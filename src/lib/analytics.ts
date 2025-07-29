@@ -1,6 +1,42 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "./firebase";
+import { logEvent } from "firebase/analytics";
+import { db, analytics } from "./firebase";
 import { getAuth } from "firebase/auth";
+
+// Helper function to safely track to Google Analytics
+function trackToGA(eventName: string, parameters?: Record<string, any>) {
+  if (analytics && typeof window !== 'undefined') {
+    try {
+      logEvent(analytics, eventName, parameters);
+      console.log('📊 GA Event:', eventName, parameters);
+    } catch (error) {
+      console.error('Error tracking to GA:', error);
+    }
+  }
+}
+
+// Helper function to safely track to Plausible
+function trackToPlausible(eventName: string, props?: Record<string, any>) {
+  if (typeof window !== 'undefined' && window.plausible) {
+    try {
+      if (props && Object.keys(props).length > 0) {
+        window.plausible(eventName, { props });
+      } else {
+        window.plausible(eventName);
+      }
+      console.log('📈 Plausible Event:', eventName, props);
+    } catch (error) {
+      console.error('Error tracking to Plausible:', error);
+    }
+  }
+}
+
+// Declare plausible function for TypeScript
+declare global {
+  interface Window {
+    plausible: (eventName: string, options?: { props?: Record<string, any> }) => void;
+  }
+}
 
 export interface OnboardingEvent {
   userId: string;
@@ -57,7 +93,25 @@ export async function trackOnboardingStep(
       payload.metadata = metadata;
     }
 
+    // Track to Firestore
     await addDoc(collection(db, "onboarding_analytics"), payload);
+
+    // Track to Google Analytics
+    trackToGA('onboarding_step', {
+      step_number: step,
+      action: action,
+      user_id: user.uid,
+      session_id: getSessionId(),
+      ...metadata
+    });
+
+    // Track to Plausible
+    trackToPlausible('Onboarding Step', {
+      step: step.toString(),
+      action: action,
+      user_id: user.uid.substring(0, 8),
+      ...metadata
+    });
 
     // Also track in console for development
     console.log('📊 Onboarding Event:', { step, action, metadata });
@@ -87,7 +141,22 @@ export async function trackUserActivation(
       payload.metadata = metadata;
     }
 
+    // Track to Firestore
     await addDoc(collection(db, "user_activation"), payload);
+
+    // Track to Google Analytics
+    trackToGA('user_activation', {
+      event_type: eventType,
+      user_id: user.uid,
+      ...metadata
+    });
+
+    // Track to Plausible
+    trackToPlausible('User Activation', {
+      event_type: eventType,
+      user_id: user.uid.substring(0, 8),
+      ...metadata
+    });
 
     console.log('🎯 Activation Event:', { eventType, metadata });
   } catch (error) {
@@ -118,7 +187,25 @@ export async function trackProjectShare(
       payload.metadata = metadata;
     }
 
+    // Track to Firestore
     await addDoc(collection(db, "share_analytics"), payload);
+
+    // Track to Google Analytics
+    trackToGA('share', {
+      method: shareMethod,
+      content_type: 'project',
+      item_id: projectId,
+      user_id: user.uid,
+      ...metadata
+    });
+
+    // Track to Plausible
+    trackToPlausible('Project Share', {
+      method: shareMethod,
+      project_id: projectId.substring(0, 8),
+      user_id: user.uid.substring(0, 8),
+      ...metadata
+    });
 
     console.log('📤 Share Event:', { projectId, shareMethod, metadata });
   } catch (error) {
@@ -150,7 +237,25 @@ export async function trackFeatureUsage(
       payload.metadata = metadata;
     }
 
+    // Track to Firestore
     await addDoc(collection(db, "feature_analytics"), payload);
+
+    // Track to Google Analytics
+    trackToGA('feature_usage', {
+      feature_name: feature,
+      action: action,
+      user_id: user.uid,
+      session_id: getSessionId(),
+      ...metadata
+    });
+
+    // Track to Plausible
+    trackToPlausible('Feature Usage', {
+      feature: feature,
+      action: action,
+      user_id: user.uid.substring(0, 8),
+      ...metadata
+    });
 
     console.log('⚡ Feature Event:', { feature, action, metadata });
   } catch (error) {
@@ -228,9 +333,77 @@ export async function trackPageView(page: string, metadata?: Record<string, any>
       payload.metadata = metadata;
     }
 
+    // Track to Firestore
     await addDoc(collection(db, "page_analytics"), payload);
+
+    // Track to Google Analytics
+    trackToGA('page_view', {
+      page_title: document.title,
+      page_location: window.location.href,
+      page_path: page,
+      user_id: user?.uid,
+      session_id: getSessionId(),
+      ...metadata
+    });
+
+    // Track to Plausible
+    trackToPlausible('Page View', {
+      page_title: document.title,
+      page_path: page,
+      user_id: user?.uid?.substring(0, 8) || 'anonymous',
+      ...metadata
+    });
 
   } catch (error) {
     console.error('Error tracking page view:', error);
+  }
+}
+
+// New function to track conversions (e.g., waitlist signups)
+export async function trackConversion(
+  type: 'waitlist_signup' | 'project_created' | 'upgrade' | 'signup',
+  value?: number,
+  metadata?: Record<string, any>
+): Promise<void> {
+  try {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    const payload: any = {
+      userId: user?.uid || 'anonymous',
+      type,
+      value: value || 0,
+      timestamp: serverTimestamp(),
+      sessionId: getSessionId(),
+    };
+
+    if (metadata) {
+      payload.metadata = metadata;
+    }
+
+    // Track to Firestore
+    await addDoc(collection(db, "conversion_analytics"), payload);
+
+    // Track to Google Analytics
+    trackToGA('conversion', {
+      conversion_type: type,
+      value: value || 0,
+      currency: 'USD',
+      user_id: user?.uid,
+      session_id: getSessionId(),
+      ...metadata
+    });
+
+    // Track to Plausible
+    trackToPlausible('Conversion', {
+      type: type,
+      value: value?.toString() || '0',
+      user_id: user?.uid?.substring(0, 8) || 'anonymous',
+      ...metadata
+    });
+
+    console.log('💰 Conversion Event:', { type, value, metadata });
+  } catch (error) {
+    console.error('Error tracking conversion:', error);
   }
 } 

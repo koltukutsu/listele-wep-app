@@ -58,9 +58,9 @@ export function ReferralDashboard() {
 
   if (loading) {
     return (
-      <Card className="border-lime-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+      <Card className="border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
         <CardContent className="p-6">
-          <div className="animate-pulse text-gray-900 dark:text-gray-100">Referans verileri yükleniyor...</div>
+          <div className="animate-pulse text-black dark:text-white">Referans verileri yükleniyor...</div>
         </CardContent>
       </Card>
     );
@@ -68,7 +68,7 @@ export function ReferralDashboard() {
 
   if (!stats) {
     return (
-      <Card className="border-lime-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+      <Card className="border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
         <CardContent className="p-6">
           <div className="text-gray-500 dark:text-gray-400">Referans verileri yüklenemedi</div>
         </CardContent>
@@ -79,11 +79,11 @@ export function ReferralDashboard() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <Card className="border-lime-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+      <Card className="border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Gift className="w-5 h-5 text-lime-500" />
-            <span className="text-gray-900 dark:text-gray-100">Referans Programı</span>
+            <Gift className="w-5 h-5 text-[#D8FF00]" />
+            <span className="text-black dark:text-white">Referans Programı</span>
           </CardTitle>
           <CardDescription className="text-gray-600 dark:text-gray-400">
             Arkadaşlarını davet et, ikiz karın! Her başarılı davet için +1 proje hakkı kazan.
@@ -94,7 +94,7 @@ export function ReferralDashboard() {
             {/* Referral Link */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Özel Referans Linkin:</label>
-              <div className="flex items-center space-x-2 p-3 bg-lime-50 dark:bg-slate-700 rounded-lg border border-lime-200 dark:border-slate-600">
+              <div className="flex items-center space-x-2 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg border border-gray-200 dark:border-slate-600">
                 <input 
                   type="text" 
                   value={referralLink} 
@@ -105,7 +105,7 @@ export function ReferralDashboard() {
                   onClick={handleCopyReferralLink}
                   size="sm"
                   variant={copiedLink ? "default" : "outline"}
-                  className={copiedLink ? "bg-lime-500 hover:bg-lime-600 text-black" : "border-lime-300 dark:border-slate-600 hover:bg-lime-100 dark:hover:bg-slate-600"}
+                  className={copiedLink ? "bg-[#D8FF00] hover:bg-[#B8E000] text-black" : "border-gray-300 dark:border-slate-600 hover:bg-gray-100 dark:hover:bg-slate-600"}
                 >
                   {copiedLink ? (
                     <>
@@ -123,9 +123,9 @@ export function ReferralDashboard() {
             </div>
 
             {/* How it works */}
-            <div className="bg-lime-50 dark:bg-slate-800 border border-lime-200 dark:border-slate-600 rounded-lg p-4">
-              <h4 className="font-medium text-lime-800 dark:text-lime-400 mb-2">📋 Nasıl Çalışır?</h4>
-              <ol className="text-sm text-lime-700 dark:text-lime-300 space-y-1 list-decimal list-inside">
+            <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-600 rounded-lg p-4">
+              <h4 className="font-medium text-black dark:text-white mb-2">📋 Nasıl Çalışır?</h4>
+              <ol className="text-sm text-gray-700 dark:text-gray-300 space-y-1 list-decimal list-inside">
                 <li>Referans linkini arkadaşlarınla paylaş</li>
                 <li>Arkadaşın linke tıklayıp kaydolur</li>
                 <li>İlk projesini oluşturduğunda sen +1 proje hakkı kazanırsın</li>
@@ -144,7 +144,7 @@ export function ReferralDashboard() {
             <Users className="h-4 w-4 text-gray-500 dark:text-gray-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.totalReferrals}</div>
+            <div className="text-2xl font-bold text-black dark:text-white">{stats.totalReferrals}</div>
             <p className="text-xs text-gray-500 dark:text-gray-400">
               Paylaştığın link ile
             </p>
@@ -154,10 +154,10 @@ export function ReferralDashboard() {
         <Card className="border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-700 dark:text-gray-300">Başarılı Davet</CardTitle>
-            <TrendingUp className="h-4 w-4 text-lime-500" />
+            <TrendingUp className="h-4 w-4 text-[#D8FF00]" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-lime-600 dark:text-lime-400">{stats.successfulReferrals}</div>
+            <div className="text-2xl font-bold text-[#D8FF00]">{stats.successfulReferrals}</div>
             <p className="text-xs text-gray-500 dark:text-gray-400">
               Proje oluşturan arkadaş
             </p>
@@ -180,10 +180,10 @@ export function ReferralDashboard() {
         <Card className="border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-700 dark:text-gray-300">Bonus Proje</CardTitle>
-            <Gift className="h-4 w-4 text-purple-500" />
+            <Gift className="h-4 w-4 text-[#D8FF00]" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">+{stats.bonusProjectsEarned}</div>
+            <div className="text-2xl font-bold text-[#D8FF00]">+{stats.bonusProjectsEarned}</div>
             <p className="text-xs text-gray-500 dark:text-gray-400">
               Kazandığın ekstra hak
             </p>
@@ -193,31 +193,31 @@ export function ReferralDashboard() {
 
       {/* Achievements */}
       {stats.successfulReferrals > 0 && (
-        <Card className="border-lime-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+        <Card className="border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-gray-100">
+            <CardTitle className="flex items-center gap-2 text-black dark:text-white">
               🏆 Başarıların
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
               {stats.successfulReferrals >= 1 && (
-                <Badge variant="outline" className="border-lime-300 dark:border-lime-700 text-lime-800 dark:text-lime-200 bg-lime-50 dark:bg-lime-900/50">
+                <Badge variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-slate-700">
                   🌟 İlk Referans
                 </Badge>
               )}
               {stats.successfulReferrals >= 5 && (
-                <Badge variant="outline" className="border-blue-300 dark:border-blue-700 text-blue-800 dark:text-blue-200 bg-blue-50 dark:bg-blue-900/50">
+                <Badge variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-slate-700">
                   🚀 Süper Referanscı (5+)
                 </Badge>
               )}
               {stats.successfulReferrals >= 10 && (
-                <Badge variant="outline" className="border-purple-300 dark:border-purple-700 text-purple-800 dark:text-purple-200 bg-purple-50 dark:bg-purple-900/50">
+                <Badge variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-slate-700">
                   👑 Referans Ustası (10+)
                 </Badge>
               )}
               {stats.successfulReferrals >= 25 && (
-                <Badge variant="outline" className="border-yellow-300 dark:border-yellow-700 text-yellow-800 dark:text-yellow-200 bg-yellow-50 dark:bg-yellow-900/50">
+                <Badge variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-slate-700">
                   🔥 Topluluk Lideri (25+)
                 </Badge>
               )}
@@ -227,9 +227,9 @@ export function ReferralDashboard() {
       )}
 
       {/* Next Goal */}
-      <Card className="border-lime-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+      <Card className="border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-gray-100">
+          <CardTitle className="flex items-center gap-2 text-black dark:text-white">
             🎯 Sonraki Hedefin
           </CardTitle>
         </CardHeader>
@@ -239,7 +239,7 @@ export function ReferralDashboard() {
               <p className="text-gray-600 dark:text-gray-400 mb-4">
                 İlk referansını yaparak başla! Arkadaşların sana teşekkür edecek 😊
               </p>
-              <Button onClick={handleCopyReferralLink} className="bg-gradient-to-r from-lime-400 to-green-500 hover:from-lime-500 hover:to-green-600 text-black">
+              <Button onClick={handleCopyReferralLink} className="bg-[#D8FF00] hover:bg-[#B8E000] text-black">
                 <Share2 className="w-4 h-4 mr-2" />
                 Referans Linkini Paylaş
               </Button>
@@ -251,7 +251,7 @@ export function ReferralDashboard() {
               </p>
               <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2 mb-4">
                 <div 
-                  className="bg-gradient-to-r from-lime-400 to-green-500 h-2 rounded-full transition-all duration-300"
+                  className="bg-[#D8FF00] h-2 rounded-full transition-all duration-300"
                   style={{ width: `${(stats.successfulReferrals / 5) * 100}%` }}
                 ></div>
               </div>
@@ -263,13 +263,13 @@ export function ReferralDashboard() {
               </p>
               <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2 mb-4">
                 <div 
-                  className="bg-gradient-to-r from-purple-400 to-purple-500 h-2 rounded-full transition-all duration-300"
+                  className="bg-[#D8FF00] h-2 rounded-full transition-all duration-300"
                   style={{ width: `${(stats.successfulReferrals / 10) * 100}%` }}
                 ></div>
               </div>
             </div>
           ) : (
-            <div className="text-center py-4 text-lime-600 dark:text-lime-400">
+            <div className="text-center py-4 text-[#D8FF00]">
               <p className="font-medium">🎉 Harikasın! Tüm hedefleri tamamladın!</p>
               <p className="text-sm text-gray-600 dark:text-gray-400">Referans yapmaya devam et, topluluk seni takdir ediyor!</p>
             </div>
