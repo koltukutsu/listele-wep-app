@@ -16,19 +16,19 @@ export default function SocialProof() {
       name: "Selin Y.",
       title: "Kurucu, Organik Atölye",
       quote:
-        "Fikrimi bir gecede hayata geçirdim ve ilk hafta 100'den fazla e-posta topladım. Bu hız, inanılmaz.",
+        "Fikrimi bir gecede hayata geçirdim ve ilk hafta 100'den fazla bekleyen topladım. Bu hız inanılmaz.",
     },
     {
       name: "Ahmet C.",
       title: "Girişimci",
       quote:
-        "Aylarca sürecek bir işi dakikalar içinde başlattım. Yatırımcı sunumumda gösterdiğim ilk 500 kişilik liste, her şeyi değiştirdi.",
+        "Aylarca sürecek bir işi dakikalar içinde başlattım. Yatırımcı sunumumda gösterdiğim 500 kişilik bekleme listesi her şeyi değiştirdi.",
     },
     {
       name: "Elif T.",
       title: "Tasarımcı",
       quote:
-        "Teknik bilgim sıfır olmasına rağmen, harika görünen bir sayfa oluşturdum. Süreç o kadar basitti ki, şaşırdım.",
+        "Teknik bilgim sıfır olmasına rağmen, etkileyici bir bekleme sayfası oluşturdum. İlk gün 50 kayıt aldım; daha motive olamazdım.",
     },
   ];
   
@@ -46,8 +46,7 @@ export default function SocialProof() {
             <span className="text-[#D8FF00]">{userCount}+</span> Girişimci Bize Güveniyor
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-gray-900 dark:text-gray-300 mt-4">
-            Bizim gibi düşünen, fikrini hızla hayata geçirmek isteyenlerin
-            yorumları.
+            Listelee ile bekleme listesi açan girişimcilerin yorumları.
           </p>
         </motion.div>
         <motion.div

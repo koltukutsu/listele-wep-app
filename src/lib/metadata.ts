@@ -2,12 +2,15 @@ import { APP_URL } from './config'
 
 export const siteConfig = {
   name: "Listelee.io",
-  description: "Fikirlerini hızla hayata geçir. AI destekli platform ile projelerini oluştur, müşteri topla ve büyü. Türkiye'nin en hızlı landing page oluşturucusu.",
-  shortDescription: "AI destekli landing page oluşturucu ile fikirlerini hızla hayata geçir.",
+  description: "Girişimciler için bekleme listesi platformu. Fikrini lansmandan önce doğrula, müşterilerini topla ve ürünü güvenle inşa et.",
+  shortDescription: "Bekleme listesiyle fikrini lansmandan önce doğrula.",
   keywords: [
+    "bekleme listesi",
+    "waitlist",
+    "lansman bekleme listesi",
     "landing page oluşturucu",
     "proje sayfası",
-    "girişimci araçları", 
+    "girişimci araçları",
     "lead toplama",
     "MVP oluşturma",
     "Türkiye startup",
@@ -49,8 +52,8 @@ export const siteConfig = {
     type: "website",
     locale: "tr_TR",
     url: APP_URL,
-    title: "Listelee.io - Fikirlerini Hızla Hayata Geçir",
-    description: "AI destekli platform ile projelerini oluştur, müşteri topla ve büyü. Türkiye'nin en hızlı landing page oluşturucusu.",
+    title: "Listelee.io - Bekleme Listeni Hızla Oluştur",
+    description: "Girişimciler için bekleme listesi platformu. Fikrini lansmandan önce doğrula, müşterilerini topla ve ürünü güvenle inşa et.",
     siteName: "Listelee.io",
     images: [
       {
@@ -64,8 +67,8 @@ export const siteConfig = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Listelee.io - Fikirlerini Hızla Hayata Geçir",
-    description: "AI destekli platform ile projelerini oluştur, müşteri topla ve büyü.",
+    title: "Listelee.io - Bekleme Listeni Hızla Oluştur",
+    description: "Girişimciler için bekleme listesi platformu. Fikrini lansmandan önce doğrula, müşterilerini topla ve ürünü güvenle inşa et.",
     images: [`${APP_URL}/twitter-image.png`],
     creator: "@listeleio",
     site: "@listeleio",
