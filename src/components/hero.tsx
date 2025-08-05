@@ -32,32 +32,32 @@ export default function Hero() {
                 className="space-y-8"
               >
                 <h1 className="text-black dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl leading-tight">
-                  Listeleri Hayata <span className="text-[#D8FF00]">Geçir.</span>
+                  Müşterini Önce <span className="text-[#D8FF00]">Topla.</span>
                 </h1>
-                
+
                 <div className="mt-6">
                   <p className="text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-                    Fikirini Listelee, İşini Test Et.
+                    Fikrini Listelee, Bekleyenlerini Topla.
                   </p>
                 </div>
 
                 <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-                  <strong className="text-black dark:text-white">İş fikrinizi test etmek</strong> için güçlü form siteleri oluşturun. 
-                  <strong className="text-black dark:text-white"> Gerçek talep</strong> ölçün, 
-                  <strong className="text-black dark:text-white"> müşteri geri bildirimi</strong> toplayın ve 
-                  <strong className="text-black dark:text-white"> para harcamadan doğrulayın</strong>. 
-                  Başarısız olmak yerine, önceden öğrenin.
+                  <strong className="text-black dark:text-white">Ürününü geliştirmeden önce müşterini bul.</strong> Listelee ile dakikalar içinde bekleme listesi sayfası kur,
+                  <strong className="text-black dark:text-white"> gerçek talebi ölç</strong>,
+                  <strong className="text-black dark:text-white"> ilk geri bildirimleri topla</strong> ve
+                  <strong className="text-black dark:text-white"> seni bekleyen bir kitleyle motive ol.</strong>
+                  Müşterisi olmayan ürüne emek verme.
                 </p>
 
                 <div className="mt-8 flex flex-wrap justify-center gap-2 text-sm">
                   <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-200 font-medium">
-                    ✅ Fikir Doğrulama
+                    📮 Bekleme Listesi
                   </span>
                   <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-200 font-medium">
-                    📊 Talep Ölçümü
+                    📊 Pazar Doğrulaması
                   </span>
                   <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-200 font-medium">
-                    💰 Risk Azaltma
+                    🔥 Ürün Motivasyonu
                   </span>
                 </div>
 

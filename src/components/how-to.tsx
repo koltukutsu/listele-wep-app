@@ -14,7 +14,7 @@ export default function HowTo() {
           transition={{ duration: 0.5 }}
           className="text-3xl sm:text-4xl font-bold mb-6 text-black dark:text-white"
         >
-          Fikirden Lansmana: 3 Adımda Yol Haritan
+          Fikrinden Bekleyenlere: 3 Adımda Lansman Hazırlığı
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -23,7 +23,7 @@ export default function HowTo() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="max-w-3xl mx-auto text-lg text-gray-900 dark:text-gray-300 mb-12 sm:mb-16"
         >
-          Karmaşık süreçleri unut. Senin görevin hayal etmek, bizimki ise onu gerçeğe dönüştürmek. İşte bu kadar basit.
+          Üç basit adımla bekleme listeni kur, gerçek talebi gör ve ürünü güvenle inşa et.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -51,10 +51,10 @@ export default function HowTo() {
               <div className="w-12 h-12 flex items-center justify-center bg-[#D8FF00] text-black rounded-full font-bold text-2xl mr-4">
                 2
               </div>
-              <h3 className="text-xl font-bold text-black dark:text-white">İlk Vitrinini Oluştur</h3>
+              <h3 className="text-xl font-bold text-black dark:text-white">Bekleme Sayfanı Kur</h3>
             </div>
             <p className="text-gray-900 dark:text-gray-300">
-              Founder Mode AI ile fikrini anlat veya dakikalar içinde kendin tasarla. Potansiyel kullanıcılarınla ilk temas noktan hazır.
+              Founder Mode AI ile fikrini anlat, bekleme sayfan dakikalar içinde oluşsun ya da sürükle-bırak kolaylığıyla kendin tasarla.
             </p>
           </div>
           <div className="relative p-8 border border-gray-200 dark:border-slate-700 rounded-lg bg-gray-50 dark:bg-slate-800 z-10 hover:shadow-lg hover:border-[#D8FF00] dark:hover:border-[#D8FF00] transition-all duration-300">
@@ -62,10 +62,10 @@ export default function HowTo() {
               <div className="w-12 h-12 flex items-center justify-center bg-[#D8FF00] text-black rounded-full font-bold text-2xl mr-4">
                 3
               </div>
-              <h3 className="text-xl font-bold text-black dark:text-white">Topluluğunu Ateşle</h3>
+              <h3 className="text-xl font-bold text-black dark:text-white">Listeyi Büyüt ve İnşa Et</h3>
             </div>
             <p className="text-gray-900 dark:text-gray-300">
-              İlk destekçilerini toplamaya başla. Lansman gününde seni bekleyen bir kitle olsun. Büyümeyi gerçek zamanlı izle.
+              İlk destekçilerini toplamaya başla. Artan sayı seni motive etsin; lansman gününde seni bekleyen bir kitle olsun.
             </p>
           </div>
         </motion.div>
@@ -78,7 +78,7 @@ export default function HowTo() {
         >
           <Link href="/onboarding">
             <Button size="lg" className="bg-[#D8FF00] hover:bg-[#B8E000] text-black font-bold text-lg px-8 py-4 shadow-lg hover:shadow-xl transition-all">
-              🚀 Kendi Yolculuğunu Başlat
+              🚀 Kendi Listeni Başlat
             </Button>
           </Link>
         </motion.div>

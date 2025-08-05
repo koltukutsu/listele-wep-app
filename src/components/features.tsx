@@ -17,25 +17,25 @@ export default function Features() {
       icon: <Code size={32} className="text-black dark:text-[#D8FF00]"/>,
       title: "Founder Mode AI & Kodsuz Editör",
       description:
-        "İster fikrini sesli anlat, yapay zeka senin için tasarlasın, ister sürükle-bırak kolaylığıyla kendi vizyonunu yarat. Teknik bilgi, geçmişte kaldı.",
+        "Bekleme sayfanı ister sesle anlat yapay zeka kursun, ister sürükle-bırak kolaylığıyla kendin tasarla. Kod bilmeye gerek yok.",
     },
     {
       icon: <Zap size={32} className="text-black dark:text-[#D8FF00]"/>,
       title: "Anında Lansman",
       description:
-        "Fikrin hazır olduğunda, dünya da hazır olmalı. Tek tıkla projen yayında ve ilk ziyaretçilerini karşılamaya hazır. Beklemek yok, sadece aksiyon.",
+        "Sayfan hazır olduğunda tek tıkla yayına al ve bekleme listeni toplamaya başla. Beklemek yok, sadece aksiyon.",
     },
     {
       icon: <Gauge size={32} className="text-black dark:text-[#D8FF00]"/>,
       title: "Büyüme Panelin",
       description:
-        "Sadece rakamları değil, büyümeyi gör. İlk destekçilerinin nereden geldiğini anla, stratejini verilerle şekillendir ve bir sonraki adımını güvenle at.",
+        "Listeye katılanları ve nereden geldiklerini gör. Stratejini verilerle şekillendir, bir sonraki adımı güvenle at.",
     },
     {
       icon: <Database size={32} className="text-black dark:text-[#D8FF00]"/>,
-      title: "İlk Destekçilerin Güvende",
+      title: "Bekleyenlerin Güvende",
       description:
-        "Topluluğun en değerli varlığın. Tüm veriler güvenle saklanır ve kontrol tamamen sendedir. Listeni dilediğin zaman al, kendi yolunda ilerle.",
+        "Topladığın tüm kayıtlar güvenle saklanır ve kontrol tamamen sendedir. Listeni dilediğin zaman al, kendi yolunda ilerle.",
     },
     {
       icon: <Globe size={32} className="text-black dark:text-[#D8FF00]"/>,
@@ -63,7 +63,7 @@ export default function Features() {
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-black dark:text-white">Kurucunun Cephaneliği</h2>
           <p className="max-w-2xl mx-auto text-lg text-gray-900 dark:text-gray-300 mt-4">
-            Fikrini hayata geçirmek için ihtiyacın olan her şey burada. Hız, veri ve topluluk... Hepsi senin kontrolünde.
+            Bekleme listeni oluşturmak ve büyütmek için ihtiyacın olan her şey burada. Hız, veri ve topluluk senin kontrolünde.
           </p>
         </motion.div>
         <motion.div
