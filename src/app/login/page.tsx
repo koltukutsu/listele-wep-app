@@ -1,10 +1,11 @@
+"use client";
+
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Sign In | Launch List'
 };
 
-"use client";
 
 import AuthForm from "~/components/auth-form";
 import Link from "next/link";
