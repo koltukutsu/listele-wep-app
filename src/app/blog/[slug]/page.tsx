@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) {
     return {
-      title: 'Blog Yazısı Bulunamadı - Listelee.io Blog',
-      description: 'Aradığınız blog yazısı bulunamadı. Diğer yazılarımızı keşfetmek için blog sayfamızı ziyaret edin.',
+      title: 'Post Not Found - Launch List Blog',
+      description: 'The blog post you are looking for was not found. Visit our blog to explore other posts.',
     };
   }
 
@@ -25,12 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const modifiedDate = new Date(post.updatedAt);
 
   return {
-    title: post.seo.title || `${post.title} | Listelee.io Blog`,
+    title: post.seo.title || `${post.title} | Launch List Blog`,
     description: post.seo.description || post.excerpt,
     keywords: post.seo.keywords.join(', '),
     authors: [{ name: post.author.name, url: `${APP_URL}/blog` }],
     creator: post.author.name,
-    publisher: 'Listelee.io',
+    publisher: 'Launch List',
     category: post.category,
     alternates: {
       canonical: `/blog/${post.slug}`,
@@ -39,9 +39,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.seo.title || post.title,
       description: post.seo.description || post.excerpt,
       url: `${APP_URL}/blog/${post.slug}`,
-      siteName: 'Listelee.io',
+      siteName: 'Launch List',
       images: post.featuredImage ? [post.featuredImage] : [`${APP_URL}/opengraph-image.png`],
-      locale: 'tr_TR',
+      locale: 'en_US',
       type: 'article',
       publishedTime: publishDate.toISOString(),
       modifiedTime: modifiedDate.toISOString(),
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.seo.title || post.title,
       description: post.seo.description || post.excerpt,
       images: post.featuredImage ? [post.featuredImage] : [`${APP_URL}/twitter-image.png`],
-      creator: '@listeleio',
+      creator: '@launchlist',
     },
     robots: {
       index: true,
@@ -112,7 +112,7 @@ export default async function BlogPostPage({ params }: Props) {
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Listelee.io",
+      "name": "Launch List",
       "url": APP_URL,
       "logo": {
         "@type": "ImageObject",
@@ -127,10 +127,10 @@ export default async function BlogPostPage({ params }: Props) {
     "keywords": post.tags.join(", "),
     "wordCount": post.content.split(' ').length,
     "timeRequired": `PT${post.readingTime}M`,
-    "inLanguage": "tr",
+    "inLanguage": "en",
     "isPartOf": {
       "@type": "Blog",
-      "name": "Listelee.io Blog",
+      "name": "Launch List Blog",
       "@id": `${APP_URL}/blog`
     },
     "interactionStatistic": {
@@ -148,7 +148,7 @@ export default async function BlogPostPage({ params }: Props) {
       {
         "@type": "ListItem",
         "position": 1,
-        "name": "Ana Sayfa",
+        "name": "Home",
         "item": APP_URL
       },
       {

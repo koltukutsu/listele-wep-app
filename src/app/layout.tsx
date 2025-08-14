@@ -21,7 +21,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="tr" className={interTight.variable} suppressHydrationWarning>
+		<html lang="en" className={interTight.variable} suppressHydrationWarning>
 			<head>
 				{structuredData.map((data, index) => (
 					<script

@@ -15,39 +15,39 @@ export default function Features() {
   const features = [
     {
       icon: <Code size={32} className="text-black dark:text-[#D8FF00]"/>,
-      title: "Founder Mode AI & Kodsuz Editör",
+      title: "Founder Mode AI & No-Code Editor",
       description:
-        "Bekleme sayfanı ister sesle anlat yapay zeka kursun, ister sürükle-bırak kolaylığıyla kendin tasarla. Kod bilmeye gerek yok.",
+        "Either describe your waitlist page with voice and let AI build it, or design it yourself with drag-and-drop ease. No coding knowledge required.",
     },
     {
       icon: <Zap size={32} className="text-black dark:text-[#D8FF00]"/>,
-      title: "Anında Lansman",
+      title: "Instant Launch",
       description:
-        "Sayfan hazır olduğunda tek tıkla yayına al ve bekleme listeni toplamaya başla. Beklemek yok, sadece aksiyon.",
+        "When your page is ready, publish it with one click and start collecting your waitlist. No waiting, just action.",
     },
     {
       icon: <Gauge size={32} className="text-black dark:text-[#D8FF00]"/>,
-      title: "Büyüme Panelin",
+      title: "Your Growth Dashboard",
       description:
-        "Listeye katılanları ve nereden geldiklerini gör. Stratejini verilerle şekillendir, bir sonraki adımı güvenle at.",
+        "See who's joining your list and where they're coming from. Shape your strategy with data, take the next step with confidence.",
     },
     {
       icon: <Database size={32} className="text-black dark:text-[#D8FF00]"/>,
-      title: "Bekleyenlerin Güvende",
+      title: "Your Waitlist is Secure",
       description:
-        "Topladığın tüm kayıtlar güvenle saklanır ve kontrol tamamen sendedir. Listeni dilediğin zaman al, kendi yolunda ilerle.",
+        "All the records you collect are stored securely and you have complete control. Take your list whenever you want, move forward on your own path.",
     },
     {
       icon: <Globe size={32} className="text-black dark:text-[#D8FF00]"/>,
-      title: "Markanı İnşa Et",
+      title: "Build Your Brand",
       description:
-        "Girişimin büyüdükçe, markan da büyür. Kendi alan adını kolayca bağlayarak kurumsal kimliğini bir üst seviyeye taşı.",
+        "As your startup grows, so does your brand. Easily connect your own domain to take your corporate identity to the next level.",
     },
     {
       icon: <Wallet size={32} className="text-black dark:text-[#D8FF00]"/>,
-      title: "Maliyetsiz Başlangıç",
+      title: "Cost-Free Start",
       description:
-        "Büyük fikirlerin önündeki en büyük engelin bütçe olmaması gerektiğine inanıyoruz. İlk adımlarını atarken cüzdanını düşünme. Sadece fikrine odaklan.",
+        "We believe that budget shouldn't be the biggest obstacle in front of great ideas. Don't think about your wallet when taking your first steps. Just focus on your idea.",
     },
   ];
 
@@ -61,9 +61,9 @@ export default function Features() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-black dark:text-white">Kurucunun Cephaneliği</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-black dark:text-white">Founder's Arsenal</h2>
           <p className="max-w-2xl mx-auto text-lg text-gray-900 dark:text-gray-300 mt-4">
-            Bekleme listeni oluşturmak ve büyütmek için ihtiyacın olan her şey burada. Hız, veri ve topluluk senin kontrolünde.
+            Everything you need to create and grow your waitlist is here. Speed, data, and community are under your control.
           </p>
         </motion.div>
         <motion.div

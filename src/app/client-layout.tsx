@@ -14,7 +14,7 @@ export default function ClientLayout({
 }) {
 	return (
 		<CookiesProvider>
-			<PlausibleProvider domain="listelee.vercel.app">
+			<PlausibleProvider domain="launchlist.vercel.app">
 				<ThemeProvider 
 					attribute="class"
 					defaultTheme="system"

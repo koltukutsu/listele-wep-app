@@ -36,12 +36,12 @@ export default function AIFounderModal({ isOpen, onClose, onApplyConfig }: AIFou
   }, []);
 
   const currentPlan = userProfile ? getPlanBySlug(userProfile.plan) : null;
-  const maxProjects = currentPlan ? (currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] ? parseInt(currentPlan.features.find(f => f.includes("Proje"))?.split(" ")[0] as string) : 0) : 0;
-  const canCreateProject = currentPlan && (currentPlan.name === "Sınırsız" || (userProfile && userProfile.projectsCount < maxProjects));
+  const maxProjects = currentPlan ? (currentPlan.features.find(f => f.includes("Project"))?.split(" ")[0] ? parseInt(currentPlan.features.find(f => f.includes("Project"))?.split(" ")[0] as string) : 0) : 0;
+  const canCreateProject = currentPlan && (currentPlan.name === "Unlimited" || (userProfile && userProfile.projectsCount < maxProjects));
 
   const handleGenerate = async () => {
     if (!prompt.trim()) {
-      toast.error('Lütfen proje fikrinizi girin.');
+      toast.error('Please enter your project idea.');
       return;
     }
     
@@ -59,18 +59,18 @@ export default function AIFounderModal({ isOpen, onClose, onApplyConfig }: AIFou
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Proje oluşturulurken bir hata oluştu.');
+        throw new Error(errorData.error || 'An error occurred while creating the project.');
       }
 
       const newConfig = await response.json();
       
-      toast.success('Proje taslağı başarıyla oluşturuldu!');
+      toast.success('Project draft created successfully!');
       onApplyConfig(newConfig);
       onClose();
 
     } catch (error) {
       console.error(error);
-      toast.error(error instanceof Error ? error.message : 'Bilinmeyen bir hata oluştu.');
+      toast.error(error instanceof Error ? error.message : 'An unknown error occurred.');
     } finally {
       setIsLoading(false);
     }
@@ -85,14 +85,14 @@ export default function AIFounderModal({ isOpen, onClose, onApplyConfig }: AIFou
             <span>AI Founder Mode</span>
           </DialogTitle>
           <DialogDescription className="mt-2 text-left">
-            Proje fikrinizi aşağıya yazın, yapay zeka sizin için bir başlangıç sayfası taslağı oluştursun.
-            Neyi, kimin için ve neden yaptığınızı anlatın.
+            Write your project idea below, and let AI create a landing page draft for you.
+            Explain what you're doing, for whom, and why.
           </DialogDescription>
         </DialogHeader>
         
         <div className="py-4">
           <Textarea
-            placeholder="Örnek: Evcil hayvan sahiplerinin, güvenilir bakıcılar bulmasını sağlayan bir mobil uygulama..."
+            placeholder="Example: A mobile app that helps pet owners find reliable pet sitters..."
             value={prompt}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPrompt(e.target.value)}
             rows={5}
@@ -103,8 +103,8 @@ export default function AIFounderModal({ isOpen, onClose, onApplyConfig }: AIFou
             <div className="mt-2 text-sm text-yellow-600 bg-yellow-50 border border-yellow-200 rounded-lg p-3 flex items-center gap-2">
               <Info className="h-5 w-5" />
               <span>
-                Proje oluşturma limitinize ulaştınız. Daha fazla proje oluşturmak için
-                <Link href="/pricing" className="font-semibold underline ml-1">planınızı yükseltin</Link>.
+                You have reached your project creation limit. To create more projects,
+                <Link href="/pricing" className="font-semibold underline ml-1">upgrade your plan</Link>.
               </span>
             </div>
           )}
@@ -117,7 +117,7 @@ export default function AIFounderModal({ isOpen, onClose, onApplyConfig }: AIFou
             onClick={onClose} 
             disabled={isLoading}
           >
-            İptal
+            Cancel
           </Button>
           <Button
             onClick={handleGenerate}
@@ -130,12 +130,12 @@ export default function AIFounderModal({ isOpen, onClose, onApplyConfig }: AIFou
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Oluşturuluyor...
+                Creating...
               </span>
             ) : (
               <span className="flex items-center gap-2">
                 <PartyPopper className="h-5 w-5" />
-                <span>Taslağı Oluştur</span>
+                <span>Create Draft</span>
               </span>
             )}
           </Button>

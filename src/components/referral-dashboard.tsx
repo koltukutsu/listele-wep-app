@@ -48,11 +48,11 @@ export function ReferralDashboard() {
     try {
       await navigator.clipboard.writeText(referralLink);
       setCopiedLink(true);
-      toast.success("Referans linkiniz panoya kopyalandı! 🎉");
+      toast.success("Your referral link has been copied to clipboard! 🎉");
       await trackFeatureUsage('referral_system', 'used', { action: 'copy_link' });
       setTimeout(() => setCopiedLink(false), 2000);
     } catch (error) {
-      toast.error("Link kopyalanamadı");
+      toast.error("Link could not be copied");
     }
   };
 
@@ -60,7 +60,7 @@ export function ReferralDashboard() {
     return (
       <Card className="border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
         <CardContent className="p-6">
-          <div className="animate-pulse text-black dark:text-white">Referans verileri yükleniyor...</div>
+          <div className="animate-pulse text-black dark:text-white">Loading referral data...</div>
         </CardContent>
       </Card>
     );
@@ -70,7 +70,7 @@ export function ReferralDashboard() {
     return (
       <Card className="border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
         <CardContent className="p-6">
-          <div className="text-gray-500 dark:text-gray-400">Referans verileri yüklenemedi</div>
+          <div className="text-gray-500 dark:text-gray-400">Failed to load referral data</div>
         </CardContent>
       </Card>
     );
@@ -83,17 +83,17 @@ export function ReferralDashboard() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Gift className="w-5 h-5 text-[#D8FF00]" />
-            <span className="text-black dark:text-white">Referans Programı</span>
+            <span className="text-black dark:text-white">Referral Program</span>
           </CardTitle>
           <CardDescription className="text-gray-600 dark:text-gray-400">
-            Arkadaşlarını davet et, ikiz karın! Her başarılı davet için +1 proje hakkı kazan.
+            Invite friends, win together! Get +1 project credit for every successful invitation.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {/* Referral Link */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Özel Referans Linkin:</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Your Special Referral Link:</label>
               <div className="flex items-center space-x-2 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg border border-gray-200 dark:border-slate-600">
                 <input 
                   type="text" 
@@ -179,13 +179,13 @@ export function ReferralDashboard() {
 
         <Card className="border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-700 dark:text-gray-300">Bonus Proje</CardTitle>
+            <CardTitle className="text-sm font-medium text-gray-700 dark:text-gray-300">Bonus Project</CardTitle>
             <Gift className="h-4 w-4 text-[#D8FF00]" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-[#D8FF00]">+{stats.bonusProjectsEarned}</div>
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              Kazandığın ekstra hak
+              Extra credits earned
             </p>
           </CardContent>
         </Card>
@@ -196,29 +196,29 @@ export function ReferralDashboard() {
         <Card className="border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-black dark:text-white">
-              🏆 Başarıların
+              🏆 Your Achievements
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
               {stats.successfulReferrals >= 1 && (
                 <Badge variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-slate-700">
-                  🌟 İlk Referans
+                  🌟 First Referral
                 </Badge>
               )}
               {stats.successfulReferrals >= 5 && (
                 <Badge variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-slate-700">
-                  🚀 Süper Referanscı (5+)
+                  🚀 Super Referrer (5+)
                 </Badge>
               )}
               {stats.successfulReferrals >= 10 && (
                 <Badge variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-slate-700">
-                  👑 Referans Ustası (10+)
+                  👑 Referral Master (10+)
                 </Badge>
               )}
               {stats.successfulReferrals >= 25 && (
                 <Badge variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-slate-700">
-                  🔥 Topluluk Lideri (25+)
+                  🔥 Community Leader (25+)
                 </Badge>
               )}
             </div>
@@ -230,24 +230,24 @@ export function ReferralDashboard() {
       <Card className="border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-black dark:text-white">
-            🎯 Sonraki Hedefin
+            🎯 Your Next Goal
           </CardTitle>
         </CardHeader>
         <CardContent>
           {stats.successfulReferrals === 0 ? (
             <div className="text-center py-4">
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                İlk referansını yaparak başla! Arkadaşların sana teşekkür edecek 😊
+                Start by making your first referral! Your friends will thank you 😊
               </p>
               <Button onClick={handleCopyReferralLink} className="bg-[#D8FF00] hover:bg-[#B8E000] text-black">
                 <Share2 className="w-4 h-4 mr-2" />
-                Referans Linkini Paylaş
+                Share Referral Link
               </Button>
             </div>
           ) : stats.successfulReferrals < 5 ? (
             <div className="text-center py-4">
               <p className="text-gray-600 dark:text-gray-400 mb-2">
-                Süper Referanscı olmak için {5 - stats.successfulReferrals} referans daha!
+                {5 - stats.successfulReferrals} more referrals to become a Super Referrer!
               </p>
               <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2 mb-4">
                 <div 
@@ -259,7 +259,7 @@ export function ReferralDashboard() {
           ) : stats.successfulReferrals < 10 ? (
             <div className="text-center py-4">
               <p className="text-gray-600 dark:text-gray-400 mb-2">
-                Referans Ustası olmak için {10 - stats.successfulReferrals} referans daha!
+                {10 - stats.successfulReferrals} more referrals to become a Referral Master!
               </p>
               <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2 mb-4">
                 <div 
@@ -270,8 +270,8 @@ export function ReferralDashboard() {
             </div>
           ) : (
             <div className="text-center py-4 text-[#D8FF00]">
-              <p className="font-medium">🎉 Harikasın! Tüm hedefleri tamamladın!</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Referans yapmaya devam et, topluluk seni takdir ediyor!</p>
+              <p className="font-medium">🎉 Amazing! You've completed all goals!</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Keep referring, the community appreciates you!</p>
             </div>
           )}
         </CardContent>

@@ -94,7 +94,7 @@ export function OnboardingAnalytics() {
   }, []);
 
   if (loading) {
-    return <div className="animate-pulse">Yükleniyor...</div>;
+    return <div className="animate-pulse">Loading...</div>;
   }
 
   if (!metrics) {
@@ -172,27 +172,27 @@ export function OnboardingAnalytics() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Zap className="w-5 h-5" />
-            Onboarding Funnel Analizi
+            Onboarding Funnel Analysis
           </CardTitle>
           <CardDescription>
-            Her adımdaki kullanıcı dağılımı ve tamamlanma oranları
+            User distribution and completion rates at each step
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           {[
-            { step: 1, name: "🚀 Karşılama & Demo", completion: metrics.step1Completion },
-            { step: 2, name: "⚡ Proje Oluşturma", completion: metrics.step2Completion },
-            { step: 3, name: "🎨 Kişiselleştirme", completion: metrics.step3Completion },
-            { step: 4, name: "📣 Paylaşım", completion: metrics.step4Completion },
-            { step: 5, name: "📊 Analitik", completion: metrics.step5Completion }
+            { step: 1, name: "🚀 Welcome & Demo", completion: metrics.step1Completion },
+            { step: 2, name: "⚡ Project Creation", completion: metrics.step2Completion },
+            { step: 3, name: "🎨 Personalization", completion: metrics.step3Completion },
+            { step: 4, name: "📣 Sharing", completion: metrics.step4Completion },
+            { step: 5, name: "📊 Analytics", completion: metrics.step5Completion }
           ].map((step) => (
             <div key={step.step} className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium">
-                  Adım {step.step}: {step.name}
+                  Step {step.step}: {step.name}
                 </span>
                 <span className="text-sm text-gray-600">
-                  {step.completion.toFixed(1)}% ({Math.round((step.completion / 100) * metrics.totalUsers)} kullanıcı)
+                  {step.completion.toFixed(1)}% ({Math.round((step.completion / 100) * metrics.totalUsers)} users)
                 </span>
               </div>
               <Progress value={step.completion} className="h-2" />
@@ -206,47 +206,47 @@ export function OnboardingAnalytics() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Award className="w-5 h-5" />
-            Öneriler & İyileştirmeler
+            Recommendations & Improvements
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {metrics.step2Completion < 70 && (
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                <h4 className="font-medium text-yellow-800">⚠️ Adım 2'de Düşüş</h4>
+                <h4 className="font-medium text-yellow-800">⚠️ Drop in Step 2</h4>
                 <p className="text-sm text-yellow-700">
-                  Proje oluşturma adımında %{(100 - metrics.step2Completion).toFixed(0)} kullanıcı kaybı var. 
-                  Daha fazla yönlendirme ve örnek içerik eklenebilir.
+                  There is a %{(100 - metrics.step2Completion).toFixed(0)} user loss in the project creation step. 
+                  More guidance and sample content can be added.
                 </p>
               </div>
             )}
             
             {metrics.averageTimeToFirstProject > 300 && (
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <h4 className="font-medium text-blue-800">🚀 Süre Optimizasyonu</h4>
+                <h4 className="font-medium text-blue-800">🚀 Time Optimization</h4>
                 <p className="text-sm text-blue-700">
-                  İlk proje oluşturma süresi 5 dakikadan uzun. Onboarding adımları 
-                  basitleştirilebilir veya daha hızlı alternatifler sunulabilir.
+                  First project creation time is longer than 5 minutes. Onboarding steps 
+                  can be simplified or faster alternatives can be offered.
                 </p>
               </div>
             )}
 
             {metrics.sevenDayActivation < 50 && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                <h4 className="font-medium text-red-800">📧 Retention Problemi</h4>
+                <h4 className="font-medium text-red-800">📧 Retention Problem</h4>
                 <p className="text-sm text-red-700">
-                  7 günlük aktivasyon oranı %50'nin altında. Email automation, 
-                  push notification ve kullanıcı geri kazanma stratejileri geliştirilebilir.
+                  7-day activation rate is below 50%. Email automation, 
+                  push notifications, and user recovery strategies can be developed.
                 </p>
               </div>
             )}
 
             {metrics.step3Completion > 80 && (
               <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                <h4 className="font-medium text-green-800">✅ Güçlü Performans</h4>
+                <h4 className="font-medium text-green-800">✅ Strong Performance</h4>
                 <p className="text-sm text-green-700">
-                  Harika! Onboarding completion oranınız çok iyi. Bu başarılı 
-                  flow'u diğer feature'lara da uygulayabilirsiniz.
+                  Great! Your onboarding completion rate is very good. You can apply 
+                  this successful flow to other features as well.
                 </p>
               </div>
             )}

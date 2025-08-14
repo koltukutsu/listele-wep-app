@@ -1,7 +1,7 @@
 {
-  "name": "Listelee.io - Girişiminizi Hızla Hayata Geçirin",
-  "short_name": "Listelee.io",
-  "description": "Fikirlerini hızla hayata geçir. Dakikalar içinde projelerini oluştur, müşteri topla ve büyü. Fikrini herkese kanitla!",
+  "name": "Launch List - Launch Faster with Confidence",
+  "short_name": "Launch List",
+  "description": "Validate ideas fast. Create projects in minutes, collect customers, and grow. Prove your idea to the world!",
   "icons": [
     {
       "src": "/favicon-16x16.png",
@@ -31,27 +31,27 @@
   "background_color": "#ffffff",
   "orientation": "portrait-primary",
   "scope": "/",
-  "lang": "tr",
+  "lang": "en",
   "categories": ["business", "productivity", "utilities"],
   "shortcuts": [
     {
-      "name": "Yeni Proje Oluştur",
-      "short_name": "Yeni Proje",
-      "description": "Hızlıca yeni bir landing page projesi oluştur",
+      "name": "Create New Project",
+      "short_name": "New Project",
+      "description": "Quickly create a new landing page project",
       "url": "/onboarding",
       "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
     },
     {
-      "name": "Proje Galerisi",
-      "short_name": "Galeri",
-      "description": "Başarılı proje örneklerini incele",
+      "name": "Project Gallery",
+      "short_name": "Gallery",
+      "description": "Explore successful project examples",
       "url": "/showcase",
       "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
     },
     {
-      "name": "Panel",
+      "name": "Dashboard",
       "short_name": "Dashboard",
-      "description": "Projelerini yönet ve analitikleri görüntüle",
+      "description": "Manage your projects and view analytics",
       "url": "/dashboard",
       "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
     }

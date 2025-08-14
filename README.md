@@ -1,9 +1,9 @@
-# Listelee.io - Fikrini Listelee, İşini Test Et
+# Launch List - List Your Idea, Test Your Business
 
-![Listelee.io](/public/opengraph-image.png)
+![Launch List](/public/opengraph-image.png)
 
 <p>
-  Türkiye’deki girişimciler için dakikalar içinde bekleme listesi sayfası kurup fikrini gerçek kullanıcılarla test etmeyi sağlayan no-code platform.
+  A no-code platform that enables entrepreneurs to set up waitlist pages in minutes and test their ideas with real users.
 </p>
 
 ## Core Features
@@ -41,8 +41,8 @@ To run this project on your local machine:
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/YOUR_USERNAME/listele-io.git 
-    cd listele-io
+    git clone https://github.com/YOUR_USERNAME/launch-list.git 
+    cd launch-list
     ```
 
 2.  **Install Dependencies:**
@@ -70,4 +70,4 @@ To run this project on your local machine:
 
 ## License
 
-This template is open-source and available under the [MIT License](LICENSE.md). You are free to use, modify, and distribute it for personal or commercial projects.# listele-wep-app
+This template is open-source and available under the [MIT License](LICENSE.md). You are free to use, modify, and distribute it for personal or commercial projects.

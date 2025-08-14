@@ -8,25 +8,25 @@ export default function Footer() {
           <div className="flex flex-row justify-between">
             <ul className="flex flex-row gap-4 text-sm">
               <li className="text-gray-600 dark:text-gray-400 hover:text-lime-600 dark:hover:text-lime-400 cursor-pointer transition-colors">
-                <Link href="/faq">SSS</Link>
+                <Link href="/faq">FAQ</Link>
               </li>
               <li className="text-gray-400 dark:text-gray-600">
                 •
               </li>
               <li className="text-gray-600 dark:text-gray-400 hover:text-lime-600 dark:hover:text-lime-400 cursor-pointer transition-colors">
-                <Link href="/kvkk">KVKK</Link>
+                <Link href="/privacy">Privacy</Link>
               </li>
               <li className="text-gray-400 dark:text-gray-600">
                 •
               </li>
               <li className="text-gray-600 dark:text-gray-400 hover:text-lime-600 dark:hover:text-lime-400 cursor-pointer transition-colors">
-                <Link href="/contact">İletişim</Link>
+                <Link href="/contact">Contact</Link>
               </li>
             </ul>
           </div>
           <div>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              &copy; {new Date().getFullYear()} Listelee.io - Fikirleri hayata geçiren platform
+              &copy; {new Date().getFullYear()} Launch List - Platform that brings ideas to life
             </p>
           </div>
         </div>

@@ -4,36 +4,36 @@ import type { Metadata } from 'next';
 import { APP_URL } from '~/lib/config';
 
 export const metadata: Metadata = {
-  title: 'Blog - Girişimcilik, Startup ve Teknoloji İçerikleri | Listelee.io',
-  description: 'Girişimcilik, startup dünyası, teknoloji trendleri ve proje geliştirme hakkında uzman içerikleri. Listelee.io blog\'da sektörün en güncel bilgilerini keşfedin.',
+  title: 'Blog - Entrepreneurship, Startups and Technology | Launch List',
+  description: "Expert content on entrepreneurship, startups, technology trends and project building. Discover the most up-to-date insights on the Launch List blog.",
   keywords: [
-    'girişimcilik blog',
+    'entrepreneurship blog',
     'startup blog',
-    'teknoloji blog',
-    'proje geliştirme',
-    'landing page rehberi',
-    'startup tavsiyeleri',
-    'girişimci hikayeler',
-    'teknoloji haberleri',
-    'iş fikri geliştirme',
-    'mvp oluşturma'
+    'technology blog',
+    'project development',
+    'landing page guide',
+    'startup tips',
+    'founder stories',
+    'tech news',
+    'business idea development',
+    'building an mvp'
   ].join(', '),
   alternates: {
     canonical: '/blog',
   },
   openGraph: {
-    title: 'Blog - Girişimcilik ve Startup İçerikleri | Listelee.io',
-    description: 'Girişimcilik, startup dünyası ve teknoloji trendleri hakkında uzman içerikleri keşfedin.',
+    title: 'Blog - Entrepreneurship & Startup Content | Launch List',
+    description: 'Discover expert content on entrepreneurship, the startup world and technology trends.',
     url: `${APP_URL}/blog`,
-    siteName: 'Listelee.io',
+    siteName: 'Launch List',
     images: [`${APP_URL}/opengraph-image.png`],
-    locale: 'tr_TR',
+    locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog - Girişimcilik ve Startup İçerikleri | Listelee.io',
-    description: 'Girişimcilik, startup dünyası ve teknoloji trendleri hakkında uzman içerikleri keşfedin.',
+    title: 'Blog - Entrepreneurship & Startup Content | Launch List',
+    description: 'Discover expert content on entrepreneurship, the startup world and technology trends.',
     images: [`${APP_URL}/twitter-image.png`],
   },
   robots: {
@@ -64,13 +64,13 @@ export default async function BlogPage() {
   const blogStructuredData = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "name": "Listelee.io Blog",
-    "description": "Girişimcilik, startup dünyası ve teknoloji trendleri hakkında uzman içerikleri",
+    "name": "Launch List Blog",
+    "description": "Expert content about entrepreneurship, the startup world and technology trends",
     "url": `${APP_URL}/blog`,
-    "inLanguage": "tr",
+    "inLanguage": "en",
     "publisher": {
       "@type": "Organization",
-      "name": "Listelee.io",
+      "name": "Launch List",
       "url": APP_URL,
       "logo": `${APP_URL}/Logo.png`
     },
@@ -91,7 +91,7 @@ export default async function BlogPage() {
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Listelee.io",
+        "name": "Launch List",
         "url": APP_URL
       }
     }))

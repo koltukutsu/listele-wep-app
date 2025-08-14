@@ -28,7 +28,7 @@ export default function WaitlistForm({ projectId }: FormProps) {
     e.preventDefault();
 
     if (!email || !isValidEmail(email)) {
-      toast.error("Lütfen geçerli bir e-posta adresi girin");
+      toast.error("Please enter a valid email address");
       return;
     }
 
@@ -39,7 +39,7 @@ export default function WaitlistForm({ projectId }: FormProps) {
       setTimeout(async () => {
         // Simulate duplicate email check (10% chance)
         if (Math.random() < 0.1) {
-          toast.error("Bu e-posta zaten listede mevcut!");
+          toast.error("This email is already on the list!");
           setLoading(false);
           return;
         }
@@ -51,7 +51,7 @@ export default function WaitlistForm({ projectId }: FormProps) {
           signup_source: 'demo_form'
         });
 
-        toast.success("Bekleme listesine katıldığınız için teşekkürler! 🎉");
+        toast.success("Thank you for joining the waitlist! 🎉");
         setEmail("");
         setSuccess(true);
         setLoading(false);
@@ -74,7 +74,7 @@ export default function WaitlistForm({ projectId }: FormProps) {
       }, 1000);
     } catch (error) {
       console.error("Error submitting form:", error);
-      toast.error("Bir hata oluştu. Lütfen tekrar deneyin 😢.");
+      toast.error("An error occurred. Please try again 😢.");
       setLoading(false);
     }
   };
@@ -99,7 +99,7 @@ export default function WaitlistForm({ projectId }: FormProps) {
             <div className="flex flex-col sm:flex-row gap-2">
               <input
                 type="email"
-                placeholder="E-posta adresiniz"
+                placeholder="Your email address"
                 value={email}
                 onChange={handleChange}
                 disabled={loading}
@@ -111,11 +111,11 @@ export default function WaitlistForm({ projectId }: FormProps) {
                 disabled={loading || !email}
                 className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 whitespace-nowrap"
               >
-                {loading ? "Kaydediliyor..." : "Listeye Katıl"}
+                {loading ? "Saving..." : "Join List"}
               </button>
             </div>
             <p className="text-sm text-gray-500 text-center">
-              Spam göndermiyoruz. İstediğiniz zaman çıkabilirsiniz.
+              We don't send spam. You can unsubscribe anytime.
             </p>
           </motion.div>
         ) : (
@@ -128,16 +128,16 @@ export default function WaitlistForm({ projectId }: FormProps) {
           >
             <div className="text-6xl">🎉</div>
             <h3 className="text-xl font-semibold text-gray-900">
-              Harika! Listeye katıldınız!
+              Great! You've joined the list!
             </h3>
             <p className="text-gray-600">
-              Önemli güncellemeleri e-posta ile göndereceğiz.
+              We'll send important updates via email.
             </p>
             <button
               onClick={resetForm}
               className="text-blue-600 hover:text-blue-700 underline text-sm"
             >
-              Başka bir e-posta ekle
+              Add another email
             </button>
           </motion.div>
         )}

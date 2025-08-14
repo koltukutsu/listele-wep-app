@@ -22,7 +22,7 @@ function generateProjectStructuredData(project: Project) {
       "@context": "https://schema.org",
       "@type": "Product",
       "name": project.config.title || project.name,
-      "description": project.config.subtitle || project.config.description || `${project.name} - Listelee.io ile oluşturulmuş proje`,
+      "description": project.config.subtitle || project.config.description || `${project.name} - Launch List generated project`,
       "url": baseUrl,
       "image": `${APP_URL}/opengraph-image.png`,
       "brand": {
@@ -34,7 +34,7 @@ function generateProjectStructuredData(project: Project) {
         "@type": "Offer",
         "price": "0",
         "@id": `${baseUrl}#offer`,
-        "priceCurrency": "TRY",
+        "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
         "url": baseUrl
       },
@@ -47,7 +47,7 @@ function generateProjectStructuredData(project: Project) {
       } : undefined,
       "isRelatedTo": {
         "@type": "WebApplication",
-        "name": "Listelee.io",
+        "name": "Launch List",
         "url": APP_URL,
         "applicationCategory": "Landing Page Builder"
       }
@@ -59,10 +59,10 @@ function generateProjectStructuredData(project: Project) {
       "name": project.config.title || project.name,
       "description": project.config.subtitle || project.config.description,
       "url": baseUrl,
-      "inLanguage": "tr",
+      "inLanguage": "en",
       "isPartOf": {
         "@type": "WebSite",
-        "name": "Listelee.io",
+        "name": "Launch List",
         "url": APP_URL
       },
       "about": {
@@ -80,15 +80,15 @@ function generateProjectStructuredData(project: Project) {
           {
             "@type": "ListItem",
             "position": 1,
-            "name": "Ana Sayfa",
+            "name": "Home",
             "item": APP_URL
           },
-          {
-            "@type": "ListItem", 
-            "position": 2,
-            "name": "Projeler",
-            "item": `${APP_URL}/showcase`
-          },
+                  {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Project Gallery",
+          "item": `${APP_URL}/showcase`
+        },
           {
             "@type": "ListItem",
             "position": 3,
@@ -110,8 +110,8 @@ export async function generateMetadata(
 
   if (!project) {
     return {
-      title: 'Proje Bulunamadı - Listelee.io',
-      description: 'Aradığınız proje bulunamadı. Listelee.io\'da binlerce proje keşfedin.',
+      title: 'Project Not Found - Launch List',
+      description: 'The project you are looking for was not found. Discover thousands of projects on Launch List.',
     };
   }
   
@@ -122,27 +122,27 @@ export async function generateMetadata(
   // Enhanced title and description for SEO
   const seoTitle = project.config.title || project.name;
   const seoDescription = project.config.subtitle || project.config.description || 
-    `${project.name} - Listelee.io ile oluşturulmuş ${project.config.category || 'startup'} projesi. Müşteri toplama ve proje validation platformu.`;
+    `${project.name} - Launch List generated ${project.config.category || 'startup'} project. Customer acquisition and project validation platform.`;
   
   // Generate keywords based on project content
   const keywords = [
     project.name.toLowerCase(),
     project.config.category || 'startup',
     'landing page',
-    'proje sayfası',
-    'müşteri toplama',
+    'project page',
+    'lead generation',
     'startup',
-    'girişimcilik',
-    'listelee.io'
+    'entrepreneurship',
+    'launch list'
   ].join(', ');
 
   return {
-    title: `${seoTitle} | Listelee.io`,
+    title: `${seoTitle} | Launch List`,
     description: seoDescription,
     keywords,
-    authors: [{ name: 'Listelee.io', url: APP_URL }],
+    authors: [{ name: 'Launch List', url: APP_URL }],
     creator: project.name,
-    publisher: 'Listelee.io',
+    publisher: 'Launch List',
     formatDetection: {
       email: false,
       address: false,
@@ -152,29 +152,29 @@ export async function generateMetadata(
       canonical: `/${project.slug}`,
     },
     openGraph: {
-      title: `${seoTitle} | Listelee.io`,
+      title: `${seoTitle} | Launch List`,
       description: seoDescription,
       url: projectUrl,
-      siteName: 'Listelee.io',
+      siteName: 'Launch List',
       images: [
         {
           url: defaultImageUrl,
           width: 1200,
           height: 630,
-          alt: `${seoTitle} - Listelee.io Project`,
+          alt: `${seoTitle} - Launch List Project`,
         },
         ...previousImages
       ],
-      locale: 'tr_TR',
+      locale: 'en_US',
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${seoTitle} | Listelee.io`,
+      title: `${seoTitle} | Launch List`,
       description: seoDescription,
       images: [defaultImageUrl],
-      creator: '@listeleio',
-      site: '@listeleio',
+      creator: '@launchlist',
+      site: '@launchlist',
     },
     robots: {
       index: true,

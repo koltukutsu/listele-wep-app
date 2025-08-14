@@ -1,37 +1,36 @@
 import { APP_URL } from './config'
 
 export const siteConfig = {
-  name: "Listelee.io",
-  description: "Girişimciler için bekleme listesi platformu. Fikrini lansmandan önce doğrula, müşterilerini topla ve ürünü güvenle inşa et.",
-  shortDescription: "Bekleme listesiyle fikrini lansmandan önce doğrula.",
+  name: "Launch List",
+  description: "A waitlist platform for entrepreneurs. Validate your idea before launch, collect customers, and build your product with confidence.",
+  shortDescription: "Validate your idea with a waitlist before launch.",
   keywords: [
-    "bekleme listesi",
     "waitlist",
-    "lansman bekleme listesi",
-    "landing page oluşturucu",
-    "proje sayfası",
-    "girişimci araçları",
-    "lead toplama",
-    "MVP oluşturma",
-    "Türkiye startup",
-    "proje validasyonu",
-    "müşteri toplama",
-    "AI proje oluşturucu",
-    "startup araçları",
-    "girişimcilik",
-    "iş fikri validation",
+    "launch waitlist",
+    "landing page creator",
+    "project page",
+    "entrepreneur tools",
+    "lead generation",
+    "MVP creation",
+    "startup tools",
+    "project validation",
+    "customer collection",
+    "AI project creator",
+    "startup tools",
+    "entrepreneurship",
+    "business idea validation",
     "no-code landing page",
-    "Türkçe landing page builder",
-    "proje pazarlama",
+    "landing page builder",
+    "project marketing",
     "startup landing page",
-    "müşteri doğrulama",
-    "iş modeli testi",
-    "yapay zeka proje asistanı",
-    "startup validasyon"
+    "customer validation",
+    "business model testing",
+    "artificial intelligence project assistant",
+    "startup validation"
   ],
-  authors: [{ name: "Listelee.io Team", url: APP_URL }],
-  creator: "Listelee.io",
-  publisher: "Listelee.io",
+  authors: [{ name: "Launch List Team", url: APP_URL }],
+  creator: "Launch List",
+  publisher: "Launch List",
   formatDetection: {
     email: false,
     address: false,
@@ -50,28 +49,28 @@ export const siteConfig = {
   },
   openGraph: {
     type: "website",
-    locale: "tr_TR",
+    locale: "en_US",
     url: APP_URL,
-    title: "Listelee.io - Bekleme Listeni Hızla Oluştur",
-    description: "Girişimciler için bekleme listesi platformu. Fikrini lansmandan önce doğrula, müşterilerini topla ve ürünü güvenle inşa et.",
-    siteName: "Listelee.io",
+    title: "Launch List - Create Your Waitlist Quickly",
+    description: "A waitlist platform for entrepreneurs. Validate your idea before launch, collect customers, and build your product with confidence.",
+    siteName: "Launch List",
     images: [
       {
         url: `${APP_URL}/opengraph-image.png`,
         width: 1200,
         height: 630,
-        alt: "Listelee.io - AI-Powered Project Landing Page Generator",
+        alt: "Launch List - AI-Powered Project Landing Page Generator",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Listelee.io - Bekleme Listeni Hızla Oluştur",
-    description: "Girişimciler için bekleme listesi platformu. Fikrini lansmandan önce doğrula, müşterilerini topla ve ürünü güvenle inşa et.",
+    title: "Launch List - Create Your Waitlist Quickly",
+    description: "A waitlist platform for entrepreneurs. Validate your idea before launch, collect customers, and build your product with confidence.",
     images: [`${APP_URL}/twitter-image.png`],
-    creator: "@listeleio",
-    site: "@listeleio",
+    creator: "@launchlist",
+    site: "@launchlist",
   },
   robots: {
     index: true,
@@ -90,7 +89,7 @@ export const siteConfig = {
 export const organizationStructuredData = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Listelee.io",
+  "name": "Launch List",
   "description": siteConfig.description,
   "url": APP_URL,
   "logo": `${APP_URL}/Logo.png`,
@@ -98,17 +97,17 @@ export const organizationStructuredData = {
   "founders": [
     {
       "@type": "Person",
-      "name": "Listelee.io Kurucu Ekibi"
+      "name": "Launch List Founding Team"
     }
   ],
   "sameAs": [
-    "https://twitter.com/listeleio"
+    "https://twitter.com/launchlist"
   ],
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer service",
     "url": APP_URL,
-    "availableLanguage": "Turkish"
+    "availableLanguage": "English"
   }
 }
 
@@ -116,7 +115,7 @@ export const organizationStructuredData = {
 export const softwareApplicationStructuredData = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "Listelee.io",
+  "name": "Launch List",
   "description": siteConfig.description,
   "url": APP_URL,
   "applicationCategory": "BusinessApplication",
@@ -125,33 +124,33 @@ export const softwareApplicationStructuredData = {
   "browserRequirements": "Requires JavaScript",
   "softwareVersion": "1.0",
   "datePublished": "2025-07-27",
-  "inLanguage": "tr",
-  "availableLanguage": "Turkish",
+  "inLanguage": "en",
+  "availableLanguage": "English",
   "offers": {
     "@type": "Offer",
     "price": "0",
-    "priceCurrency": "TRY",
-    "description": "Ücretsiz plan mevcut, ücretli planlar yakında",
+    "priceCurrency": "USD",
+    "description": "Free plan available, paid plans coming soon",
     "availability": "https://schema.org/InStock"
   },
   "author": {
     "@type": "Organization",
-    "name": "Listelee.io",
+    "name": "Launch List",
     "url": APP_URL
   },
   "publisher": {
     "@type": "Organization", 
-    "name": "Listelee.io",
+    "name": "Launch List",
     "url": APP_URL
   },
   "screenshot": `${APP_URL}/demo.png`,
   "featureList": [
-    "AI destekli proje oluşturma",
-    "Drag & drop editör",
-    "Müşteri lead toplama",
-    "Gerçek zamanlı analitik",
-    "Mobil uyumlu tasarım",
-    "SEO optimizasyonu"
+    "AI-powered project creation",
+    "Drag & drop editor",
+    "Customer lead collection",
+    "Real-time analytics",
+    "Mobile-responsive design",
+    "SEO optimization"
   ]
 }
 
@@ -159,13 +158,13 @@ export const softwareApplicationStructuredData = {
 export const websiteStructuredData = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Listelee.io",
+  "name": "Launch List",
   "description": siteConfig.description,
   "url": APP_URL,
-  "inLanguage": "tr",
+  "inLanguage": "en",
   "publisher": {
     "@type": "Organization",
-    "name": "Listelee.io",
+    "name": "Launch List",
     "url": APP_URL
   },
   "potentialAction": {
@@ -213,23 +212,23 @@ export const createPageMetadata = (
 // Specific page metadata
 export const pageMetadata = {
   pricing: createPageMetadata(
-    "Fiyatlandırma",
-    "Listelee.io fiyat planları. Ücretsiz başla, ihtiyacına göre büyüt. Girişimciler için uygun fiyatlı landing page çözümleri.",
+    "Pricing",
+    "Launch List pricing plans. Start free, scale as you need. Affordable landing page solutions for entrepreneurs.",
     "/pricing"
   ),
   showcase: createPageMetadata(
-    "Proje Galerisi",
-    "Listelee.io ile hayata geçirilmiş başarılı proje örnekleri. İlham al, kendi projenin için fikir edin.",
+    "Project Gallery",
+    "Successful project examples brought to life with Launch List. Get inspired, get ideas for your own project.",
     "/showcase"
   ),
   login: createPageMetadata(
-    "Giriş Yap",
-    "Listelee.io hesabına giriş yap. Projelerini yönet, müşteri verilerini takip et.",
+    "Sign In",
+    "Sign in to your Launch List account. Manage your projects, track customer data.",
     "/login"
   ),
   onboarding: createPageMetadata(
-    "Başlangıç",
-    "Listelee.io'ya hoş geldin! İlk projeni oluştur ve fikrini hayata geçirmeye başla.",
+    "Get Started",
+    "Welcome to Launch List! Create your first project and start bringing your idea to life.",
     "/onboarding"
   ),
 } 

@@ -21,63 +21,63 @@ export function EnhancedSharingModal({ isOpen, onClose, projectUrl, projectName 
   const sharingMessages = [
     {
       icon: <Rocket className="w-4 h-4 text-blue-500" />,
-      title: "Heyecanlı Başlangıç",
-      message: `🚀 Yeni girişim projem hazır! "${projectName}" hakkında ne düşünüyorsun? Geri bildirimini almak çok değerli: ${projectUrl}`
+      title: "Exciting Start",
+      message: `🚀 My new startup project is ready! What do you think about "${projectName}"? Your feedback is very valuable: ${projectUrl}`
     },
     {
       icon: <Heart className="w-4 h-4 text-red-500" />,
-      title: "Samimi ve Kişisel",
-      message: `❤️ Uzun zamandır üzerinde çalıştığım projeyi sonunda paylaşabiliyorum! Görüşün benim için çok önemli: ${projectUrl}`
+      title: "Warm and Personal",
+      message: `❤️ I can finally share the project I've been working on for a long time! Your opinion is very important to me: ${projectUrl}`
     },
     {
       icon: <Target className="w-4 h-4 text-green-500" />,
-      title: "Geri Bildirim Odaklı",
-      message: `🎯 İlk müşterilerimi arıyorum ve senin fikrini merak ediyorum! 2 dakika ayırıp bakabilir misin? ${projectUrl}`
+      title: "Feedback Focused",
+      message: `🎯 I'm looking for my first customers and I'm curious about your thoughts! Can you take 2 minutes to look? ${projectUrl}`
     },
     {
       icon: <Users className="w-4 h-4 text-purple-500" />,
-      title: "Topluluk Desteği",
-      message: `👥 Girişimcilik yolculuğumda yeni bir kilometre taşı! Destekçilerimden biri olmak ister misin? ${projectUrl}`
+      title: "Community Support",
+      message: `👥 A new milestone in my entrepreneurial journey! Would you like to be one of my supporters? ${projectUrl}`
     },
     {
       icon: <Sparkles className="w-4 h-4 text-yellow-500" />,
-      title: "İlham Verici",
-      message: `✨ Hayalimdeki projeyi hayata geçirdim! Bu yolculukta senin enerjine de ihtiyacım var: ${projectUrl}`
+      title: "Inspiring",
+      message: `✨ I've brought my dream project to life! I need your energy on this journey too: ${projectUrl}`
     },
     {
       icon: <MessageCircle className="w-4 h-4 text-cyan-500" />,
-      title: "Sohbet Başlatıcı",
-      message: `💬 Yeni projemle ilgili sohbet etmek ister miyiz? Kahve molasında şöyle bir göz atabilirsin: ${projectUrl}`
+      title: "Conversation Starter",
+      message: `💬 Would you like to chat about my new project? You can take a quick look during your coffee break: ${projectUrl}`
     },
     {
       icon: <Gift className="w-4 h-4 text-pink-500" />,
-      title: "Değer Vurgusu",
-      message: `🎁 Sana özel bir şey hazırladım! Bu proje senin gibi değerli insanlar için: ${projectUrl}`
+      title: "Value Emphasis",
+      message: `🎁 I've prepared something special for you! This project is for valuable people like you: ${projectUrl}`
     },
     {
       icon: <Share2 className="w-4 h-4 text-indigo-500" />,
-      title: "Paylaşım Teşviki",
-      message: `🔄 Eğer beğenirsen arkadaşlarına da önerebilirsin! İşte projeme bir göz at: ${projectUrl}`
+      title: "Sharing Encouragement",
+      message: `🔄 If you like it, you can also recommend it to your friends! Here's a look at my project: ${projectUrl}`
     },
     {
       icon: <Target className="w-4 h-4 text-orange-500" />,
-      title: "Profesyonel Yaklaşım",
-      message: `🎯 İş fikrimi hayata geçirdim ve profesyonel görüşünü almak istiyorum. Değerlendirmen önemli: ${projectUrl}`
+      title: "Professional Approach",
+      message: `🎯 I've brought my business idea to life and I want to get your professional opinion. Your evaluation is important: ${projectUrl}`
     },
     {
       icon: <Rocket className="w-4 h-4 text-emerald-500" />,
-      title: "Başarı Odaklı",
-      message: `🚀 Bu proje ile büyük hedeflerim var! İlk destekçilerimden biri olmanı çok isterim: ${projectUrl}`
+      title: "Success Focused",
+      message: `🚀 I have big goals with this project! I would really like you to be one of my first supporters: ${projectUrl}`
     }
   ];
 
   const handleCopyLink = async () => {
     try {
       await navigator.clipboard.writeText(projectUrl);
-      toast.success("Proje linki kopyalandı! 📋");
+      toast.success("Project link copied! 📋");
       await trackFeatureUsage('project_sharing', 'used', { method: 'link_only' });
     } catch (error) {
-      toast.error("Link kopyalanamadı");
+      toast.error("Link could not be copied");
     }
   };
 
@@ -85,7 +85,7 @@ export function EnhancedSharingModal({ isOpen, onClose, projectUrl, projectName 
     try {
       await navigator.clipboard.writeText(message);
       setCopiedIndex(index);
-      toast.success(`"${title}" mesajı kopyalandı! 📱`);
+      toast.success(`"${title}" message copied! 📱`);
       await trackFeatureUsage('project_sharing', 'used', { 
         method: 'message_template',
         messageType: title.toLowerCase().replace(' ', '_')
@@ -93,7 +93,7 @@ export function EnhancedSharingModal({ isOpen, onClose, projectUrl, projectName 
       
       setTimeout(() => setCopiedIndex(null), 2000);
     } catch (error) {
-      toast.error("Mesaj kopyalanamadı");
+      toast.error("Message could not be copied");
     }
   };
 
@@ -103,10 +103,10 @@ export function EnhancedSharingModal({ isOpen, onClose, projectUrl, projectName 
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Share2 className="w-5 h-5 text-lime-500" />
-            <span className="text-gray-900 dark:text-gray-100">Projenizi Paylaşın</span>
+            <span className="text-gray-900 dark:text-gray-100">Share Your Project</span>
           </DialogTitle>
           <DialogDescription className="text-gray-600 dark:text-gray-400">
-            Projenizi etkili bir şekilde paylaşmak için hazır mesajlarımızı kullanabilirsiniz.
+            You can use our ready-made messages to share your project effectively.
           </DialogDescription>
         </DialogHeader>
 
@@ -115,12 +115,12 @@ export function EnhancedSharingModal({ isOpen, onClose, projectUrl, projectName 
           <div className="bg-lime-50 dark:bg-slate-800 rounded-lg p-4 border-2 border-dashed border-lime-200 dark:border-slate-600">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-1">Sadece Link Kopyala</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Proje linkinizi direkt olarak paylaşın</p>
+                <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-1">Copy Link Only</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Share your project link directly</p>
               </div>
               <Button onClick={handleCopyLink} variant="outline" size="sm" className="border-lime-300 dark:border-slate-600 hover:bg-lime-100 dark:hover:bg-slate-700">
                 <Copy className="w-4 h-4 mr-2" />
-                Linki Kopyala
+                Copy Link
               </Button>
             </div>
             <div className="mt-3 p-2 bg-white dark:bg-slate-700 rounded border border-lime-200 dark:border-slate-600 text-sm text-gray-700 dark:text-gray-300 break-all">
@@ -132,10 +132,10 @@ export function EnhancedSharingModal({ isOpen, onClose, projectUrl, projectName 
           <div>
             <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
               <MessageCircle className="w-5 h-5 text-lime-500" />
-              Hazır Paylaşım Mesajları
+              Ready Sharing Messages
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              Aşağıdaki mesajlardan birini seçip kopyalayabilirsiniz. Her mesaj sizin proje linkinizi içerir.
+              You can select and copy one of the messages below. Each message contains your project link.
             </p>
 
             <div className="grid gap-3">
@@ -160,12 +160,12 @@ export function EnhancedSharingModal({ isOpen, onClose, projectUrl, projectName 
                             {copiedIndex === index ? (
                               <>
                                 <Check className="w-3 h-3 mr-1 text-lime-500" />
-                                <span className="text-lime-500 text-xs">Kopyalandı!</span>
+                                <span className="text-lime-500 text-xs">Copied!</span>
                               </>
                             ) : (
                               <>
                                 <Copy className="w-3 h-3 mr-1" />
-                                <span className="text-xs">Kopyala</span>
+                                <span className="text-xs">Copy</span>
                               </>
                             )}
                           </Button>
@@ -188,12 +188,12 @@ export function EnhancedSharingModal({ isOpen, onClose, projectUrl, projectName 
                 <Sparkles className="w-5 h-5 text-lime-500" />
               </div>
               <div>
-                <h4 className="font-medium text-lime-800 dark:text-lime-400 mb-2">💡 Paylaşım İpuçları</h4>
+                <h4 className="font-medium text-lime-800 dark:text-lime-400 mb-2">💡 Sharing Tips</h4>
                 <ul className="text-sm text-lime-700 dark:text-lime-300 space-y-1">
-                  <li>• <strong>WhatsApp</strong> için daha samimi mesajlar daha etkili olur</li>
-                  <li>• <strong>LinkedIn</strong> için profesyonel yaklaşımı tercih edin</li>
-                  <li>• <strong>Email</strong> için kişisel ve detaylı mesajlar kullanın</li>
-                  <li>• Doğru zamanda paylaşın - mesai saatleri daha iyi sonuç verir</li>
+                  <li>• <strong>WhatsApp</strong> - More personal messages are more effective</li>
+                  <li>• <strong>LinkedIn</strong> - Prefer a professional approach</li>
+                  <li>• <strong>Email</strong> - Use personal and detailed messages</li>
+                  <li>• Share at the right time - business hours give better results</li>
                 </ul>
               </div>
             </div>
@@ -202,7 +202,7 @@ export function EnhancedSharingModal({ isOpen, onClose, projectUrl, projectName 
           {/* Close Button */}
           <div className="flex justify-end pt-4 border-t border-gray-200 dark:border-slate-700">
             <Button onClick={onClose} variant="outline" className="border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300">
-              Kapat
+              Close
             </Button>
           </div>
         </div>

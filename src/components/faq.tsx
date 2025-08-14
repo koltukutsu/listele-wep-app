@@ -13,8 +13,8 @@ export default function Faq() {
 					Frequently Asked Questions
 				</h2>
 				<p className="sm:text-base text-sm text-muted-foreground text-center">
-					Everything you need to know about the template. Find answers to common
-					questions.
+					Everything you need to know about Launch List. Find answers to common
+					questions about our waitlist platform.
 				</p>
 			</div>
 			<div className="w-full max-w-lg">
@@ -25,35 +25,34 @@ export default function Faq() {
 				>
 					<AccordionItem value="item-1">
 						<AccordionTrigger className="hover:no-underline">
-							What's included in this template?
+							What is Launch List?
 						</AccordionTrigger>
 						<AccordionContent className="text-muted-foreground">
-							This template is a comprehensive Next.js 15 starter kit designed
-							to help you build your next project quickly and efficiently. It
-							includes a range of features and components that you can use to
-							get started, including a responsive design, a dark mode toggle,
-							and a form component.
+							Launch List is a waitlist platform that helps entrepreneurs validate their ideas before building products. Create landing pages, collect customer interest, and build your audience before launch.
 						</AccordionContent>
 					</AccordionItem>
 					<AccordionItem value="item-2">
 						<AccordionTrigger className="hover:no-underline">
-							How do I get started with this template?
+							How does the AI Founder Mode work?
 						</AccordionTrigger>
 						<AccordionContent className="text-muted-foreground">
-							To get started with this template, you can clone the repository
-							and install the dependencies using npm or yarn. Once you have the
-							dependencies installed, you can start the development server using
-							npm run dev or yarn dev.
+							Simply describe your idea in plain English, and our AI will automatically generate a professional waitlist page for you. No coding or design skills required.
 						</AccordionContent>
 					</AccordionItem>
 					<AccordionItem value="item-3">
 						<AccordionTrigger className="hover:no-underline">
-							How do I customize the template to my needs?
+							Is Launch List really free?
 						</AccordionTrigger>
 						<AccordionContent className="text-muted-foreground">
-							You can customize the template to your needs by modifying the
-							components and pages in the src directory. You can also add your
-							own components and pages to the src directory.
+							Yes! You can create up to 2 projects and collect up to 75 form submissions completely free. This gives you enough to validate your idea without any upfront costs.
+						</AccordionContent>
+					</AccordionItem>
+					<AccordionItem value="item-4">
+						<AccordionTrigger className="hover:no-underline">
+							Can I use my own domain?
+						</AccordionTrigger>
+						<AccordionContent className="text-muted-foreground">
+							Absolutely! You can easily connect your own domain to your waitlist page, giving your startup a professional appearance and building your brand from day one.
 						</AccordionContent>
 					</AccordionItem>
 				</Accordion>

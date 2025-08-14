@@ -74,10 +74,10 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
         userCredential = await createUserWithEmailAndPassword(auth, email, password);
         await createUserProfile(userCredential.user, 'email');
         await trackUserActivation('first_login');
-        toast.success("Hesap başarıyla oluşturuldu!");
+        toast.success("Account created successfully!");
       } else {
         userCredential = await signInWithEmailAndPassword(auth, email, password);
-        toast.success("Başarıyla giriş yapıldı!");
+        toast.success("Successfully signed in!");
       }
       
       await setAuthCookie(userCredential.user);
@@ -91,23 +91,23 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
       
       switch (error.code) {
         case 'auth/email-already-in-use':
-          toast.error("Bu e-posta adresi zaten kullanımda.");
+          toast.error("This email address is already in use.");
           break;
         case 'auth/weak-password':
-          toast.error("Şifre çok zayıf. En az 6 karakter olmalı.");
+          toast.error("Password is too weak. Must be at least 6 characters.");
           break;
         case 'auth/user-not-found':
         case 'auth/wrong-password':
-          toast.error("E-posta veya şifre hatalı.");
+          toast.error("Email or password is incorrect.");
           break;
         case 'auth/invalid-email':
-          toast.error("Geçersiz e-posta adresi.");
+          toast.error("Invalid email address.");
           break;
         case 'auth/too-many-requests':
-          toast.error("Çok fazla deneme yapıldı. Lütfen daha sonra tekrar deneyin.");
+          toast.error("Too many attempts. Please try again later.");
           break;
         default:
-          toast.error("Bir hata oluştu. Lütfen tekrar deneyin.");
+          toast.error("An error occurred. Please try again.");
       }
     } finally {
       setLoading(false);
@@ -131,7 +131,7 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
         await trackUserActivation('first_login');
       }
       
-      toast.success("Google ile başarıyla giriş yapıldı!");
+      toast.success("Successfully signed in with Google!");
       
       if (onSuccess) {
         onSuccess();
@@ -142,19 +142,19 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
       
       switch (error.code) {
         case 'auth/popup-closed-by-user':
-          toast.error("Giriş işlemi iptal edildi.");
+          toast.error("Sign-in process was cancelled.");
           break;
         case 'auth/popup-blocked':
-          toast.error("Pop-up engellendi. Lütfen tarayıcınızda pop-up'ları etkinleştirin ve tekrar deneyin.");
+          toast.error("Pop-up blocked. Please enable pop-ups in your browser and try again.");
           break;
         case 'auth/cancelled-popup-request':
           // Don't show error for this, user likely clicked multiple times
           break;
         case 'auth/network-request-failed':
-          toast.error("Ağ hatası. İnternet bağlantınızı kontrol edin.");
+          toast.error("Network error. Check your internet connection.");
           break;
         default:
-          toast.error("Google ile giriş yapılamadı. Lütfen tekrar deneyin.");
+          toast.error("Could not sign in with Google. Please try again.");
       }
     } finally {
       setLoading(false);
@@ -164,7 +164,7 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
   return (
     <div className="w-full max-w-sm">
       <h2 className="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-gray-100">
-        {isSignUp ? "Hesap Oluştur" : "Giriş Yap"}
+        {isSignUp ? "Create Account" : "Sign In"}
       </h2>
       
       <form onSubmit={handleEmailAuth} className="space-y-4">
@@ -173,14 +173,14 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
             htmlFor="email"
             className="text-sm font-medium text-gray-700 dark:text-gray-300"
           >
-            E-posta Adresi
+            Email Address
           </label>
           <Input
             id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="E-posta adresiniz"
+            placeholder="Your email address"
             required
             className="mt-1 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
           />
@@ -190,14 +190,14 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
             htmlFor="password"
             className="text-sm font-medium text-gray-700 dark:text-gray-300"
           >
-            Şifreniz
+            Password
           </label>
           <Input
             id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Şifreniz"
+            placeholder="Your password"
             required
             className="mt-1 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
           />
@@ -207,7 +207,7 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
           disabled={loading}
           className="w-full bg-gradient-to-r from-lime-400 to-green-500 hover:from-lime-500 hover:to-green-600 text-black font-semibold"
         >
-          {loading ? "Yükleniyor..." : isSignUp ? "Kayıt Ol" : "Giriş Yap"}
+          {loading ? "Loading..." : isSignUp ? "Sign Up" : "Sign In"}
         </Button>
       </form>
       
@@ -216,7 +216,7 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
           <span className="w-full border-t border-gray-300 dark:border-slate-600" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white dark:bg-slate-900 px-2 text-gray-500 dark:text-gray-400">veya</span>
+          <span className="bg-white dark:bg-slate-900 px-2 text-gray-500 dark:text-gray-400">or</span>
         </div>
       </div>
       
@@ -245,7 +245,7 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
             d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
           />
         </svg>
-        Google ile {isSignUp ? "Kayıt Ol" : "Giriş Yap"}
+        Sign in with Google
       </Button>
       
       <div className="text-center mt-4">
@@ -255,8 +255,8 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
           type="button"
         >
           {isSignUp
-            ? "Zaten bir hesabın var mı? Giriş Yap"
-            : "Hesabın yok mu? Kayıt Ol"}
+            ? "Already have an account? Sign In"
+            : "Don't have an account? Sign Up"}
         </button>
       </div>
     </div>

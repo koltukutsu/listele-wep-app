@@ -1,3 +1,9 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Sign In | Launch List'
+};
+
 "use client";
 
 import AuthForm from "~/components/auth-form";
@@ -15,7 +21,7 @@ export default function LoginPage() {
       <div className="mb-8">
         <Link href="/" className="flex items-center gap-2 text-2xl font-bold text-black dark:text-white">
           <Logo />
-          <span>Listelee.io</span>
+          <span>Launch List</span>
         </Link>
       </div>
       <div className="w-full max-w-md p-8 space-y-8 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-200 dark:border-slate-700">

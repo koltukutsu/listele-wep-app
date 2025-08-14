@@ -14,7 +14,7 @@ export default function HowTo() {
           transition={{ duration: 0.5 }}
           className="text-3xl sm:text-4xl font-bold mb-6 text-black dark:text-white"
         >
-          Fikrinden Bekleyenlere: 3 Adımda Lansman Hazırlığı
+          From Idea to Waitlist: 3 Steps to Launch Preparation
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -23,7 +23,7 @@ export default function HowTo() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="max-w-3xl mx-auto text-lg text-gray-900 dark:text-gray-300 mb-12 sm:mb-16"
         >
-          Üç basit adımla bekleme listeni kur, gerçek talebi gör ve ürünü güvenle inşa et.
+          Set up your waitlist in three simple steps, see real demand, and build your product with confidence.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -40,10 +40,10 @@ export default function HowTo() {
               <div className="w-12 h-12 flex items-center justify-center bg-[#D8FF00] text-black rounded-full font-bold text-2xl mr-4">
                 1
               </div>
-              <h3 className="text-xl font-bold text-black dark:text-white">Vizyonunu Tanımla</h3>
+              <h3 className="text-xl font-bold text-black dark:text-white">Define Your Vision</h3>
             </div>
             <p className="text-gray-900 dark:text-gray-300">
-              Her büyük hikaye bir isimle başlar. Girişimine kimliğini kazandır, misyonunu tek cümlede anlat.
+              Every great story starts with a name. Give your startup an identity, explain your mission in one sentence.
             </p>
           </div>
           <div className="relative p-8 border border-gray-200 dark:border-slate-700 rounded-lg bg-gray-50 dark:bg-slate-800 z-10 hover:shadow-lg hover:border-[#D8FF00] dark:hover:border-[#D8FF00] transition-all duration-300">
@@ -51,10 +51,10 @@ export default function HowTo() {
               <div className="w-12 h-12 flex items-center justify-center bg-[#D8FF00] text-black rounded-full font-bold text-2xl mr-4">
                 2
               </div>
-              <h3 className="text-xl font-bold text-black dark:text-white">Bekleme Sayfanı Kur</h3>
+              <h3 className="text-xl font-bold text-black dark:text-white">Set Up Your Waitlist Page</h3>
             </div>
             <p className="text-gray-900 dark:text-gray-300">
-              Founder Mode AI ile fikrini anlat, bekleme sayfan dakikalar içinde oluşsun ya da sürükle-bırak kolaylığıyla kendin tasarla.
+              Describe your idea with Founder Mode AI, let your waitlist page be created in minutes, or design it yourself with drag-and-drop ease.
             </p>
           </div>
           <div className="relative p-8 border border-gray-200 dark:border-slate-700 rounded-lg bg-gray-50 dark:bg-slate-800 z-10 hover:shadow-lg hover:border-[#D8FF00] dark:hover:border-[#D8FF00] transition-all duration-300">
@@ -62,10 +62,10 @@ export default function HowTo() {
               <div className="w-12 h-12 flex items-center justify-center bg-[#D8FF00] text-black rounded-full font-bold text-2xl mr-4">
                 3
               </div>
-              <h3 className="text-xl font-bold text-black dark:text-white">Listeyi Büyüt ve İnşa Et</h3>
+              <h3 className="text-xl font-bold text-black dark:text-white">Grow the List and Build</h3>
             </div>
             <p className="text-gray-900 dark:text-gray-300">
-              İlk destekçilerini toplamaya başla. Artan sayı seni motive etsin; lansman gününde seni bekleyen bir kitle olsun.
+              Start collecting your first supporters. Let the growing number motivate you; have an audience waiting for you on launch day.
             </p>
           </div>
         </motion.div>
@@ -78,7 +78,7 @@ export default function HowTo() {
         >
           <Link href="/onboarding">
             <Button size="lg" className="bg-[#D8FF00] hover:bg-[#B8E000] text-black font-bold text-lg px-8 py-4 shadow-lg hover:shadow-xl transition-all">
-              🚀 Kendi Listeni Başlat
+              🚀 Start Your Own List
             </Button>
           </Link>
         </motion.div>

@@ -100,7 +100,7 @@ export default function BlogListingClient({
             <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
               <BookOpen className="w-6 h-6 sm:w-8 sm:h-8 text-[#D8FF00]" />
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black dark:text-white">
-                Listelee.io Blog
+                Launch List Blog
               </h1>
               <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-[#D8FF00]" />
             </div>
@@ -452,7 +452,7 @@ export default function BlogListingClient({
             </h3>
             <p className="text-sm sm:text-base text-black/80 mb-6 max-w-2xl mx-auto px-4">
               Blog'da okuduğun hikayelere ilham al ve kendi startup yolculuğuna başla. 
-              Listelee.io ile dakikalar içinde profesyonel landing page'ini oluştur.
+              Build your professional landing page in minutes with Launch List.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Link href="/onboarding">

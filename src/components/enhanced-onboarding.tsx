@@ -12,11 +12,11 @@ import { trackOnboardingStep } from "../lib/analytics";
 import { isPaymentEnabled } from "~/lib/config";
 
 const SAMPLE_IDEAS = [
-  "Türk kahvesi abonelik kutusu - aylık farklı yörelerden özel kahveler",
-  "Freelancerlar için proje yönetim platformu - AI destekli zaman takibi",
-  "Sürdürülebilir yaşam için çevre dostu ürün marketplace'i",
-  "Online Türkçe dil kursu - konuşma pratiği odaklı",
-  "Pet-friendly cafe ve mekan bulucu mobil uygulama"
+  "Turkish coffee subscription box - monthly special coffees from different regions",
+  "Project management platform for freelancers - AI-powered time tracking",
+  "Eco-friendly product marketplace for sustainable living",
+  "Online Turkish language course - conversation practice focused",
+  "Pet-friendly cafe and venue finder mobile app"
 ];
 
 interface OnboardingStep {
@@ -32,67 +32,67 @@ interface OnboardingStep {
 const ONBOARDING_STEPS: OnboardingStep[] = [
   {
     id: 1,
-    title: "🚀 Founder Mode'a Hoş Geldin!",
-    subtitle: "Senin için nasıl çalıştığını görelim",
-    description: "Girişimcilik yolculuğunda seni destekleyecek akıllı asistanını keşfet. İlk olarak, ne kadar hızlı çalıştığını görmek ister misin?",
-    action: "Örnek Projeyi Gör",
+    title: "🚀 Welcome to Founder Mode!",
+    subtitle: "Let's see how it works for you",
+    description: "Discover your smart assistant that will support you on your entrepreneurial journey. First, would you like to see how fast it works?",
+    action: "See Sample Project",
     icon: <Sparkles className="w-6 h-6" />,
     valueProps: [
-      "⚡ 30 saniyede profesyonel landing page",
-      "🤖 AI destekli içerik oluşturma",
-      "📊 Anlık müşteri toplama sistemi"
+      "⚡ Professional landing page in 30 seconds",
+      "🤖 AI-powered content creation",
+      "📊 Instant customer collection system"
     ]
   },
   {
     id: 2,
-    title: "⚡ İnanılmaz! Şimdi Senin Sıran",
-    subtitle: "Fikrini hayata geçirme zamanı",
-    description: "Gördüğün gibi, harika bir başlangıç yapmak sadece birkaç saniye sürüyor. Şimdi senin parlak fikrini anlat, gerisini biz halledelim!",
-    action: "Fikrimi Oluştur",
+    title: "⚡ Amazing! Now It's Your Turn",
+    subtitle: "Time to bring your idea to life",
+    description: "As you can see, making a great start only takes a few seconds. Now tell us your brilliant idea, and we'll handle the rest!",
+    action: "Create My Idea",
     icon: <Zap className="w-6 h-6" />,
     valueProps: [
-      "💡 İstediğin her fikir için çalışır",
-      "🎨 Markana özel tasarım",
-      "📝 Profesyonel metin içeriği"
+      "💡 Works for any idea you have",
+      "🎨 Design tailored to your brand",
+      "📝 Professional text content"
     ]
   },
   {
     id: 3,
-    title: "🎨 Mükemmel! Şimdi Kişiselleştir",
-    subtitle: "Projen hazır, son dokunuşları yapalım",
-    description: "AI asistanın senin için harika bir başlangıç yaptı! Şimdi brandına özel renkler, metinler ve özellikler ekleyerek projen tamamen senin yap.",
-    action: "Editörü Keşfet",
+    title: "🎨 Perfect! Now Personalize",
+    subtitle: "Your project is ready, let's add the final touches",
+    description: "Your AI assistant has made a great start for you! Now make the project completely yours by adding brand-specific colors, texts, and features.",
+    action: "Explore Editor",
     icon: <Eye className="w-6 h-6" />,
     valueProps: [
-      "🎯 Canlı önizleme ile anında görün",
-      "🎨 Sınırsız tasarım özgürlüğü",
-      "✨ Profesyonel şablonlar"
+      "🎯 See instantly with live preview",
+      "🎨 Unlimited design freedom",
+      "✨ Professional templates"
     ]
   },
   {
     id: 4,
-    title: "📣 Dünyayla Paylaş ve Büyü!",
-    subtitle: "İlk müşterilerini toplamaya başla",
-    description: "Projeni yayınla ve hemen paylaşmaya başla! Her link tıklaması potansiyel bir müşteri, her kayıt senin girişiminin gücünün kanıtı.",
-    action: "Projeyi Yayınla",
+    title: "📣 Share with the World and Grow!",
+    subtitle: "Start collecting your first customers",
+    description: "Publish your project and start sharing immediately! Every link click is a potential customer, every registration is proof of your startup's power.",
+    action: "Publish Project",
     icon: <Share2 className="w-6 h-6" />,
     valueProps: [
-      "🌍 Anında canlıya alın",
-      "📱 Tüm cihazlarda mükemmel görünüm",
-      "🔥 Viral paylaşım özelikleri"
+      "🌍 Go live instantly",
+      "📱 Perfect appearance on all devices",
+      "🔥 Viral sharing features"
     ]
   },
   {
     id: 5,
-    title: "📊 Başarını Takip Et ve Analiz Et",
-    subtitle: "Verilerle büyüme stratejin oluştur",
-    description: "Gerçek zamanlı analizlerle projendeki her gelişmeyi takip et. Hangi kanallardan müşteri geldiği, conversion oranların ve daha fazlası!",
-    action: "Analizleri Gör",
+    title: "📊 Track and Analyze Your Success",
+    subtitle: "Build your growth strategy with data",
+    description: "Track every development in your project with real-time analytics. Which channels customers come from, your conversion rates, and much more!",
+    action: "View Analytics",
     icon: <BarChart3 className="w-6 h-6" />,
     valueProps: [
-      "📈 Gerçek zamanlı müşteri takibi",
-      "🎯 Conversion optimizasyonu",
-      "🌟 Rekabet analizi"
+      "📈 Real-time customer tracking",
+      "🎯 Conversion optimization",
+      "🌟 Competitive analysis"
     ]
   }
 ];
@@ -144,7 +144,7 @@ export function EnhancedOnboarding() {
       const user = auth.currentUser;
       if (!user) {
         console.error('No authenticated user found');
-        alert('Lütfen önce giriş yapın.');
+        alert('Please log in first.');
         setLoading(false);
         return;
       }
@@ -181,14 +181,14 @@ export function EnhancedOnboarding() {
         console.error('API Error:', response.status, errorData);
         
         if (response.status === 403 && errorData.error === 'AI features are not currently available') {
-          alert('AI özellikleri şu anda aktif değil. Lütfen daha sonra tekrar deneyin.');
+          alert('AI features are currently unavailable. Please try again later.');
         } else {
-          alert(`Bir hata oluştu: ${errorData.error || 'Bilinmeyen hata'}`);
+          alert(`An error occurred: ${errorData.error || 'Unknown error'}`);
         }
       }
     } catch (error) {
       console.error('Error in handleSampleDemo:', error);
-      alert('Bağlantı hatası. Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin.');
+      alert('Connection error. Please check your internet connection and try again.');
     } finally {
       setLoading(false);
     }
@@ -202,7 +202,7 @@ export function EnhancedOnboarding() {
       const user = auth.currentUser;
       if (!user) {
         console.error('No authenticated user found');
-        alert('Lütfen önce giriş yapın.');
+        alert('Please log in first.');
         setLoading(false);
         return;
       }
@@ -234,16 +234,16 @@ export function EnhancedOnboarding() {
         console.error('API Error:', response.status, errorData);
         
         if (response.status === 403 && errorData.error === 'AI features are not currently available') {
-          alert('AI özellikleri şu anda aktif değil. Lütfen daha sonra tekrar deneyin.');
+          alert('AI features are currently unavailable. Please try again later.');
         } else if (response.status === 403 && errorData.error === 'Project limit reached.') {
-          alert('Proje limitiniz doldu. Lütfen planınızı yükseltin.');
+          alert('Your project limit has been reached. Please upgrade your plan.');
         } else {
-          alert(`Bir hata oluştu: ${errorData.error || 'Bilinmeyen hata'}`);
+          alert(`An error occurred: ${errorData.error || 'Unknown error'}`);
         }
       }
     } catch (error) {
       console.error('Error in handleCreateProject:', error);
-      alert('Bağlantı hatası. Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin.');
+      alert('Connection error. Please check your internet connection and try again.');
     } finally {
       setLoading(false);
     }
@@ -281,13 +281,13 @@ export function EnhancedOnboarding() {
               <Sparkles className="w-16 h-16 mx-auto text-lime-400 mb-4" />
             </div>
             <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-lime-500 to-green-600 dark:from-lime-400 dark:to-green-400 bg-clip-text text-transparent">
-              ✨ AI Founder Mode Çalışıyor!
+              ✨ AI Founder Mode is Working!
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
-              Senin için örnek bir proje oluşturuyor...
+              Creating a sample project for you...
             </p>
             <div className="bg-gray-100 dark:bg-slate-800 rounded-lg p-4 mb-6 border border-lime-200 dark:border-slate-600">
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Şu anda oluşturulan fikir:</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Current idea being generated:</p>
               <p className="font-semibold text-gray-800 dark:text-gray-200">
                 "{SAMPLE_IDEAS[currentSampleIndex]}"
               </p>
@@ -296,7 +296,7 @@ export function EnhancedOnboarding() {
               <div className="w-2 h-2 bg-lime-500 rounded-full animate-bounce"></div>
               <div className="w-2 h-2 bg-lime-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
               <div className="w-2 h-2 bg-lime-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-              <span className="ml-2">Profesyonel landing page oluşturuluyor...</span>
+              <span className="ml-2">Creating professional landing page...</span>
             </div>
           </CardContent>
         </Card>
@@ -311,10 +311,10 @@ export function EnhancedOnboarding() {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-              Adım {currentStep} / {ONBOARDING_STEPS.length}
+              Step {currentStep} / {ONBOARDING_STEPS.length}
             </span>
             <span className="text-sm text-gray-500 dark:text-gray-400">
-              {Math.round((currentStep / ONBOARDING_STEPS.length) * 100)}% tamamlandı
+              {Math.round((currentStep / ONBOARDING_STEPS.length) * 100)}% completed
             </span>
           </div>
           <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-3">
@@ -354,9 +354,9 @@ export function EnhancedOnboarding() {
                 {currentStep === 1 && (
                   <div className="space-y-4">
                     <div className="bg-lime-50 dark:bg-slate-800 border border-lime-200 dark:border-slate-600 rounded-lg p-4">
-                      <h4 className="font-semibold text-lime-800 dark:text-lime-400 mb-2">🎯 Ne Yapacağız?</h4>
+                      <h4 className="font-semibold text-lime-800 dark:text-lime-400 mb-2">🎯 What Are We Going to Do?</h4>
                       <p className="text-lime-700 dark:text-lime-300 text-sm">
-                        Önce sana nasıl çalıştığını göstereceğiz, sonra sen kendi fikrini oluşturacaksın!
+                        First, we'll show you how it works, and then you'll create your own idea!
                       </p>
                     </div>
                     <Button 
@@ -368,12 +368,12 @@ export function EnhancedOnboarding() {
                       {loading ? (
                         <>
                           <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Örnek Oluşturuluyor...
+                          Generating Sample...
                         </>
                       ) : process.env.NEXT_PUBLIC_PAYMENT_ENABLED !== 'true' ? (
                         <>
                           <Sparkles className="mr-2 h-5 w-5" />
-                          AI Özellikleri Aktif Değil
+                          AI Features Unavailable
                         </>
                       ) : (
                         <>
@@ -384,9 +384,9 @@ export function EnhancedOnboarding() {
                     </Button>
                     {process.env.NEXT_PUBLIC_PAYMENT_ENABLED !== 'true' && (
                       <p className="text-sm text-amber-600 dark:text-amber-400 mt-2 p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
-                        💡 AI özellikleri şu anda aktif değil. Geliştirici modunda çalışmak için 
+                        💡 AI features are currently unavailable. To work in developer mode, 
                         <code className="mx-1 px-2 py-1 bg-amber-100 dark:bg-amber-800 rounded text-xs">NEXT_PUBLIC_PAYMENT_ENABLED=true</code> 
-                        environment variable'ını ayarlayın.
+                        environment variable.
                       </p>
                     )}
                   </div>
@@ -395,25 +395,25 @@ export function EnhancedOnboarding() {
                 {currentStep === 2 && (
                   <div className="space-y-4">
                     <div className="bg-green-50 dark:bg-slate-800 border border-green-200 dark:border-slate-600 rounded-lg p-4">
-                      <h4 className="font-semibold text-green-800 dark:text-green-400 mb-2">💡 İlham Lazım mı?</h4>
-                      <p className="text-green-700 dark:text-green-300 text-sm mb-3">İşte birkaç örnek fikir:</p>
+                      <h4 className="font-semibold text-green-800 dark:text-green-400 mb-2">💡 Need Inspiration?</h4>
+                      <p className="text-green-700 dark:text-green-300 text-sm mb-3">Here are a few ideas:</p>
                       <div className="text-sm text-green-600 dark:text-green-400">
                         "{SAMPLE_IDEAS[currentSampleIndex]}"
                       </div>
                     </div>
                     <div className="space-y-3">
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                        Fikrini detaylı anlat (ne, nasıl, kim için):
+                        Describe your idea in detail (what, how, for whom):
                       </label>
                       <textarea
                         className="w-full p-4 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-transparent resize-none bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100"
-                        placeholder="Örnek: Online Türk mutfağı kursu platformu. Ev hanımları ve yemek meraklıları için video dersler, canlı cooking showlar ve topluluk özelliği. Aylık abonelik modeli ile..."
+                        placeholder="Example: Online Turkish cooking course platform. For housewives and food enthusiasts, video lessons, live cooking shows, and community features. Monthly subscription model..."
                         value={prompt}
                         onChange={(e) => setPrompt(e.target.value)}
                         rows={4}
                       />
                       <div className="text-xs text-gray-500 dark:text-gray-400">
-                        💡 İpucu: Ne kadar detaylı anlatırsan, o kadar iyi bir sonuç alırsın!
+                        💡 Tip: The more details you provide, the better the result!
                       </div>
                     </div>
                     <Button 
@@ -425,12 +425,12 @@ export function EnhancedOnboarding() {
                       {loading ? (
                         <>
                           <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          AI Çalışıyor...
+                          Working on AI...
                         </>
                       ) : process.env.NEXT_PUBLIC_PAYMENT_ENABLED !== 'true' ? (
                         <>
                           <Zap className="mr-2 h-5 w-5" />
-                          AI Özellikleri Aktif Değil
+                          AI Features Unavailable
                         </>
                       ) : (
                         <>
@@ -441,9 +441,9 @@ export function EnhancedOnboarding() {
                     </Button>
                     {process.env.NEXT_PUBLIC_PAYMENT_ENABLED !== 'true' && (
                       <p className="text-sm text-amber-600 dark:text-amber-400 mt-2 p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
-                        💡 AI özellikleri şu anda aktif değil. Geliştirici modunda çalışmak için 
+                        💡 AI features are currently unavailable. To work in developer mode, 
                         <code className="mx-1 px-2 py-1 bg-amber-100 dark:bg-amber-800 rounded text-xs">NEXT_PUBLIC_PAYMENT_ENABLED=true</code> 
-                        environment variable'ını ayarlayın.
+                        environment variable.
                       </p>
                     )}
                   </div>
@@ -452,9 +452,9 @@ export function EnhancedOnboarding() {
                 {currentStep >= 3 && (
                   <div className="space-y-4">
                     <div className="bg-lime-50 dark:bg-slate-800 border border-lime-200 dark:border-slate-600 rounded-lg p-4">
-                      <h4 className="font-semibold text-lime-800 dark:text-lime-400 mb-2">🎉 Tebrikler!</h4>
+                      <h4 className="font-semibold text-lime-800 dark:text-lime-400 mb-2">🎉 Congratulations!</h4>
                       <p className="text-lime-700 dark:text-lime-300 text-sm">
-                        Projein hazır! Şimdi onu mükemmelleştirme ve büyütme zamanı.
+                        Your project is ready! Now it's time to refine and grow it.
                       </p>
                     </div>
                     <Button 
@@ -474,7 +474,7 @@ export function EnhancedOnboarding() {
                 <div>
                   <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center">
                     <TrendingUp className="mr-2 h-5 w-5 text-lime-500" />
-                    Bu Adımda Kazanacakların:
+                    What You'll Gain in This Step:
                   </h4>
                   <div className="space-y-3">
                     {currentStepData.valueProps.map((prop, index) => (
@@ -488,7 +488,7 @@ export function EnhancedOnboarding() {
 
                 {/* Step completion badges */}
                 <div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">İlerleme Durumun:</h4>
+                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">Your Progress:</h4>
                   <div className="space-y-2">
                     {ONBOARDING_STEPS.map((step, index) => (
                       <div key={step.id} className="flex items-center space-x-3">
@@ -517,10 +517,10 @@ export function EnhancedOnboarding() {
                 <div className="bg-gray-50 dark:bg-slate-800 border border-lime-200 dark:border-slate-600 rounded-lg p-4">
                   <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2 flex items-center">
                     <Users className="mr-2 h-4 w-4 text-lime-500" />
-                    Diğer Girişimciler Diyor Ki:
+                    What Other Founders Say:
                   </h4>
                   <blockquote className="text-sm text-gray-600 dark:text-gray-400 italic">
-                    "Listelee.io ile 2 dakikada yaptığım şeyi, eskiden 2 saatte yapıyordum. İnanılmaz!"
+                    "With Launch List, I can do what used to take me 2 hours in just 2 minutes. Unbelievable!"
                   </blockquote>
                   <cite className="text-xs text-gray-500 dark:text-gray-400 block mt-2">— Ahmet K., SaaS Founder</cite>
                 </div>
@@ -536,12 +536,12 @@ export function EnhancedOnboarding() {
                 className="flex items-center border-lime-300 dark:border-slate-600 text-gray-700 dark:text-gray-300"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Geri
+                Back
               </Button>
 
               <div className="text-center">
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Her adım seni başarıya götürüyor 🚀
+                  Every step brings you closer to success 🚀
                 </p>
               </div>
 
@@ -551,7 +551,7 @@ export function EnhancedOnboarding() {
                   onClick={() => router.push('/dashboard')}
                   className="text-gray-600 dark:text-gray-400 border-gray-300 dark:border-slate-600"
                 >
-                  Daha Sonra Tamamla
+                  Complete Later
                 </Button>
               )}
             </div>

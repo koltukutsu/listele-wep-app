@@ -42,7 +42,7 @@ export function PlausibleEventExample() {
   const events = usePlausibleEvents();
 
   const handleWaitlistSignup = () => {
-    events.trackWaitlistSignup('homepage', 'listelee.vercel.app');
+    events.trackWaitlistSignup('homepage', 'launchlist.vercel.app');
   };
 
   const handleProjectCreated = () => {

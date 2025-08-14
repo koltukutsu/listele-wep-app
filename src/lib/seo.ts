@@ -46,19 +46,19 @@ export function generateProjectKeywords(
 ): string[] {
   const baseKeywords = [
     'landing page',
-    'proje sayfası',
-    'müşteri toplama',
+    'project page',
+    'lead generation',
     'startup',
-    'girişimcilik',
-    'listelee.io',
-    'proje validation',
+    'entrepreneurship',
+    'launch list',
+    'project validation',
     'mvp',
-    'iş fikri'
+    'business idea'
   ];
 
   const projectKeywords = [
     projectName.toLowerCase(),
-    ...(category ? [category, `${category} projesi`, `${category} startup`] : []),
+    ...(category ? [category, `${category} project`, `${category} startup`] : []),
     ...(description ? extractKeywords(description) : []),
     ...(subtitle ? extractKeywords(subtitle) : [])
   ];
@@ -71,7 +71,7 @@ export function generateProjectKeywords(
 
 // Extract keywords from text content
 function extractKeywords(text: string): string[] {
-  const commonWords = ['ve', 'ile', 'için', 'bir', 'bu', 'o', 'şu', 'ya', 'da', 'de', 'ki', 'mi', 'mu', 'mü'];
+  const commonWords = ['and', 'with', 'for', 'the', 'this', 'that', 'you', 'your'];
   return text
     .toLowerCase()
     .split(/\s+/)
@@ -83,84 +83,80 @@ function extractKeywords(text: string): string[] {
 function getCategoryKeywords(category?: string): string[] {
   const categoryMap: { [key: string]: string[] } = {
     'e-commerce': [
-      'e-ticaret',
-      'online mağaza',
-      'ürün satış',
-      'e-ticaret startup',
-      'online satış',
-      'dijital mağaza'
+      'e-commerce',
+      'online store',
+      'product sales',
+      'ecommerce startup',
+      'online sales',
+      'digital store'
     ],
     'saas': [
       'saas',
-      'yazılım hizmeti',
-      'b2b araç',
-      'yazılım startup',
+      'software as a service',
+      'b2b tool',
+      'software startup',
       'cloud software',
       'software service'
     ],
     'local-business': [
-      'yerel işletme',
-      'lokal hizmet',
-      'mahalle işi',
-      'yerel hizmet',
-      'işletme sayfası',
-      'lokal startup'
+      'local business',
+      'local service',
+      'neighborhood business',
+      'business page',
+      'local startup'
     ],
     'consulting': [
-      'danışmanlık',
-      'konsültasyon',
-      'uzman hizmet',
-      'danışman',
-      'profesyonel hizmet',
-      'koçluk'
+      'consulting',
+      'consultation',
+      'expert service',
+      'consultant',
+      'professional service',
+      'coaching'
     ],
     'education': [
-      'eğitim',
-      'online kurs',
-      'öğretim',
-      'eğitim platformu',
-      'kurs sayfası',
-      'öğrenim'
+      'education',
+      'online course',
+      'teaching',
+      'education platform',
+      'course page',
+      'learning'
     ],
     'health': [
-      'sağlık',
+      'health',
       'wellness',
-      'terapi',
-      'sağlık hizmeti',
-      'wellness koçluğu',
-      'sağlık danışmanlığı'
+      'therapy',
+      'health service',
+      'wellness coaching',
+      'health consulting'
     ],
     'technology': [
-      'teknoloji',
+      'technology',
       'tech startup',
-      'yazılım',
-      'teknoloji hizmeti',
-      'dijital çözüm',
+      'software',
+      'technology service',
+      'digital solution',
       'innovation'
     ],
     'food': [
-      'yemek',
-      'gıda',
+      'food',
       'restaurant',
       'catering',
       'food truck',
-      'yemek servisi'
+      'meal service'
     ],
     'fashion': [
-      'moda',
       'fashion',
-      'stil',
-      'tasarım',
-      'giyim',
-      'moda markası'
+      'style',
+      'design',
+      'apparel',
+      'fashion brand'
     ],
     'travel': [
-      'seyahat',
-      'turizm',
-      'tur',
       'travel',
-      'gezi',
-      'tatil'
+      'tourism',
+      'tour',
+      'trip',
+      'vacation'
     ]
   };
 
@@ -175,7 +171,7 @@ export function generateProductSchema(project: any) {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": project.config.title || project.name,
-    "description": project.config.subtitle || project.config.description || `${project.name} - Listelee.io ile oluşturulmuş proje`,
+    "description": project.config.subtitle || project.config.description || `${project.name} - Launch List generated project`,
     "url": baseUrl,
     "image": `${APP_URL}/opengraph-image.png`,
     "brand": {
@@ -186,7 +182,7 @@ export function generateProductSchema(project: any) {
     "offers": {
       "@type": "Offer",
       "price": "0",
-      "priceCurrency": "TRY",
+      "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
       "url": baseUrl
     },
@@ -199,7 +195,7 @@ export function generateProductSchema(project: any) {
     } : undefined,
     "creator": {
       "@type": "Organization",
-      "name": "Listelee.io",
+      "name": "Launch List",
       "url": APP_URL
     }
   };
@@ -211,17 +207,17 @@ export function generateCategoryFAQSchema(category: string) {
     'e-commerce': [
       {
         question: "E-ticaret projesi için landing page nasıl oluşturulur?",
-        answer: "Listelee.io ile e-ticaret projeniz için profesyonel landing page dakikalar içinde oluşturabilirsiniz. Ürün tanıtımı, müşteri yorumları ve satış sayfası özelliklerini kolayca ekleyebilirsiniz."
+        answer: "With Launch List, you can create a professional landing page for your e-commerce project in minutes. Easily add product showcases, customer testimonials, and sales page features."
       },
       {
         question: "E-ticaret startup'ı için hangi özellikler önemli?",
-        answer: "E-ticaret projesi için müşteri güven sinyalleri, ürün görselleri, fiyat bilgileri ve kolay iletişim formu kritik önemde. Listelee.io bu özellikleri otomatik olarak sayfanıza ekler."
+        answer: "For e-commerce projects, trust signals, product images, pricing information, and an easy contact form are critical. Launch List automatically adds these features to your page."
       }
     ],
     'saas': [
       {
         question: "SaaS ürünü için etkili landing page nasıl olmalı?",
-        answer: "SaaS landing page'inde ürünün çözdüğü problem, özellikler, fiyatlandırma ve demo talebi formu bulunmalı. Listelee.io ile SaaS projeler için optimize edilmiş şablonlar kullanabilirsiniz."
+        answer: "A SaaS landing page should include the problem your product solves, features, pricing, and a demo request form. With Launch List, you can use templates optimized for SaaS projects."
       }
     ]
   };
@@ -272,10 +268,10 @@ export function calculateSEOScore(project: any): {
       score += 25;
     } else {
       score += 15;
-      suggestions.push('Başlık 30-60 karakter arasında olmalı');
+      suggestions.push('Title should be between 30-60 characters');
     }
   } else {
-    suggestions.push('Proje başlığı eksik');
+    suggestions.push('Project title is missing');
   }
 
   // Description optimization (25 points)
@@ -285,17 +281,17 @@ export function calculateSEOScore(project: any): {
       score += 25;
     } else {
       score += 15;
-      suggestions.push('Açıklama 120-160 karakter arasında olmalı');
+      suggestions.push('Description should be between 120-160 characters');
     }
   } else {
-    suggestions.push('Proje açıklaması eksik');
+    suggestions.push('Project description is missing');
   }
 
   // Category (15 points)
   if (project.config.category) {
     score += 15;
   } else {
-    suggestions.push('Proje kategorisi seçilmeli');
+    suggestions.push('Project category should be selected');
   }
 
   // Content quality (20 points)
@@ -306,9 +302,9 @@ export function calculateSEOScore(project: any): {
     score += 20;
   } else if (hasFeatures || hasBenefits) {
     score += 10;
-    suggestions.push('Özellikler ve faydalar bölümlerini ekleyin');
+    suggestions.push('Add both features and benefits sections');
   } else {
-    suggestions.push('Proje özellikleri ve faydaları eksik');
+    suggestions.push('Project features and benefits are missing');
   }
 
   // Performance metrics (15 points)
@@ -316,9 +312,9 @@ export function calculateSEOScore(project: any): {
     score += 15;
   } else if (project.stats?.totalSignups > 0) {
     score += 8;
-    suggestions.push('Daha fazla müşteri kaydı almaya odaklanın');
+    suggestions.push('Focus on getting more signups');
   } else {
-    suggestions.push('Henüz müşteri kaydı alınmamış');
+    suggestions.push('No signups yet');
   }
 
   return { score, suggestions };
@@ -336,7 +332,7 @@ export function generateSocialShareURLs(project: any) {
   const description = encodeURIComponent(project.config.subtitle || project.config.description || '');
 
   return {
-    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${title}&via=listeleio`,
+    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${title}&via=launchlist`,
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
     whatsapp: `https://wa.me/?text=${title} ${encodeURIComponent(url)}`,

@@ -10,74 +10,74 @@ import { APP_URL } from '~/lib/config';
 
 const CATEGORY_INFO = {
   'e-commerce': {
-    title: 'E-Ticaret Projeleri',
-    description: 'Listelee.io ile oluşturulmuş başarılı e-ticaret projelerini keşfet. Online mağaza, ürün satış sayfaları ve e-ticaret başlangıç projelerinden ilham al.',
-    keywords: 'e-ticaret landing page, online mağaza sayfası, ürün satış sayfası, e-ticaret startup, online satış projesi',
+    title: 'E-Commerce Projects',
+    description: 'Discover successful e-commerce projects built with Launch List. Get inspired by online stores, product sales pages, and e-commerce starter projects.',
+    keywords: 'e-commerce landing page, online store page, product sales page, ecommerce startup, online sales project',
     emoji: '🛒',
-    longDescription: 'E-ticaret dünyasına adım atmak mı istiyorsun? Burada Listelee.io ile hayata geçirilmiş onlarca başarılı e-ticaret projesini bulabilirsin. Online mağazalardan ürün satış sayfalarına, marketplace fikirlerinden niş e-ticaret projelerine kadar geniş bir yelpazede ilham alabilir, kendi projen için fikirler edinebilirsin.'
+    longDescription: 'Looking to step into the e-commerce world? Here you can find dozens of successful e-commerce projects brought to life with Launch List. From online stores to product sales pages, from marketplace ideas to niche e-commerce projects, get inspired and gather ideas for your own project.'
   },
   'saas': {
-    title: 'SaaS Projeleri',
-    description: 'Yazılım hizmeti (SaaS) projelerinin en başarılı örnekleri. B2B araçlar, SaaS ürünler ve yazılım çözümleri için landing page örnekleri.',
-    keywords: 'saas landing page, yazılım hizmeti sayfası, b2b araç sayfası, saas startup, yazılım proje sayfası',
+    title: 'SaaS Projects',
+    description: 'The best examples of Software as a Service (SaaS) projects. Landing page examples for B2B tools, SaaS products and software solutions.',
+    keywords: 'saas landing page, software service page, b2b tool page, saas startup, software project page',
     emoji: '💻',
-    longDescription: 'SaaS (Software as a Service) dünyası sürekli büyüyen ve gelişen bir alan. Burada Listelee.io ile oluşturulmuş yazılım hizmetleri, B2B araçları, iş otomasyonu çözümleri ve SaaS ürünlerinin landing page örneklerini bulabilirsin. Kendi yazılım fikrin için müşteri validation yapma sürecinden ilham al.'
+    longDescription: 'The SaaS world is constantly growing and evolving. Here you can find landing page examples of software services, B2B tools, business automation solutions and SaaS products built with Launch List. Get inspired for your own software idea and validate with real customers.'
   },
   'local-business': {
-    title: 'Yerel İşletme Projeleri',
-    description: 'Yerel işletmeler için oluşturulmuş dijital pazarlama projeleri. Restoran, kuaför, cafe ve diğer yerel hizmetler için örnek sayfalar.',
-    keywords: 'yerel işletme sayfası, restoran web sitesi, kuaför sayfası, cafe landing page, yerel hizmet sayfası',
+    title: 'Local Business Projects',
+    description: 'Digital marketing projects built for local businesses. Example pages for restaurants, hairdressers, cafes and other local services.',
+    keywords: 'local business page, restaurant website, hairdresser page, cafe landing page, local service page',
     emoji: '🏪',
-    longDescription: 'Yerel işletmeler dijital dünyada var olmak için güçlü bir online varlığa ihtiyaç duyuyor. Bu kategoride restoranlardan kuaförlere, cafelerden spor salonlarına kadar çeşitli yerel işletmelerin Listelee.io ile oluşturdukları dijital vitrinleri keşfedebilirsin.'
+    longDescription: 'Local businesses need a strong online presence to thrive. In this category, explore the digital storefronts that various local businesses created with Launch List: from restaurants to hairdressers, cafes to gyms.'
   },
   'consulting': {
-    title: 'Danışmanlık Projeleri',
-    description: 'Uzman danışmanlar ve koçlar için oluşturulmuş profesyonel sayfalar. İş danışmanlığı, yaşam koçluğu ve özel danışmanlık hizmetleri.',
-    keywords: 'danışmanlık sayfası, koç web sitesi, iş danışmanı sayfası, uzman profil sayfası, danışmanlık hizmeti',
+    title: 'Consulting Projects',
+    description: 'Professional pages built for expert consultants and coaches. Business consulting, life coaching and specialized advisory services.',
+    keywords: 'consulting page, coach website, business consultant page, expert profile page, consulting services',
     emoji: '👔',
-    longDescription: 'Danışmanlık sektöründe güven ve uzmanlık göstermek çok önemli. Bu kategoride iş danışmanlarından yaşam koçlarına, pazarlama uzmanlarından finans danışmanlarına kadar farklı alanlardaki uzmanların profesyonel sayfalarını inceleyebilirsin.'
+    longDescription: 'In consulting, trust and expertise are everything. Explore professional pages of experts from business consultants to life coaches, marketing strategists to financial advisors.'
   },
   'education': {
-    title: 'Eğitim Projeleri',
-    description: 'Online kurslar, eğitim platformları ve öğretim hizmetleri için oluşturulmuş sayfalar. Eğitimciler ve kurs yaratıcıları için ilham verici örnekler.',
-    keywords: 'online kurs sayfası, eğitim platformu, öğretmen web sitesi, kurs landing page, eğitim hizmeti sayfası',
+    title: 'Education Projects',
+    description: 'Pages for online courses, education platforms and teaching services. Inspiring examples for educators and course creators.',
+    keywords: 'online course page, education platform, teacher website, course landing page, education service page',
     emoji: '📚',
-    longDescription: 'Eğitim sektörü dijital dönüşümle birlikte hızla gelişiyor. Online kurslardan birebir öğretim hizmetlerine, eğitim platformlarından workshop organizasyonlarına kadar eğitim alanındaki çeşitli projelerden ilham al.'
+    longDescription: 'Education is rapidly evolving with digital transformation. From online courses to one-on-one tutoring, from education platforms to workshops, get inspired by diverse education projects.'
   },
   'health': {
-    title: 'Sağlık Projeleri',
-    description: 'Sağlık hizmetleri, wellness ürünleri ve terapistler için oluşturulmuş dijital sayfalar. Sağlık sektöründe güven oluşturan profesyonel örnekler.',
-    keywords: 'sağlık hizmeti sayfası, doktor web sitesi, wellness ürün sayfası, terapi hizmeti, sağlık danışmanlığı',
+    title: 'Health Projects',
+    description: 'Digital pages for health services, wellness products and therapists. Professional examples that build trust in the health sector.',
+    keywords: 'health service page, doctor website, wellness product page, therapy service, health consulting',
     emoji: '🏥',
-    longDescription: 'Sağlık sektöründe dijital varlık, güven ve profesyonellik açısından kritik öneme sahip. Doktorlardan terapistlere, wellness koçlarından sağlık ürünü satıcılarına kadar sağlık alanındaki profesyonel sayfaları keşfet.'
+    longDescription: 'In health, digital presence is critical for trust and professionalism. Explore professional pages across the health domain: doctors, therapists, wellness coaches and health product providers.'
   },
   'technology': {
-    title: 'Teknoloji Projeleri',
-    description: 'Tech startupları, yazılım projeleri ve teknoloji hizmetleri için oluşturulmuş landing pagelar. Teknoloji sektöründeki inovatif proje örnekleri.',
-    keywords: 'teknoloji startup sayfası, yazılım proje sayfası, tech hizmet sayfası, teknoloji ürün sayfası, startup landing page',
+    title: 'Technology Projects',
+    description: 'Landing pages for tech startups, software projects and technology services. Innovative project examples in the technology sector.',
+    keywords: 'technology startup page, software project page, tech service page, technology product page, startup landing page',
     emoji: '🚀',
-    longDescription: 'Teknoloji dünyası sürekli yenilikle dolu. Yapay zeka projelerinden mobil uygulamalara, blockchain çözümlerinden IoT ürünlerine kadar teknoloji sektöründeki en yaratıcı ve inovatif projeleri keşfet.'
+    longDescription: 'The tech world is full of innovation. From AI projects to mobile apps, from blockchain to IoT products, discover the most creative and innovative projects in technology.'
   },
   'food': {
-    title: 'Yemek & İçecek Projeleri',
-    description: 'Gıda sektöründeki yaratıcı projeler. Restoranlar, food trucklar, catering hizmetleri ve özel gıda ürünleri için örnek sayfalar.',
-    keywords: 'restoran web sitesi, yemek servisi sayfası, catering hizmet sayfası, food truck sayfası, gıda ürün sayfası',
+    title: 'Food & Beverage Projects',
+    description: 'Creative projects in the food industry. Example pages for restaurants, food trucks, catering services and specialty food products.',
+    keywords: 'restaurant website, meal service page, catering service page, food truck page, food product page',
     emoji: '🍕',
-    longDescription: 'Yemek sektörü hem geleneksel hem de modern yaklaşımlarla dolu yaratıcı bir alan. Ghost kitchenlardan gourmet ürünlere, veganözel diyetürlere kadar gıda sektöründeki çeşitli girişim fikirlerini keşfet.'
+    longDescription: 'The food industry is a creative field with both traditional and modern approaches. Explore diverse startup ideas from ghost kitchens to gourmet products and more.'
   },
   'fashion': {
-    title: 'Moda Projeleri',
-    description: 'Moda markaları, tasarımcılar ve stil danışmanları için oluşturulmuş estetik sayfalar. Fashion ve lifestyle sektöründeki trend projeler.',
-    keywords: 'moda markası sayfası, tasarımcı web sitesi, stil danışmanı sayfası, fashion brand landing page, moda ürün sayfası',
+    title: 'Fashion Projects',
+    description: 'Aesthetic pages built for fashion brands, designers and style consultants. Trend projects in fashion and lifestyle.',
+    keywords: 'fashion brand page, designer website, style consultant page, fashion brand landing page, fashion product page',
     emoji: '👗',
-    longDescription: 'Moda dünyası görsellik ve estetik açısından en ön planda olan sektörlerden biri. Kadın modasından erkek stiline, sürdürülebilir modadan özel tasarım hizmetlerine kadar moda sektöründeki yaratıcı projeleri incele.'
+    longDescription: 'Fashion is among the most visually driven sectors. From women’s fashion to men’s style, sustainable fashion to bespoke services—explore creative fashion projects.'
   },
   'travel': {
-    title: 'Seyahat Projeleri',
-    description: 'Turizm ve seyahat sektöründeki hizmetler. Tur operatörlerinden özel seyahat planlamasına, konaklama hizmetlerinden rehberlik servislerine.',
-    keywords: 'tur operatörü sayfası, seyahat rehberi web sitesi, otel rezervasyon sayfası, turizm hizmeti, seyahat danışmanlığı',
+    title: 'Travel Projects',
+    description: 'Services in tourism and travel. From tour operators to custom travel planning, from accommodation to guiding services.',
+    keywords: 'tour operator page, travel guide website, hotel booking page, tourism service, travel consulting',
     emoji: '✈️',
-    longDescription: 'Seyahat sektörü deneyim satışının en yoğun olduğu alanlardan biri. Boutique otellerden özel tur rehberliğine, seyahat blogundan macera turlarına kadar turizm sektöründeki çeşitli hizmet modellerini keşfet.'
+    longDescription: 'Travel is a space where experiences are everything. From boutique hotels to private guiding, from travel blogs to adventure tours—discover diverse service models in tourism.'
   }
 };
 
@@ -93,30 +93,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!categoryInfo) {
     return {
-      title: 'Kategori Bulunamadı - Listelee.io',
-      description: 'Aradığınız kategori bulunamadı. Tüm proje kategorilerini keşfetmek için ana sayfaya dönün.',
+      title: 'Category Not Found - Launch List',
+      description: 'The category you are looking for was not found. Return to the homepage to explore all project categories.',
     };
   }
 
   return {
-    title: `${categoryInfo.title} | Listelee.io Proje Galerisi`,
+    title: `${categoryInfo.title} | Launch List Project Gallery`,
     description: categoryInfo.description,
     keywords: categoryInfo.keywords,
     alternates: {
       canonical: `/kategori/${category}`,
     },
     openGraph: {
-      title: `${categoryInfo.title} | Listelee.io`,
+      title: `${categoryInfo.title} | Launch List`,
       description: categoryInfo.description,
       url: `${APP_URL}/kategori/${category}`,
-      siteName: 'Listelee.io',
+      siteName: 'Launch List',
       images: [`${APP_URL}/opengraph-image.png`],
-      locale: 'tr_TR',
+      locale: 'en_US',
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${categoryInfo.title} | Listelee.io`,
+      title: `${categoryInfo.title} | Launch List`,
       description: categoryInfo.description,
       images: [`${APP_URL}/twitter-image.png`],
     },
@@ -161,7 +161,7 @@ export default async function CategoryPage({ params }: Props) {
     "url": `${APP_URL}/kategori/${category}`,
     "isPartOf": {
       "@type": "WebSite",
-      "name": "Listelee.io",
+      "name": "Launch List",
       "url": APP_URL
     },
     "breadcrumb": {
@@ -170,13 +170,13 @@ export default async function CategoryPage({ params }: Props) {
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Ana Sayfa",
+          "name": "Home",
           "item": APP_URL
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Proje Galerisi",
+          "name": "Project Gallery",
           "item": `${APP_URL}/showcase`
         },
         {
@@ -221,9 +221,9 @@ export default async function CategoryPage({ params }: Props) {
             
             {/* Breadcrumb */}
             <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-6">
-              <Link href="/" className="hover:text-lime-600 dark:hover:text-lime-400">Ana Sayfa</Link>
+              <Link href="/" className="hover:text-lime-600 dark:hover:text-lime-400">Home</Link>
               <span>/</span>
-              <Link href="/showcase" className="hover:text-lime-600 dark:hover:text-lime-400">Proje Galerisi</Link>
+              <Link href="/showcase" className="hover:text-lime-600 dark:hover:text-lime-400">Project Gallery</Link>
               <span>/</span>
               <span className="text-gray-900 dark:text-gray-100">{categoryInfo.title}</span>
             </nav>
@@ -244,13 +244,13 @@ export default async function CategoryPage({ params }: Props) {
                 <div className="flex items-center gap-2">
                   <Target className="w-5 h-5 text-lime-500" />
                   <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                    {projects.length} Proje
+                    {projects.length} Projects
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-green-500" />
                   <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                    {formatNumber(projects.reduce((sum, p) => sum + (p.stats?.totalSignups || 0), 0))} Toplam Kayıt
+                    {formatNumber(projects.reduce((sum, p) => sum + (p.stats?.totalSignups || 0), 0))} Total Signups
                   </span>
                 </div>
               </div>
@@ -272,12 +272,12 @@ export default async function CategoryPage({ params }: Props) {
             <Link href="/showcase">
               <Button variant="outline" className="border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Tüm Kategoriler
+                All Categories
               </Button>
             </Link>
             
             <Badge variant="outline" className="border-lime-300 dark:border-lime-700 text-lime-800 dark:text-lime-200 bg-lime-50 dark:bg-lime-900/50">
-              {projects.length} proje bulundu
+              {projects.length} projects found
             </Badge>
           </div>
 
@@ -286,14 +286,14 @@ export default async function CategoryPage({ params }: Props) {
             <div className="text-center py-16 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg">
               <span className="text-6xl mb-4 block">{categoryInfo.emoji}</span>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                Bu kategoride henüz proje yok
+                No projects in this category yet
               </h3>
               <p className="text-gray-500 dark:text-gray-400 mb-6">
-                İlk projeyi sen oluştur ve bu kategoriye örnek ol!
+                Create the first project and set an example for this category!
               </p>
               <Link href="/onboarding">
                 <Button className="bg-gradient-to-r from-lime-400 to-green-500 hover:from-lime-500 hover:to-green-600 text-black">
-                  İlk Projeyi Oluştur
+                  Create the First Project
                 </Button>
               </Link>
             </div>
@@ -306,7 +306,7 @@ export default async function CategoryPage({ params }: Props) {
                       {project.config.title || project.name}
                     </CardTitle>
                     <CardDescription className="line-clamp-2 text-sm text-gray-600 dark:text-gray-400">
-                      {project.config.subtitle || project.config.description || "Harika bir proje"}
+                      {project.config.subtitle || project.config.description || "A great project"}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -331,7 +331,7 @@ export default async function CategoryPage({ params }: Props) {
                           className="w-full border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
                         >
                           <ExternalLink className="w-3 h-3 mr-2" />
-                          İncele
+                          View
                         </Button>
                       </Link>
                     </div>
@@ -346,20 +346,20 @@ export default async function CategoryPage({ params }: Props) {
             <div className="bg-gradient-to-r from-lime-400 to-green-500 rounded-xl p-8 text-black">
               <span className="text-4xl mb-4 block">{categoryInfo.emoji}</span>
               <h3 className="text-2xl font-bold mb-4">
-                {categoryInfo.title} kategorisinde sen de var ol!
+                Be part of {categoryInfo.title} too!
               </h3>
               <p className="text-black/80 mb-6 max-w-2xl mx-auto">
-                Listelee.io ile kendi {category} projenizi oluşturun, müşteri toplayın ve sektörünüzde fark yaratın.
+                Create your own {category} project with Launch List, collect customers, and make a difference in your industry.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/onboarding">
                   <Button size="lg" className="bg-white text-lime-600 hover:bg-gray-100 dark:bg-slate-800 dark:text-lime-400 dark:hover:bg-slate-700">
-                    Hemen Başla - Ücretsiz
+                    Get Started - Free
                   </Button>
                 </Link>
                 <Link href="/showcase">
                   <Button size="lg" variant="outline" className="border-white text-black hover:bg-white/20">
-                    Diğer Kategoriler
+                    Other Categories
                   </Button>
                 </Link>
               </div>

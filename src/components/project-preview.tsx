@@ -13,7 +13,7 @@ export default function ProjectPreview({ config }: ProjectPreviewProps) {
     const mockProject: Project = {
         id: 'preview-id',
         userId: 'preview-user',
-        name: config.name || 'Önizleme Projesi',
+        name: config.name || 'Preview Project',
         slug: 'preview-slug',
         status: 'published',
         createdAt: new Date().getTime(),

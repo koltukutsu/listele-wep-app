@@ -46,13 +46,13 @@ export default function Header() {
       await signOut(auth);
       // Clear the cookie by setting its expiration date to the past
       document.cookie = 'firebase-auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-      toast.success('Başarıyla çıkış yapıldı');
+      toast.success('Successfully signed out');
       if (pathname.startsWith('/dashboard')) {
         router.push('/');
       }
     } catch (error) {
       console.error('Sign out error:', error);
-      toast.error('Çıkış yapılırken bir hata oluştu');
+      toast.error('An error occurred while signing out');
     }
   };
 
@@ -67,7 +67,7 @@ export default function Header() {
       >
         <Link href="/" className="flex items-center gap-1 md:gap-2 shrink-0">
           <Logo />
-          <span className="font-bold text-black dark:text-white text-sm md:text-base">Listelee.io</span>
+          <span className="font-bold text-black dark:text-white text-sm md:text-base">Launch List</span>
         </Link>
 
         <div className="flex items-center gap-1 md:gap-4">
@@ -75,7 +75,7 @@ export default function Header() {
           <div className="hidden md:flex items-center gap-4">
             <Link href="/showcase">
               <Button variant="ghost" className="text-gray-900 dark:text-gray-300 hover:text-[#D8FF00] hover:bg-gray-50 dark:hover:bg-slate-800">
-                Tüm Projeler
+                All Projects
               </Button>
             </Link>
             <Link href="/blog">
@@ -85,7 +85,7 @@ export default function Header() {
             </Link>
             <Link href="/pricing">
               <Button variant="ghost" className="text-gray-900 dark:text-gray-300 hover:text-[#D8FF00] hover:bg-gray-50 dark:hover:bg-slate-800">
-                Fiyatlandırma
+                Pricing
               </Button>
             </Link>
           </div>
@@ -104,7 +104,7 @@ export default function Header() {
                     size="sm"
                   >
                     <Mic className="h-4 w-4" />
-                    <span className="sr-only">Fikrini Söyle</span>
+                    <span className="sr-only">Tell Your Idea</span>
                   </Button>
                 )}
 
@@ -122,14 +122,14 @@ export default function Header() {
                               : user.email?.[0].toUpperCase() || 'U'}
                           </AvatarFallback>
                         </Avatar>
-                        <span className="sr-only">Kullanıcı menüsü</span>
+                        <span className="sr-only">User menu</span>
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700 shadow-lg">
                       <DropdownMenuLabel className="font-normal bg-gray-50 dark:bg-slate-700 rounded-md mx-1 mb-1">
                         <div className="flex flex-col space-y-1 p-2">
                           <p className="text-sm font-medium leading-none text-black dark:text-white">
-                            {user.displayName || 'Kullanıcı'}
+                            {user.displayName || 'User'}
                           </p>
                           <p className="text-xs leading-none text-gray-500 dark:text-gray-400 truncate">
                             {user.email}
@@ -142,7 +142,7 @@ export default function Header() {
                       <div className="md:hidden">
                         <DropdownMenuItem asChild>
                           <Link href="/showcase" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
-                            Tüm Projeler
+                            All Projects
                           </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
@@ -152,7 +152,7 @@ export default function Header() {
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
                           <Link href="/pricing" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
-                            Fiyatlandırma
+                            Pricing
                           </Link>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator className="bg-gray-200 dark:bg-slate-600" />
@@ -161,12 +161,12 @@ export default function Header() {
                       {/* User menu items */}
                       <DropdownMenuItem asChild>
                         <Link href="/dashboard" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
-                          Panelim
+                          Dashboard
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild>
                         <Link href="/dashboard/profile" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
-                          Profilim
+                          Profile
                         </Link>
                       </DropdownMenuItem>
                       
@@ -175,7 +175,7 @@ export default function Header() {
                         <DropdownMenuSeparator className="bg-gray-200 dark:bg-slate-600" />
                         <div className="px-2 py-1">
                           <div className="flex items-center justify-between">
-                            <span className="text-sm text-gray-900 dark:text-gray-300">Tema</span>
+                            <span className="text-sm text-gray-900 dark:text-gray-300">Theme</span>
                             <ModeToggle />
                           </div>
                         </div>
@@ -186,7 +186,7 @@ export default function Header() {
                         onClick={handleSignOut}
                         className="text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-900/20 cursor-pointer"
                       >
-                        Çıkış Yap
+                        Sign Out
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -198,12 +198,12 @@ export default function Header() {
                   <div className="hidden md:flex items-center gap-1">
                     <Link href="/dashboard">
                       <Button variant="ghost" size="sm" className="text-gray-900 dark:text-gray-300 hover:text-[#D8FF00] hover:bg-gray-100 dark:hover:bg-slate-700 font-medium">
-                        Panelim
+                        Dashboard
                       </Button>
                     </Link>
                     <Link href="/dashboard/profile">
                       <Button variant="ghost" size="sm" className="text-gray-900 dark:text-gray-300 hover:text-[#D8FF00] hover:bg-gray-100 dark:hover:bg-slate-700 font-medium">
-                        Profilim
+                        Profile
                       </Button>
                     </Link>
                   </div>
@@ -216,7 +216,7 @@ export default function Header() {
                     className="hidden md:flex bg-[#D8FF00] hover:bg-[#B8E000] text-black font-bold shadow-lg"
                   >
                     <Mic className="mr-2 h-4 w-4" />
-                    Fikrini Söyle
+                    Tell Your Idea
                   </Button>
                 )}
               </div>
@@ -228,13 +228,13 @@ export default function Header() {
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="sm" className="p-2">
                         <Menu className="h-4 w-4" />
-                        <span className="sr-only">Menü</span>
+                        <span className="sr-only">Menu</span>
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-48 bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700 shadow-lg">
                       <DropdownMenuItem asChild>
                         <Link href="/showcase" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
-                          Tüm Projeler
+                          All Projects
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild>
@@ -244,13 +244,13 @@ export default function Header() {
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild>
                         <Link href="/pricing" className="w-full cursor-pointer text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
-                          Fiyatlandırma
+                          Pricing
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuSeparator className="bg-gray-200 dark:bg-slate-600" />
                       <div className="px-2 py-1">
                         <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-900 dark:text-gray-300">Tema</span>
+                          <span className="text-sm text-gray-900 dark:text-gray-300">Theme</span>
                           <ModeToggle />
                         </div>
                       </div>
@@ -259,7 +259,7 @@ export default function Header() {
                 </div>
                 <Link href="/login">
                   <Button variant="secondary" size="sm" className="bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-200 hover:bg-[#D8FF00] hover:text-black border-gray-300 dark:border-slate-600 text-xs md:text-sm px-2 md:px-4">
-                    Giriş Yap
+                    Sign In
                   </Button>
                 </Link>
               </div>

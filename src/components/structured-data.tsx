@@ -19,101 +19,101 @@ export function StructuredData({ data }: StructuredDataProps) {
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Listelee.io",
-  "url": "https://listele.io",
-  "logo": "https://listele.io/Logo.png",
+  "name": "Launch List",
+  "url": "https://launchlist.io",
+  "logo": "https://launchlist.io/Logo.png",
   "sameAs": [
-    "https://twitter.com/listeleio"
+    "https://twitter.com/launchlist"
   ],
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer service",
-    "availableLanguage": "Turkish"
+    "availableLanguage": "English"
   }
 };
 
 export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Listelee.io",
-  "url": "https://listele.io",
-  "description": "Fikirlerini hızla hayata geçir. AI destekli platform ile projelerini oluştur, müşteri topla ve büyü.",
-  "inLanguage": "tr",
+  "name": "Launch List",
+  "url": "https://launchlist.io",
+  "description": "Bring your ideas to life quickly. Create projects, collect customers, and grow with our AI-powered platform.",
+  "inLanguage": "en",
   "author": {
     "@type": "Organization",
-    "name": "Listelee.io"
+    "name": "Launch List"
   }
 };
 
 export const softwareApplicationSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "Listelee.io",
-  "description": "AI destekli platform ile projelerini oluştur, müşteri topla ve büyü. Türkiye'nin en hızlı landing page oluşturucusu.",
-  "url": "https://listele.io",
+  "name": "Launch List",
+  "description": "Create projects, collect customers, and grow with our AI-powered platform. The fastest landing page creator.",
+  "url": "https://launchlist.io",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
   "offers": {
     "@type": "Offer",
     "price": "0",
-    "priceCurrency": "TRY",
-    "description": "Ücretsiz plan mevcut, ücretli planlar 10 TL'den başlar"
+    "priceCurrency": "USD",
+    "description": "Free plan available, paid plans start from $10"
   },
   "author": {
     "@type": "Organization", 
-    "name": "Listelee.io"
+    "name": "Launch List"
   },
-  "inLanguage": "tr",
-  "availableLanguage": "Turkish",
+  "inLanguage": "en",
+  "availableLanguage": "English",
   "featureList": [
-    "Landing page oluşturma",
-    "AI destekli içerik oluşturma", 
-    "Lead toplama",
-    "Proje validasyonu",
-    "Sesli proje oluşturma"
+    "Landing page creation",
+    "AI-powered content creation", 
+    "Lead collection",
+    "Project validation",
+    "Voice project creation"
   ]
 }; 
 
 export const pricingPageSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
-  "name": "Listelee.io Landing Page Builder",
-  "description": "AI destekli landing page oluşturma platformu",
+  "name": "Launch List Landing Page Builder",
+  "description": "AI-powered landing page creation platform",
   "brand": {
     "@type": "Brand",
-    "name": "Listelee.io"
+    "name": "Launch List"
   },
   "offers": [
     {
       "@type": "Offer",
-      "name": "Ücretsiz",
+      "name": "Free",
       "price": "0",
-      "priceCurrency": "TRY",
-      "description": "2 Proje, 75 Form Doldurma/Proje",
+      "priceCurrency": "USD",
+      "description": "2 Projects, 75 Form Submissions/Project",
       "availability": "InStock"
     },
     {
       "@type": "Offer",
-      "name": "Temel",
+      "name": "Basic",
       "price": "10",
-      "priceCurrency": "TRY",
-      "description": "5 Proje, 200 Form Doldurma/Proje",
+      "priceCurrency": "USD",
+      "description": "5 Projects, 200 Form Submissions/Project",
       "availability": "InStock"
     },
     {
       "@type": "Offer",
       "name": "Pro",
       "price": "49",
-      "priceCurrency": "TRY",
-      "description": "25 Proje, 2,000 Form Doldurma/Proje",
+      "priceCurrency": "USD",
+      "description": "25 Projects, 2,000 Form Submissions/Project",
       "availability": "InStock"
     },
     {
       "@type": "Offer",
-      "name": "Sınırsız",
+      "name": "Unlimited",
       "price": "99",
-      "priceCurrency": "TRY",
-      "description": "Sınırsız Proje, Sınırsız Form Doldurma",
+      "priceCurrency": "USD",
+      "description": "Unlimited Projects, Unlimited Form Submissions",
       "availability": "InStock"
     }
   ]

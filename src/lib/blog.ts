@@ -45,10 +45,10 @@ export function getBlogPostBySlug(slug: string): LocalBlogPost | null {
       excerpt: data.excerpt || '',
       content,
       author: data.author || {
-        name: 'Listelee.io',
-        email: 'info@listelee.io'
+        name: 'Launch List',
+        email: 'info@launchlist.io'
       },
-      category: data.category || 'Genel',
+      category: data.category || 'General',
       tags: data.tags || [],
       status: 'published', // Local markdown files are always published
       seo: data.seo || {

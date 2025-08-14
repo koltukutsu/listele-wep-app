@@ -13,22 +13,22 @@ export default function SocialProof() {
 
   const testimonials = [
     {
-      name: "Selin Y.",
-      title: "Kurucu, Organik Atölye",
+      name: "Sarah Y.",
+      title: "Founder, Organic Workshop",
       quote:
-        "Fikrimi bir gecede hayata geçirdim ve ilk hafta 100'den fazla bekleyen topladım. Bu hız inanılmaz.",
+        "I brought my idea to life overnight and collected over 100 people on the waitlist in the first week. This speed is incredible.",
     },
     {
-      name: "Ahmet C.",
-      title: "Girişimci",
+      name: "Alex C.",
+      title: "Entrepreneur",
       quote:
-        "Aylarca sürecek bir işi dakikalar içinde başlattım. Yatırımcı sunumumda gösterdiğim 500 kişilik bekleme listesi her şeyi değiştirdi.",
+        "I started what would have taken months in minutes. The 500-person waitlist I showed in my investor presentation changed everything.",
     },
     {
-      name: "Elif T.",
-      title: "Tasarımcı",
+      name: "Emma T.",
+      title: "Designer",
       quote:
-        "Teknik bilgim sıfır olmasına rağmen, etkileyici bir bekleme sayfası oluşturdum. İlk gün 50 kayıt aldım; daha motive olamazdım.",
+        "Despite having zero technical knowledge, I created an impressive waitlist page. I got 50 registrations on the first day; I couldn't be more motivated.",
     },
   ];
   
@@ -43,10 +43,10 @@ export default function SocialProof() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-black dark:text-white">
-            <span className="text-[#D8FF00]">{userCount}+</span> Girişimci Bize Güveniyor
+            <span className="text-[#D8FF00]">{userCount}+</span> Entrepreneurs Trust Us
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-gray-900 dark:text-gray-300 mt-4">
-            Listelee ile bekleme listesi açan girişimcilerin yorumları.
+            Reviews from entrepreneurs who opened waitlists with Launch List.
           </p>
         </motion.div>
         <motion.div

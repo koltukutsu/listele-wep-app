@@ -13,7 +13,7 @@ export default function Importance() {
           transition={{ duration: 0.5 }}
           className="text-3xl sm:text-4xl font-bold mb-6 text-black dark:text-white"
         >
-          Önce Bekleme Listeni Kur, Sonra Ürünü Yap
+          Build Your Waitlist First, Then Build Your Product
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -22,7 +22,7 @@ export default function Importance() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="max-w-3xl mx-auto text-lg text-gray-900 dark:text-gray-300 mb-12 sm:mb-16"
         >
-          Hiç kimse beklemiyorsa neden inşa edesin? Listelee ile fikrini bugün duyur, pazarın hazır olup olmadığını gör ve boşa vakit harcamadan ilerle.
+          Why build if no one is waiting? Announce your idea today with Launch List, see if the market is ready, and move forward without wasting time.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -32,21 +32,21 @@ export default function Importance() {
           className="grid md:grid-cols-3 gap-8"
         >
           <div className="p-8 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 hover:shadow-lg hover:border-[#D8FF00] dark:hover:border-[#D8FF00] transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4 text-black dark:text-white">Talebi Kanıtla, Varsayımı Bırak</h3>
+            <h3 className="text-2xl font-bold mb-4 text-black dark:text-white">Prove Demand, Leave Assumptions</h3>
             <p className="text-gray-900 dark:text-gray-300">
-              Bekleme listene kaydolan gerçek insanlar tahminlerden daha değerlidir. Fikrini gerçekten isteyen var mı, anında gör.
+              Real people signing up for your waitlist are more valuable than assumptions. See instantly if anyone actually wants your idea.
             </p>
           </div>
           <div className="p-8 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 hover:shadow-lg hover:border-[#D8FF00] dark:hover:border-[#D8FF00] transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4 text-black dark:text-white">İlk Topluluğunu İnşa Et</h3>
+            <h3 className="text-2xl font-bold mb-4 text-black dark:text-white">Build Your First Community</h3>
             <p className="text-gray-900 dark:text-gray-300">
-              Bunlar sadece e-postalar değil; senin vizyonuna inanan ilk destekçilerin. Onlarla konuş, öğren ve ürününü onlarla birlikte geliştir.
+              These aren't just emails; they're your first supporters who believe in your vision. Talk to them, learn from them, and develop your product with them.
             </p>
           </div>
           <div className="p-8 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 hover:shadow-lg hover:border-[#D8FF00] dark:hover:border-[#D8FF00] transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4 text-black dark:text-white">Motivasyonunu Canlı Tut</h3>
+            <h3 className="text-2xl font-bold mb-4 text-black dark:text-white">Keep Your Motivation Alive</h3>
             <p className="text-gray-900 dark:text-gray-300">
-              Listendeki her yeni kişi üretime başlamak için bir sebep. Seni bekleyen bir kitle varken erteleme, inşa etmeye başla.
+              Every new person on your list is a reason to start building. Don't procrastinate when you have an audience waiting for you, start building.
             </p>
           </div>
         </motion.div>

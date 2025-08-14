@@ -32,39 +32,39 @@ export default function Hero() {
                 className="space-y-8"
               >
                 <h1 className="text-black dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl leading-tight">
-                  Müşterini Önce <span className="text-[#D8FF00]">Topla.</span>
+                  Collect Your <span className="text-[#D8FF00]">Customers</span> First.
                 </h1>
 
                 <div className="mt-6">
                   <p className="text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-                    Fikrini Listelee, Bekleyenlerini Topla.
+                    List Your Idea, Collect Your Waitlist.
                   </p>
                 </div>
 
                 <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-                  <strong className="text-black dark:text-white">Ürününü geliştirmeden önce müşterini bul.</strong> Listelee ile dakikalar içinde bekleme listesi sayfası kur,
-                  <strong className="text-black dark:text-white"> gerçek talebi ölç</strong>,
-                  <strong className="text-black dark:text-white"> ilk geri bildirimleri topla</strong> ve
-                  <strong className="text-black dark:text-white"> seni bekleyen bir kitleyle motive ol.</strong>
-                  Müşterisi olmayan ürüne emek verme.
+                  <strong className="text-black dark:text-white">Find your customers before developing your product.</strong> Set up a waitlist page in minutes with Launch List,
+                  <strong className="text-black dark:text-white"> measure real demand</strong>,
+                  <strong className="text-black dark:text-white"> collect first feedback</strong> and
+                  <strong className="text-black dark:text-white"> get motivated by an audience waiting for you.</strong>
+                  Don't waste effort on products without customers.
                 </p>
 
                 <div className="mt-8 flex flex-wrap justify-center gap-2 text-sm">
                   <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-200 font-medium">
-                    📮 Bekleme Listesi
+                    📮 Waitlist
                   </span>
                   <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-200 font-medium">
-                    📊 Pazar Doğrulaması
+                    📊 Market Validation
                   </span>
                   <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-200 font-medium">
-                    🔥 Ürün Motivasyonu
+                    🔥 Product Motivation
                   </span>
                 </div>
 
                 <div className="mt-12 flex flex-wrap justify-center gap-y-4 gap-x-6">
                   <Link href={paymentEnabled ? "/onboarding" : "/dashboard"}>
                     <Button size="lg" className="relative w-full sm:w-auto bg-[#D8FF00] hover:bg-[#B8E000] text-black font-bold text-lg px-8 py-4 shadow-lg hover:shadow-xl transition-all">
-                      🚀 Ücretsiz Başla
+                      🚀 Start Free
                     </Button>
                   </Link>
                   {paymentEnabled && (
@@ -75,13 +75,13 @@ export default function Hero() {
                       className="relative w-full sm:w-auto group border-2 border-[#D8FF00] text-black dark:text-white hover:bg-[#D8FF00]/10 dark:hover:bg-[#D8FF00]/20 font-semibold text-lg px-8 py-4"
                     >
                       <Mic className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                      Sesle Proje Oluştur
+                      Create Project with Voice
                     </Button>
                   )}
                 </div>
 
                 <div className="mt-8 text-sm text-gray-800 dark:text-gray-400">
-                  💳 Kredi kartı gerektirmez • 🎯 2 proje + 75 form ücretsiz • ⭐ Dakikalar içinde test et
+                  💳 No credit card required • 🎯 2 projects + 75 forms free • ⭐ Test in minutes
                 </div>
               </motion.div>
             </div>
