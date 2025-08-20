@@ -13,7 +13,7 @@ export default function NewProjectRedirectPage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
-      <p>Yeni proje oluşturuluyor...</p>
+      <p>Creating new project...</p>
     </main>
   );
 }

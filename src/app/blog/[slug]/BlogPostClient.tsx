@@ -40,7 +40,7 @@ export default function BlogPostClient({ post, recentPosts }: BlogPostClientProp
     const date = typeof timestamp.seconds === 'number' 
       ? new Date(timestamp.seconds * 1000)
       : new Date(timestamp);
-    return date.toLocaleDateString('tr-TR', {
+    return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
@@ -59,10 +59,10 @@ export default function BlogPostClient({ post, recentPosts }: BlogPostClientProp
     try {
       await navigator.clipboard.writeText(url);
       setCopiedLink(true);
-      toast.success("Bağlantı panoya kopyalandı!");
+      toast.success("Link copied to clipboard!");
       setTimeout(() => setCopiedLink(false), 2000);
     } catch (error) {
-      toast.error("Bağlantı kopyalanamadı");
+      toast.error("Failed to copy link");
     }
   };
 
@@ -89,7 +89,7 @@ export default function BlogPostClient({ post, recentPosts }: BlogPostClientProp
           
           {/* Breadcrumbs */}
           <nav className="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 overflow-x-auto">
-            <Link href="/" className="hover:text-[#D8FF00] whitespace-nowrap">Ana Sayfa</Link>
+            <Link href="/" className="hover:text-[#D8FF00] whitespace-nowrap">Home</Link>
             <span>/</span>
             <Link href="/blog" className="hover:text-[#D8FF00] whitespace-nowrap">Blog</Link>
             <span>/</span>
@@ -107,7 +107,7 @@ export default function BlogPostClient({ post, recentPosts }: BlogPostClientProp
           <Link href="/blog">
             <Button variant="outline" size="sm" className="mb-4 sm:mb-6 text-xs sm:text-sm border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700">
               <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-              Blog'a Dön
+              Back to Blog
             </Button>
           </Link>
 
@@ -119,7 +119,7 @@ export default function BlogPostClient({ post, recentPosts }: BlogPostClientProp
               </Badge>
               <div className="flex items-center gap-1 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                 <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
-                {post.readingTime} dakika okuma
+                {post.readingTime} minutes read
               </div>
             </div>
 
@@ -153,7 +153,7 @@ export default function BlogPostClient({ post, recentPosts }: BlogPostClientProp
                 </div>
                 <div className="flex items-center gap-1 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                   <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
-                  {formatNumber(post.views || 0)} görüntüleme
+                  {formatNumber(post.views || 0)} views
                 </div>
               </div>
 
@@ -298,7 +298,7 @@ export default function BlogPostClient({ post, recentPosts }: BlogPostClientProp
                 <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200 dark:border-slate-700">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <h4 className="text-base sm:text-lg font-semibold text-black dark:text-white">
-                      Bu yazıyı paylaş
+                      Share this article
                     </h4>
                     <div className="flex flex-wrap items-center gap-2">
                       <Button
@@ -310,12 +310,12 @@ export default function BlogPostClient({ post, recentPosts }: BlogPostClientProp
                         {copiedLink ? (
                           <>
                             <Check className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-                            Kopyalandı!
+                            Copied!
                           </>
                         ) : (
                           <>
                             <Copy className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-                            Linki Kopyala
+                            Copy Link
                           </>
                         )}
                       </Button>
@@ -347,7 +347,7 @@ export default function BlogPostClient({ post, recentPosts }: BlogPostClientProp
                 <CardHeader className="pb-3 sm:pb-4">
                   <CardTitle className="flex items-center gap-2 text-base sm:text-lg text-black dark:text-white">
                     <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-[#D8FF00]" />
-                    Son Yazılar
+                    Recent Posts
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0">
@@ -371,7 +371,7 @@ export default function BlogPostClient({ post, recentPosts }: BlogPostClientProp
                   <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-200 dark:border-slate-700">
                     <Link href="/blog">
                       <Button variant="outline" className="w-full text-xs sm:text-sm border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:border-[#D8FF00] hover:text-[#D8FF00]">
-                        Tüm Yazıları Gör
+                        View All Posts
                       </Button>
                     </Link>
                   </div>
@@ -382,14 +382,14 @@ export default function BlogPostClient({ post, recentPosts }: BlogPostClientProp
               <Card className="border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800">
                 <CardContent className="p-4 sm:p-6 text-center">
                   <h4 className="font-bold text-sm sm:text-base text-black dark:text-white mb-2">
-                    🚀 Kendi Projenizi Oluşturun!
+                    🚀 Create Your Own Project!
                   </h4>
                   <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3 sm:mb-4">
-                    Blog'da edindiğiniz bilgileri pratiğe dökün ve kendi landing page'inizi oluşturun.
+                    Put the knowledge you gained from the blog into practice and create your own landing page.
                   </p>
                   <Link href="/onboarding">
                     <Button className="w-full text-xs sm:text-sm bg-[#D8FF00] hover:bg-[#B8E000] text-black">
-                      Hemen Başla
+                      Get Started
                     </Button>
                   </Link>
                 </CardContent>
