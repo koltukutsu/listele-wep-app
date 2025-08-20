@@ -76,7 +76,7 @@ export default function BlogListingClient({
     const date = typeof timestamp.seconds === 'number' 
       ? new Date(timestamp.seconds * 1000)
       : new Date(timestamp);
-    return date.toLocaleDateString('tr-TR', {
+    return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
@@ -105,8 +105,8 @@ export default function BlogListingClient({
               <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-[#D8FF00]" />
             </div>
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-6 px-4">
-              Girişimcilik dünyasından en güncel haberler, startup hikayeleri, teknoloji trendleri 
-              ve proje geliştirme rehberleri. Başarılı girişimcilerden ilham al!
+              Latest news from the entrepreneurship world, startup stories, technology trends 
+              and project development guides. Get inspired by successful entrepreneurs!
             </p>
             
             {/* Blog Stats */}
@@ -114,19 +114,19 @@ export default function BlogListingClient({
               <div className="flex items-center gap-2">
                 <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-[#D8FF00]" />
                 <span className="text-base sm:text-lg font-semibold text-black dark:text-white">
-                  {posts.length} Makale
+                  {posts.length} Articles
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <Filter className="w-4 h-4 sm:w-5 sm:h-5 text-[#D8FF00]" />
                 <span className="text-base sm:text-lg font-semibold text-black dark:text-white">
-                  {categories.length} Kategori
+                  {categories.length} Categories
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <Eye className="w-4 h-4 sm:w-5 sm:h-5 text-[#D8FF00]" />
                 <span className="text-base sm:text-lg font-semibold text-black dark:text-white">
-                  {formatNumber(posts.reduce((sum, post) => sum + (post.views || 0), 0))} Görüntüleme
+                  {formatNumber(posts.reduce((sum, post) => sum + (post.views || 0), 0))} Views
                 </span>
               </div>
             </div>
@@ -145,7 +145,7 @@ export default function BlogListingClient({
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-4 h-4 sm:w-5 sm:h-5" />
                 <Input
-                  placeholder="Makale ara... (başlık, içerik veya etiket)"
+                  placeholder="Search articles... (title, content or tags)"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-9 sm:pl-10 text-sm sm:text-base border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-black dark:text-white focus:ring-[#D8FF00] focus:border-[#D8FF00]"
@@ -156,7 +156,7 @@ export default function BlogListingClient({
             {/* Category Filter */}
             <div className="mb-4 sm:mb-6">
               <h4 className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 sm:mb-3">
-                📂 Kategoriler
+                📂 Categories
               </h4>
               <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 <Button
@@ -168,7 +168,7 @@ export default function BlogListingClient({
                     : "border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
                   }`}
                 >
-                  Tümü ({posts.length})
+                  All ({posts.length})
                 </Button>
                 {categories.map((category) => {
                   const categoryCount = posts.filter(p => p.category === category).length;
@@ -193,7 +193,7 @@ export default function BlogListingClient({
             {/* Tag Filter */}
             <div>
               <h4 className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 sm:mb-3">
-                🏷️ Etiketler
+                🏷️ Tags
               </h4>
               <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 <Button
@@ -205,7 +205,7 @@ export default function BlogListingClient({
                     : "border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
                   }`}
                 >
-                  Tümü
+                  All
                 </Button>
                 {tags.slice(0, 10).map((tag) => { // Show only first 10 tags
                   const tagCount = posts.filter(p => p.tags.includes(tag)).length;
@@ -226,7 +226,7 @@ export default function BlogListingClient({
                 })}
                 {tags.length > 10 && (
                   <Badge variant="outline" className="text-xs border-gray-300 dark:border-slate-600 text-gray-600 dark:text-gray-400">
-                    +{tags.length - 10} daha
+                    +{tags.length - 10} more
                   </Badge>
                 )}
               </div>
@@ -236,9 +236,9 @@ export default function BlogListingClient({
             <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-100 dark:border-slate-700">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 <span>
-                  {filteredPosts.length} sonuç gösteriliyor
+                  {filteredPosts.length} results showing
                   {(searchTerm || selectedCategory !== "all" || selectedTag !== "all") && 
-                    ` (${posts.length} toplam makale)`
+                    ` (${posts.length} total articles)`
                   }
                 </span>
                 {(searchTerm || selectedCategory !== "all" || selectedTag !== "all") && (
@@ -252,7 +252,7 @@ export default function BlogListingClient({
                     }}
                     className="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-700 text-xs sm:text-sm w-fit"
                   >
-                    Filtreleri Temizle
+                    Clear Filters
                   </Button>
                 )}
               </div>
@@ -266,13 +266,13 @@ export default function BlogListingClient({
             <BookOpen className="w-12 h-12 sm:w-16 sm:h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
             <h3 className="text-lg sm:text-xl font-semibold text-black dark:text-white mb-2 px-4">
               {searchTerm || selectedCategory !== "all" || selectedTag !== "all" 
-                ? "Aramanızla eşleşen makale bulunamadı" 
-                : "Henüz hiç blog yazısı yayınlanmamış"}
+                ? "No articles found matching your search" 
+                : "No blog posts published yet"}
             </h3>
             <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 mb-6 px-4">
               {searchTerm || selectedCategory !== "all" || selectedTag !== "all"
-                ? "Farklı anahtar kelimeler veya filtreler deneyebilirsiniz."
-                : "İlk blog yazımız yakında yayınlanacak!"}
+                ? "You can try different keywords or filters."
+                : "Our first blog post will be published soon!"}
             </p>
             {(searchTerm || selectedCategory !== "all" || selectedTag !== "all") && (
               <Button 
@@ -284,7 +284,7 @@ export default function BlogListingClient({
                 }}
                 className="border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 text-sm"
               >
-                Tüm Makaleleri Göster
+                Show All Articles
               </Button>
             )}
           </div>
@@ -306,7 +306,7 @@ export default function BlogListingClient({
                         </Badge>
                         <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
                           <Clock className="w-3 h-3" />
-                          {post.readingTime} dk okuma
+                          {post.readingTime} min read
                         </div>
                       </div>
                       <CardTitle className="text-base sm:text-lg group-hover:text-[#D8FF00] transition-colors line-clamp-2 text-black dark:text-white mb-2">
@@ -364,7 +364,7 @@ export default function BlogListingClient({
                           variant="outline"
                           className="w-full text-sm border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:border-[#D8FF00] hover:text-[#D8FF00]"
                         >
-                          Devamını Oku →
+                          Read More →
                         </Button>
                       </Link>
                     </div>
@@ -383,7 +383,7 @@ export default function BlogListingClient({
                   disabled={currentPage === 1}
                   className="w-full sm:w-auto text-sm border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
                 >
-                  ← Önceki
+                  ← Previous
                 </Button>
                 
                 <div className="flex items-center gap-1 overflow-x-auto max-w-full">
@@ -436,7 +436,7 @@ export default function BlogListingClient({
                   disabled={currentPage === totalPages}
                   className="w-full sm:w-auto text-sm border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
                 >
-                  Sonraki →
+                  Next →
                 </Button>
               </div>
             )}
@@ -448,22 +448,22 @@ export default function BlogListingClient({
           <div className="bg-[#D8FF00] rounded-xl p-6 sm:p-8 text-black mx-2 sm:mx-0">
             <BookOpen className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-4" />
             <h3 className="text-xl sm:text-2xl font-bold mb-4">
-              Kendin de Bir Proje Oluştur! 🚀
+              Create Your Own Project! 🚀
             </h3>
             <p className="text-sm sm:text-base text-black/80 mb-6 max-w-2xl mx-auto px-4">
-              Blog'da okuduğun hikayelere ilham al ve kendi startup yolculuğuna başla. 
+              Get inspired by the stories you read on the blog and start your own startup journey. 
               Build your professional landing page in minutes with Launch List.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Link href="/onboarding">
                 <Button size="lg" className="w-full sm:w-auto text-sm sm:text-base bg-white text-black hover:bg-gray-100 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700">
                   <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                  Hemen Başla - Ücretsiz
+                  Get Started - Free
                 </Button>
               </Link>
               <Link href="/showcase">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto text-sm sm:text-base border-black text-black hover:bg-black/10">
-                  Örnek Projeleri İncele
+                  View Sample Projects
                 </Button>
               </Link>
             </div>

@@ -110,7 +110,7 @@ export function ReferralDashboard() {
                   {copiedLink ? (
                     <>
                       <Check className="w-4 h-4 mr-1" />
-                      Kopyalandı!
+                      Copied!
                     </>
                   ) : (
                     <>
@@ -124,11 +124,11 @@ export function ReferralDashboard() {
 
             {/* How it works */}
             <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-600 rounded-lg p-4">
-              <h4 className="font-medium text-black dark:text-white mb-2">📋 Nasıl Çalışır?</h4>
+              <h4 className="font-medium text-black dark:text-white mb-2">📋 How It Works?</h4>
               <ol className="text-sm text-gray-700 dark:text-gray-300 space-y-1 list-decimal list-inside">
-                <li>Referans linkini arkadaşlarınla paylaş</li>
-                <li>Arkadaşın linke tıklayıp kaydolur</li>
-                <li>İlk projesini oluşturduğunda sen +1 proje hakkı kazanırsın</li>
+                <li>Share your referral link with friends</li>
+                <li>Your friend clicks the link and signs up</li>
+                <li>When they create their first project, you earn +1 project credit</li>
                 <li>Arkadaşın da 1 ay ücretsiz Temel plan kullanır!</li>
               </ol>
             </div>
