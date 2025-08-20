@@ -13,7 +13,7 @@ import { createProject, getProjectById, updateProject, deleteProject } from "~/l
 import type { Project } from "~/lib/firestore";
 import ProjectPreview from "~/components/project-preview";
 import Confetti from 'react-confetti';
-import AIFounderModal from '~/components/ai-founder-modal';
+import AIFounderFashionl from '~/components/ai-founder-modal';
 import { PartyPopper, Copy, Check, Trash2, X } from 'lucide-react';
 import {
   Dialog,
@@ -38,17 +38,17 @@ import {
 
 
 const PROJECT_CATEGORIES = [
-    { value: "other", label: "Diğer" },
-    { value: "e-commerce", label: "E-Ticaret" },
+    { value: "other", label: "Other" },
+    { value: "e-commerce", label: "E-Commerce" },
     { value: "saas", label: "SaaS" },
-    { value: "local-business", label: "Yerel İşletme" },
-    { value: "consulting", label: "Danışmanlık" },
-    { value: "education", label: "Eğitim" },
-    { value: "health", label: "Sağlık" },
-    { value: "technology", label: "Teknoloji" },
-    { value: "food", label: "Yemek & İçecek" },
-    { value: "fashion", label: "Moda" },
-    { value: "travel", label: "Seyahat" }
+    { value: "local-business", label: "Local Business" },
+    { value: "consulting", label: "Consulting" },
+    { value: "education", label: "Education" },
+    { value: "health", label: "Health" },
+    { value: "technology", label: "Technology" },
+    { value: "food", label: "Food & Beverage" },
+    { value: "fashion", label: "Fashion" },
+    { value: "travel", label: "Travel" }
 ];
 
 interface Benefit {
@@ -64,21 +64,21 @@ interface Feature {
 }
 
 const defaultConfig = {
-    name: "Yeni Projem",
-    title: "Geleceği İnşa Etmeye Hazır mısın?",
-    subtitle: "Büyük fikrin için ilk adımı at, dünyayı değiştirmeye başla.",
-    description: "Bu yolculukta sana katılacak ilk kişilerden olmak için mailini bırak.",
+    name: "My New Project",
+    title: "Ready to Build the Future?",
+    subtitle: "Take the first step for your big idea, start changing the world.",
+    description: "Leave your email to be among the first to join this journey.",
     backgroundColor: "#ffffff",
     textColor: "#1f2937",
     accentColor: "#3b82f6",
     formFields: { name: true, email: true, phone: false },
-    buttonText: "Geleceğin Parçası Ol",
-    thankYouMessage: "Harika! Aramıza hoş geldin. Çok yakında büyük haberlerle döneceğiz. ",
+    buttonText: "Be Part of the Future",
+    thankYouMessage: "Great! Welcome to our community. We'll be back with big news very soon. ",
     isPublic: true, // Default to public for free users
     category: 'other', // Default category
     targetAudience: {
-        title: "Kimin Problemini Çözüyorsun?",
-        description: "Girişiminin kalbinde yatan değeri anlat. Hangi büyük soruna çözüm getirdiğini, kimin hayatını kolaylaştırdığını net ve etkileyici bir şekilde ifade et."
+        title: "Whose Problem Are You Solving?",
+        description: "Tell the value at the heart of your venture. Express clearly and impressively what big problem you're solving and whose life you're making easier."
     },
     benefits: [
         { title: "Değer Vaadin 1", description: "Kullanıcıların hayatını nasıl değiştireceksin?", icon: "" },
@@ -92,11 +92,11 @@ const defaultConfig = {
     ],
     faqSections: {
         whoIsItFor: {
-            title: "Kimler İçin?",
+            title: "Who Is It For?",
             items: ["Girişimciler", "Yaratıcılar", "Meraklılar"]
         },
         whatCanItDo: {
-            title: "Neler Yapabilir?",
+            title: "What Can It Do?",
             items: ["Fikrini doğrula", "Topluluk oluştur", "Harekete geç"]
         }
     },
@@ -113,7 +113,7 @@ export default function ProjectEditorPage() {
     const [createdProjectId, setCreatedProjectId] = useState<string | null>(null);
     const [createdProjectSlug, setCreatedProjectSlug] = useState<string | null>(null);
     const [showConfetti, setShowConfetti] = useState(false);
-    const [isAiModalOpen, setIsAiModalOpen] = useState(false);
+    const [isAiFashionlOpen, setIsAiFashionlOpen] = useState(false);
     const [user, setUser] = useState<User | null>(null);
     const [authLoading, setAuthLoading] = useState(true);
     const [copyButtonText, setCopyButtonText] = useState('Kopyala');
@@ -148,11 +148,11 @@ export default function ProjectEditorPage() {
                         if (projectData && projectData.userId === currentUser.uid) {
                             setConfig(projectData.config);
                         } else {
-                            toast.error('Proje bulunamadı veya bu projeyi düzenleme yetkiniz yok.');
+                            toast.error('Project not found or you don't have permission to edit this project.');
                             router.push('/dashboard');
                         }
                     } catch (error) {
-                        toast.error('Proje yüklenirken bir hata oluştu.');
+                        toast.error('An error occurred while loading the project.');
                         console.error('Error fetching project:', error);
                     }
                 }
@@ -229,11 +229,11 @@ export default function ProjectEditorPage() {
         setIsDeleting(true);
         try {
             await deleteProject(projectId);
-            toast.success('Proje başarıyla silindi.');
+            toast.success('Project deleted successfully.');
             router.push('/dashboard');
         } catch (error) {
             console.error('Error deleting project:', error);
-            toast.error('Proje silinirken bir hata oluştu.');
+            toast.error('An error occurred while deleting the project.');
         } finally {
             setIsDeleting(false);
             setShowDeleteDialog(false);
@@ -242,11 +242,11 @@ export default function ProjectEditorPage() {
 
     const handleSaveProject = async () => {
         if (!config.name) {
-            toast.error("Lütfen proje adını girin.");
+            toast.error("Please enter a project name.");
             return;
         }
         if (!user) {
-            toast.error("Oturum açmanız gerekiyor.");
+            toast.error("You need to sign in.");
             return;
         }
 
@@ -276,7 +276,7 @@ export default function ProjectEditorPage() {
             }
         } catch (error) {
             console.error("Error saving project:", error);
-            toast.error("Proje kaydedilirken bir hata oluştu.");
+            toast.error("An error occurred while saving the project.");
         } finally {
             setLoading(false);
         }
@@ -290,7 +290,7 @@ export default function ProjectEditorPage() {
     };
 
     const addListItem = (section: 'benefits' | 'features') => {
-        const newItem = section === 'benefits' ? { title: "Yeni Değer Vaadi", description: "Açıklama", icon: "" } : { title: "Yeni Özellik", description: "Açıklama", icon: "" };
+        const newItem = section === 'benefits' ? { title: "New Value Proposition", description: "Description", icon: "" } : { title: "New Feature", description: "Description", icon: "" };
         updateConfig(section, [...config[section], newItem]);
     };
 
@@ -300,7 +300,7 @@ export default function ProjectEditorPage() {
     };
 
     const addFaqItem = (section: 'whoIsItFor' | 'whatCanItDo') => {
-        const newItems = [...config.faqSections[section].items, "Yeni Soru"];
+        const newItems = [...config.faqSections[section].items, "New Question"];
         updateConfig(`faqSections.${section}.items`, newItems);
     };
 
@@ -329,25 +329,25 @@ export default function ProjectEditorPage() {
     }
 
     if (authLoading) {
-    return <main className="flex min-h-screen flex-col items-center justify-center p-24"><p>Yükleniyor...</p></main>;
+    return <main className="flex min-h-screen flex-col items-center justify-center p-24"><p>Loading...</p></main>;
   }
 
   return (
     <main className="h-screen bg-gray-50 overflow-hidden">
       {authLoading ? (
-        <div className="flex items-center justify-center h-full">Yükleniyor...</div>
+        <div className="flex items-center justify-center h-full">Loading...</div>
       ) : (
         <>
           {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} onConfettiComplete={() => setShowConfetti(false)} recycle={false} numberOfPieces={400} />}
           {isPaymentEnabled() && (
-            <AIFounderModal isOpen={isAiModalOpen} onClose={() => setIsAiModalOpen(false)} onApplyConfig={(aiConfig) => setConfig(aiConfig)} />
+            <AIFounderFashionl isOpen={isAiFashionlOpen} onClose={() => setIsAiFashionlOpen(false)} onApplyConfig={(aiConfig) => setConfig(aiConfig)} />
           )}
 
           {createdProjectId ? (
             <div className="flex flex-col items-center justify-center h-full bg-gray-50 text-center p-4">
               <PartyPopper size={64} className="text-green-500 mb-4 animate-bounce" />
               <h1 className="text-4xl font-bold mb-2 text-gray-800">İlk Adımı Attın!</h1>
-              <p className="text-lg text-gray-600 mb-8 max-w-md">Harika bir başlangıç. Şimdi fikrini dünyayla paylaşarak geleceği inşa etmeye başla.</p>
+              <p className="text-lg text-gray-600 mb-8 max-w-md">Great start. Now start building the future by sharing your idea with the world.</p>
               <div className="flex items-center space-x-2 bg-white border rounded-lg p-2 shadow-sm w-full max-w-lg">
                 <input type="text" value={`${APP_URL}/${createdProjectSlug}`} readOnly className="flex-grow bg-transparent outline-none text-gray-700 px-2" />
                 <Button onClick={handleCopyLink} className="shrink-0">
@@ -356,7 +356,7 @@ export default function ProjectEditorPage() {
                 </Button>
               </div>
               <Button onClick={() => router.push('/dashboard')} variant="link" className="mt-8 text-gray-600 hover:text-gray-900">
-                Dashboard'a Dön
+                Back to Dashboard
               </Button>
             </div>
           ) : (
@@ -370,19 +370,19 @@ export default function ProjectEditorPage() {
                   {/* Project Name and Category */}
                   <Card>
                     <CardHeader>
-                      <CardTitle>🚀 Proje Detayları</CardTitle>
+                      <CardTitle>🚀 Project Details</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div>
-                        <Label htmlFor="name">Proje Adı</Label>
+                        <Label htmlFor="name">Project Name</Label>
                         <Input id="name" value={config.name} onChange={(e) => updateConfig('name', e.target.value)} />
                       </div>
                       <div>
-                        <Label htmlFor="category">Proje Kategorisi</Label>
+                        <Label htmlFor="category">Project Category</Label>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button variant="outline" className="w-full justify-between">
-                              <span>{PROJECT_CATEGORIES.find(cat => cat.value === config.category)?.label || 'Kategori Seçin'}</span>
+                              <span>{PROJECT_CATEGORIES.find(cat => cat.value === config.category)?.label || 'Select Category'}</span>
                               <ChevronDown className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>
@@ -395,12 +395,12 @@ export default function ProjectEditorPage() {
                           </DropdownMenuContent>
                         </DropdownMenu>
                         <p className="text-sm text-gray-500 mt-2">
-                          Projenizi doğru kitleye ulaştırmak için bir kategori seçin.
+                          Select a category to reach the right audience for your project.
                         </p>
                       </div>
                       {isPaymentEnabled() && (
-                         <Button onClick={() => setIsAiModalOpen(true)} variant="outline" className="w-full">
-                           ✨ AI Founder Mode ile Otomatik Doldur
+                         <Button onClick={() => setIsAiFashionlOpen(true)} variant="outline" className="w-full">
+                           ✨ Auto-fill with AI Founder Mode
                          </Button>
                       )}
                     </CardContent>
@@ -409,19 +409,19 @@ export default function ProjectEditorPage() {
                   {/* Hero Section */}
                   <Card>
                     <CardHeader>
-                      <CardTitle>🖼️ Ana Ekran</CardTitle>
+                      <CardTitle>🖼️ Main Screen</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div>
-                        <Label htmlFor="title">Başlık</Label>
+                        <Label htmlFor="title">Title</Label>
                         <Input id="title" value={config.title} onChange={(e) => updateConfig('title', e.target.value)} />
                       </div>
                       <div>
-                        <Label htmlFor="subtitle">Alt Başlık</Label>
+                        <Label htmlFor="subtitle">Alt Title</Label>
                         <Input id="subtitle" value={config.subtitle} onChange={(e) => updateConfig('subtitle', e.target.value)} />
                       </div>
                       <div>
-                        <Label htmlFor="description">Açıklama</Label>
+                        <Label htmlFor="description">Description</Label>
                         <Input id="description" value={config.description} onChange={(e) => updateConfig('description', e.target.value)} />
                       </div>
                     </CardContent>
@@ -430,15 +430,15 @@ export default function ProjectEditorPage() {
                   {/* Call to Action Section */}
                   <Card>
                     <CardHeader>
-                      <CardTitle>📢 Harekete Geçirici Mesaj</CardTitle>
+                      <CardTitle>📢 Call to Action</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div>
-                        <Label htmlFor="buttonText">Buton Metni</Label>
+                        <Label htmlFor="buttonText">Button Text</Label>
                         <Input id="buttonText" value={config.buttonText} onChange={(e) => updateConfig('buttonText', e.target.value)} />
                       </div>
                       <div>
-                        <Label htmlFor="thankYouMessage">Teşekkür Mesajı</Label>
+                        <Label htmlFor="thankYouMessage">Thank You Message</Label>
                         <Input id="thankYouMessage" value={config.thankYouMessage} onChange={(e) => updateConfig('thankYouMessage', e.target.value)} />
                       </div>
                     </CardContent>
@@ -447,20 +447,20 @@ export default function ProjectEditorPage() {
                   {/* Form Fields Section */}
                   <Card>
                     <CardHeader>
-                      <CardTitle>📋 Form Alanları</CardTitle>
+                      <CardTitle>📋 Form Fields</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-2">
                       <div className="flex items-center gap-2">
                         <Checkbox id="formName" checked={config.formFields.name} onCheckedChange={(checked) => updateConfig('formFields.name', checked)} />
-                        <Label htmlFor="formName">İsim</Label>
+                        <Label htmlFor="formName">Name</Label>
                       </div>
                       <div className="flex items-center gap-2">
                         <Checkbox id="formEmail" checked={config.formFields.email} onCheckedChange={(checked) => updateConfig('formFields.email', checked)} />
-                        <Label htmlFor="formEmail">E-posta</Label>
+                        <Label htmlFor="formEmail">Email</Label>
                       </div>
                       <div className="flex items-center gap-2">
                         <Checkbox id="formPhone" checked={config.formFields.phone} onCheckedChange={(checked) => updateConfig('formFields.phone', checked)} />
-                        <Label htmlFor="formPhone">Telefon</Label>
+                        <Label htmlFor="formPhone">Phone</Label>
                       </div>
                     </CardContent>
                   </Card>
@@ -468,15 +468,15 @@ export default function ProjectEditorPage() {
                   {/* Target Audience Section */}
                   <Card>
                     <CardHeader>
-                      <CardTitle>🎯 Hedef Kitle</CardTitle>
+                      <CardTitle>🎯 Target Audience</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div>
-                        <Label htmlFor="targetAudienceTitle">Başlık</Label>
+                        <Label htmlFor="targetAudienceTitle">Title</Label>
                         <Input id="targetAudienceTitle" value={config.targetAudience.title} onChange={(e) => updateConfig('targetAudience.title', e.target.value)} />
                       </div>
                       <div>
-                        <Label htmlFor="targetAudienceDescription">Açıklama</Label>
+                        <Label htmlFor="targetAudienceDescription">Description</Label>
                         <Input id="targetAudienceDescription" value={config.targetAudience.description} onChange={(e) => updateConfig('targetAudience.description', e.target.value)} />
                       </div>
                     </CardContent>
@@ -485,49 +485,49 @@ export default function ProjectEditorPage() {
                   {/* Benefits Section */}
                   <Card>
                     <CardHeader>
-                      <CardTitle>🌟 Değer Vaatleri</CardTitle>
+                      <CardTitle>🌟 Value Propositions</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       {config.benefits.map((benefit: Benefit, index: number) => (
                         <div key={index} className="p-4 border rounded-md space-y-2">
-                          <Input value={benefit.title} onChange={(e) => updateListItem('benefits', index, 'title', e.target.value)} placeholder="Başlık" />
-                          <Input value={benefit.description} onChange={(e) => updateListItem('benefits', index, 'description', e.target.value)} placeholder="Açıklama" />
+                          <Input value={benefit.title} onChange={(e) => updateListItem('benefits', index, 'title', e.target.value)} placeholder="Title" />
+                          <Input value={benefit.description} onChange={(e) => updateListItem('benefits', index, 'description', e.target.value)} placeholder="Description" />
                           <Button variant="ghost" size="icon" onClick={() => removeListItem('benefits', index)}>
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
                       ))}
-                      <Button onClick={() => addListItem('benefits')}>Değer Vaadi Ekle</Button>
+                      <Button onClick={() => addListItem('benefits')}>Add Value Proposition</Button>
                     </CardContent>
                   </Card>
 
                   {/* Features Section */}
                   <Card>
                     <CardHeader>
-                      <CardTitle>✨ Özellikler</CardTitle>
+                      <CardTitle>✨ Features</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       {config.features.map((feature: Feature, index: number) => (
                         <div key={index} className="p-4 border rounded-md space-y-2">
-                          <Input value={feature.title} onChange={(e) => updateListItem('features', index, 'title', e.target.value)} placeholder="Başlık" />
-                          <Input value={feature.description} onChange={(e) => updateListItem('features', index, 'description', e.target.value)} placeholder="Açıklama" />
+                          <Input value={feature.title} onChange={(e) => updateListItem('features', index, 'title', e.target.value)} placeholder="Title" />
+                          <Input value={feature.description} onChange={(e) => updateListItem('features', index, 'description', e.target.value)} placeholder="Description" />
                           <Button variant="ghost" size="icon" onClick={() => removeListItem('features', index)}>
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
                       ))}
-                      <Button onClick={() => addListItem('features')}>Özellik Ekle</Button>
+                      <Button onClick={() => addListItem('features')}>Add Feature</Button>
                     </CardContent>
                   </Card>
 
                   {/* FAQ Section */}
                   <Card>
                     <CardHeader>
-                      <CardTitle>❓ Sıkça Sorulan Sorular</CardTitle>
+                      <CardTitle>❓ Frequently Asked Questions</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
-                        <h3 className="font-medium">Kimler İçin?</h3>
+                        <h3 className="font-medium">Who Is It For?</h3>
                         {config.faqSections.whoIsItFor.items.map((item: string, index: number) => (
                           <div key={index} className="flex items-center gap-2">
                             <Input value={item} onChange={(e) => {
@@ -540,10 +540,10 @@ export default function ProjectEditorPage() {
                             </Button>
                           </div>
                         ))}
-                        <Button onClick={() => addFaqItem('whoIsItFor')}>Soru Ekle</Button>
+                        <Button onClick={() => addFaqItem('whoIsItFor')}>Add Question</Button>
                       </div>
                       <div className="space-y-4 mt-4">
-                        <h3 className="font-medium">Neler Yapabilir?</h3>
+                        <h3 className="font-medium">What Can It Do?</h3>
                         {config.faqSections.whatCanItDo.items.map((item: string, index: number) => (
                           <div key={index} className="flex items-center gap-2">
                             <Input value={item} onChange={(e) => {
@@ -556,7 +556,7 @@ export default function ProjectEditorPage() {
                             </Button>
                           </div>
                         ))}
-                        <Button onClick={() => addFaqItem('whatCanItDo')}>Soru Ekle</Button>
+                        <Button onClick={() => addFaqItem('whatCanItDo')}>Add Question</Button>
                       </div>
                     </CardContent>
                   </Card>
@@ -564,24 +564,24 @@ export default function ProjectEditorPage() {
                   {/* Project Settings Section */}
                   <Card>
                       <CardHeader>
-                        <CardTitle>⚙️ Proje Ayarları</CardTitle>
+                        <CardTitle>⚙️ Project Settings</CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-6">
                         {/* Public Toggle */}
                         <div className="flex items-center justify-between p-4 bg-lime-50 dark:bg-slate-700 rounded-lg">
                           <div className="flex-1">
                             <Label htmlFor="isPublic" className="font-bold text-gray-800 dark:text-gray-200">
-                              {config.isPublic ? 'Herkese Açık Proje' : 'Özel Proje'}
+                              {config.isPublic ? 'Public Project' : 'Private Project'}
                             </Label>
                             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                               {config.isPublic 
-                                ? 'Projenizi herkese açık yayınlayın.'
-                                : 'Sadece link ile erişilebilir.'
+                                ? 'Publish your project publicly.'
+                                : 'Accessible only via link.'
                               }
                             </p>
                             {userPlan?.slug === 'free' && !config.isPublic && (
                               <p className="text-xs text-amber-600 dark:text-amber-400 mt-2 font-medium">
-                                ⚠️ Özel projeler sadece ücretli planlarda kullanılabilir
+                                ⚠️ Private projects are only available in paid plans
                               </p>
                             )}
                           </div>
@@ -599,7 +599,7 @@ export default function ProjectEditorPage() {
                             </button>
                             {userPlan?.slug === 'free' && (
                               <span className="text-xs text-orange-600 dark:text-orange-400 font-medium">
-                                Ücretsiz Plan
+                                Free Plan
                               </span>
                             )}
                           </div>
@@ -614,10 +614,10 @@ export default function ProjectEditorPage() {
                               </div>
                               <div className="flex-1">
                                 <h4 className="text-sm font-medium text-orange-800 dark:text-orange-200">
-                                  Ücretsiz Plan Sınırlaması
+                                  Free Plan Sınırlaması
                                 </h4>
                                 <p className="text-sm text-orange-700 dark:text-orange-300 mt-1">
-                                  Ücretsiz planda tüm projeler herkese açıktır. Özel projeler için planınızı yükseltin.
+                                  All projects are public in the free plan. Upgrade your plan for private projects.
                                 </p>
                                 <Button
                                   variant="outline"
@@ -625,7 +625,7 @@ export default function ProjectEditorPage() {
                                   className="mt-2 text-orange-600 border-orange-300 hover:bg-orange-100"
                                   onClick={() => router.push('/pricing')}
                                 >
-                                  Planları Görüntüle
+                                  View Plans
                                 </Button>
                               </div>
                             </div>
@@ -637,11 +637,11 @@ export default function ProjectEditorPage() {
                   {/* Custom Domain Section */}
                   <Card>
                       <CardHeader>
-                        <CardTitle>🌐 Özel Domain</CardTitle>
+                        <CardTitle>🌐 Custom Domain</CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-4">
                         <p className="text-sm text-gray-600">
-                          Projenizi özel bir domain ile yayınlamak isterseniz, buraya ekleyebilirsiniz.
+                          If you want to publish your project with a custom domain, you can add it here.
                         </p>
                         <Input
                           placeholder="https://www.fikrininadi.com"
@@ -654,7 +654,7 @@ export default function ProjectEditorPage() {
                           variant="outline"
                           className="w-full"
                         >
-                          Özel Domain Ayarla
+                          Set Custom Domain
                         </Button>
                       </CardContent>
                   </Card>
@@ -673,12 +673,12 @@ export default function ProjectEditorPage() {
                               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
-                            {isEditing ? 'Kaydediliyor...' : 'Oluşturuluyor...'}
+                            {isEditing ? 'Saving...' : 'Creating...'}
                           </span>
                         ) : isEditing ? (
-                          'Değişiklikleri Kaydet'
+                          'Save Changes'
                         ) : (
-                          'Projeyi Oluştur ve Yayınla'
+                          'Create and Publish Project'
                         )}
                       </Button>
                       {isEditing && (
@@ -689,7 +689,7 @@ export default function ProjectEditorPage() {
                           className="py-6 text-base font-medium border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700"
                         >
                           <Trash2 className="w-5 h-5 mr-2" />
-                          Projeyi Sil
+                          Delete Project
                         </Button>
                       )}
                     </div>
@@ -697,7 +697,7 @@ export default function ProjectEditorPage() {
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-500" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span>Değişiklikleriniz otomatik olarak kaydedilir</span>
+                      <span>Your changes are saved automatically</span>
                     </div>
                   </div>
 
@@ -705,9 +705,9 @@ export default function ProjectEditorPage() {
                   <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
                     <DialogContent className="sm:max-w-[425px]">
                       <DialogHeader>
-                        <DialogTitle>Projeyi Sil</DialogTitle>
+                        <DialogTitle>Delete Project</DialogTitle>
                         <DialogDescription>
-                          Bu işlem geri alınamaz. Projeyi silmek istediğinize emin misiniz?
+                          This action cannot be undone. Are you sure you want to delete the project?
                         </DialogDescription>
                       </DialogHeader>
                       <DialogFooter className="sm:justify-start">
@@ -716,11 +716,11 @@ export default function ProjectEditorPage() {
                           variant="destructive"
                           onClick={handleDeleteProject}
                         >
-                          Sil
+                          Delete
                         </Button>
                         <DialogClose asChild>
                           <Button type="button" variant="outline">
-                            İptal
+                            Cancel
                           </Button>
                         </DialogClose>
                       </DialogFooter>
@@ -733,20 +733,20 @@ export default function ProjectEditorPage() {
                           <DialogHeader>
                               <DialogTitle className="flex items-center gap-2">
                                   <Users className="h-5 w-5 text-orange-500" />
-                                  Özel Projeler - Premium Özellik
+                                  Private Projectler - Premium Özellik
                               </DialogTitle>
                               <DialogDescription className="space-y-3">
                                   <p>
-                                      Özel projeler sadece ücretli planlarda kullanılabilir. Özel projeler:
+                                      Private projects are only available in paid plans. Özel projeler:
                                   </p>
                                   <ul className="list-disc list-inside space-y-1 text-sm">
-                                      <li>Showcase galerisinde görünmez</li>
-                                      <li>Sadece direkt link ile erişilebilir</li>
-                                      <li>Daha iyi gizlilik kontrolü sağlar</li>
-                                      <li>Profesyonel kullanım için ideal</li>
+                                      <li>Not visible in showcase gallery</li>
+                                      <li>Accessible only via direct link</li>
+                                      <li>Provides better privacy control</li>
+                                      <li>Ideal for professional use</li>
                                   </ul>
                                   <p className="font-medium text-orange-600 dark:text-orange-400">
-                                      Şu anda ücretsiz planda olduğunuz için tüm projeleriniz herkese açık olarak oluşturulur.
+                                      Since you're currently on the free plan, all your projects are created as public.
                                   </p>
                               </DialogDescription>
                           </DialogHeader>
@@ -758,11 +758,11 @@ export default function ProjectEditorPage() {
                                   }}
                                   className="w-full sm:w-auto"
                               >
-                                  Planları Görüntüle
+                                  View Plans
                               </Button>
                               <DialogClose asChild>
                                   <Button variant="outline" className="w-full sm:w-auto">
-                                      Ücretsiz Devam Et
+                                      Continue Free
                                   </Button>
                               </DialogClose>
                           </DialogFooter>
