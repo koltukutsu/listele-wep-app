@@ -34,8 +34,16 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.email) {
+    
+    // Only validate email if it's enabled in the form configuration
+    if (project.config.formFields.email && !formData.email) {
       setError('E-posta adresi zorunludur.');
+      return;
+    }
+    
+    // If email field is disabled but no other fields are filled, show error
+    if (!project.config.formFields.email && !formData.name && !formData.phone) {
+      setError('Lütfen en az bir alanı doldurun.');
       return;
     }
     setLoading(true);
@@ -43,7 +51,7 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
     try {
       await addLead(project.id, {
         name: formData.name || null,
-        email: formData.email,
+        email: formData.email || null,
         phone: formData.phone || null,
       });
       
@@ -51,10 +59,11 @@ export default function PublicProjectPage({ project }: PublicProjectPageProps) {
       await trackConversion('waitlist_signup', 1, {
         project_id: project.id,
         project_name: project.name,
-        email_domain: formData.email.split('@')[1],
+        email_domain: formData.email ? formData.email.split('@')[1] : null,
         signup_source: 'project_page',
         has_name: !!formData.name,
-        has_phone: !!formData.phone
+        has_phone: !!formData.phone,
+        has_email: !!formData.email
       });
       
       setSubmitted(true);

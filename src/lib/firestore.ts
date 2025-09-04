@@ -63,7 +63,7 @@ export interface Lead {
   id: string;
   projectId: string;
   name?: string | null;
-  email: string;
+  email?: string | null;
   phone?: string | null;
   createdAt: Timestamp;
   ipAddress?: string;
@@ -364,7 +364,7 @@ export async function deleteProject(projectId: string): Promise<void> {
 // Lead operations
 export async function addLead(projectId: string, leadData: {
   name?: string | null;
-  email: string;
+  email?: string | null;
   phone?: string | null;
   ipAddress?: string;
   userAgent?: string;
