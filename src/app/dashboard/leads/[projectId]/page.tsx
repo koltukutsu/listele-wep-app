@@ -71,7 +71,7 @@ export default function LeadsPage() {
 
     const dataToExport = displayedLeads.map(lead => ({
       'Ad Soyad': lead.name || '',
-      'E-posta': lead.email,
+      'E-posta': lead.email || '',
       'Telefon': lead.phone || '',
       'Kayıt Tarihi': lead.createdAt ? new Date(lead.createdAt.seconds * 1000).toLocaleString() : '',
     }));
